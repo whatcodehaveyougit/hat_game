@@ -1,10 +1,10 @@
 package com.example.hatGame.components;
 
 import com.example.hatGame.models.Clue;
-import com.example.hatGame.models.Contest;
+import com.example.hatGame.models.Game;
 import com.example.hatGame.models.Player;
 import com.example.hatGame.repositories.ClueRepo;
-import com.example.hatGame.repositories.ContestRepo;
+import com.example.hatGame.repositories.GameRepo;
 import com.example.hatGame.repositories.PlayerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class Dataloader implements ApplicationRunner {
 
     @Autowired
-    ContestRepo contestRepo;
+    GameRepo contestRepo;
 
     @Autowired
     PlayerRepo playerRepo;
@@ -29,7 +29,7 @@ public class Dataloader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args){
 
-        Contest contest1 = new Contest("Hummus");
+        Game contest1 = new Game("Hummus");
         contestRepo.save(contest1);
 
         Clue clue1 = new Clue("007", contest1);

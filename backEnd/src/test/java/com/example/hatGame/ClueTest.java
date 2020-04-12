@@ -1,20 +1,19 @@
 package com.example.hatGame;
 
 import com.example.hatGame.models.Clue;
-import com.example.hatGame.models.Contest;
-import org.aspectj.lang.annotation.Before;
+import com.example.hatGame.models.Game;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ClueTest {
 
-    Contest contest;
+    Game contest;
     Clue clue;
 
     @Test
     public void get_clue_name(){
-        contest = new Contest("Hummus");
+        contest = new Game("Hummus");
         clue = new Clue("sword", contest);
         assertEquals("sword", clue.getContent());
     }

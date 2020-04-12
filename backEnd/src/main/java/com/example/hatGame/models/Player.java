@@ -1,7 +1,6 @@
 package com.example.hatGame.models;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "players")
@@ -18,14 +17,14 @@ public class Player {
     private String team;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name="contest_id", nullable = false)
-    private Contest contest;
+    @JoinColumn(name="game_id", nullable = false)
+    private Game game;
 
-    public Player(String name, String team, Contest contest){
+    public Player(String name, String team, Game game){
         this.id = id;
         this.name = name;
         this.team = team;
-        this.contest = contest;
+        this.game = game;
     }
 
     public Player(){
@@ -55,11 +54,11 @@ public class Player {
         this.team = team;
     }
 
-    public Contest getContest() {
-        return contest;
+    public Game getGame() {
+        return game;
     }
 
-    public void setContest(Contest contest) {
-        this.contest = contest;
+    public void getGame(Game game) {
+        this.game = game;
     }
 }

@@ -14,13 +14,13 @@ public class Clue {
     private String content;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name="contest_id", nullable = false)
-    private Contest contest;
+    @JoinColumn(name="game_id", nullable = false)
+    private Game game;
 
-    public Clue(String content, Contest contest){
+    public Clue(String content, Game game){
         this.id = id;
         this.content = content;
-        this.contest = contest;
+        this.game = game;
     }
 
     public Clue(){
@@ -42,12 +42,12 @@ public class Clue {
         this.content = content;
     }
 
-    public Contest getContest() {
-        return contest;
+    public Game getGame() {
+        return game;
     }
 
-    public void setContest(Contest contest) {
-        this.contest = contest;
+    public void getGame(Game game) {
+        this.game = game;
     }
 
 }

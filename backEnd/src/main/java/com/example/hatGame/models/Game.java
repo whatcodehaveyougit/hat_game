@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "contests")
-public class Contest {
+@Table(name = "games")
+public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,21 +18,21 @@ public class Contest {
     private String title;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "contest", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "game", cascade = CascadeType.REMOVE)
     private List<Player> players;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "contest", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "game", cascade = CascadeType.REMOVE)
     private List<Clue> clues;
 
-    public Contest(String title){
+    public Game(String title){
         this.id = id;
         this.title = title;
         this.players = new ArrayList<Player>();
         this.clues = new ArrayList<Clue>();
     }
 
-    public Contest(){
+    public Game(){
     }
 
     public Long getId() {
