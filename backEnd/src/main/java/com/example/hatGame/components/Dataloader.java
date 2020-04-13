@@ -35,8 +35,14 @@ public class Dataloader implements ApplicationRunner {
         Clue clue1 = new Clue("007", contest1);
         clueRepo.save(clue1);
 
+        Clue clue2 = new Clue("12 years a slave", contest1);
+        clueRepo.save(clue2);
+
         Player player1 = new Player("Jimmy", "best team", contest1);
         playerRepo.save(player1);
+
+        Player player2 = new Player("Mark", "best team", contest1);
+        playerRepo.save(player2);
 
 
 
