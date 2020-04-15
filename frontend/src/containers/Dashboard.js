@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import Navbar from '../components/Navbar'
+import {BrowserRouter as Router, Route, Redirect } from "react-router-dom"
 import CreateGame from '../components/CreateGame.js'
+import HomePage from '../components/HomePage.js'
 
 function Dashboard() {
     
-    // Games is the state item
-    // setGames is the function that alters the state
-    // useState([]) tells it to expect an array 
+    // Keeping local state in a functional component!
+    // Games is the state item ----- setGames is the function that alters the state
+    // useState([]) sets games as an empty array 
     const [games, setGames] = useState([])
 
     // This is basically ComponentDidMount due to the empty array, only gets rendered once
@@ -17,18 +20,23 @@ function Dashboard() {
         .catch(err => console.error);
     }, [])
 
+    handleContestSubmit(){
+        console.log("contest submit")
+    }
+
  
         return (
-            <>
-                <h1>The Hat Game</h1>
-                <h3>These are the games today</h3>
-                { games.map ( game => (
-                    <button class="game">{game.title}</button>
-                ))}
-                <CreateGame />
+            <Router>
+                <React.Fragment>
+                    
+                    <Navbar />
+                    <Route exact path="/" render={() => <HomePage games={games} /> } />
+                    <Route exact path="/create-game" render={() => <CreateGame /> } />
                
-            </>
+                </React.Fragment>
+      </Router>
         )
+
     
 }
 
