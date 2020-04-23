@@ -5,8 +5,7 @@ export default function() {
 
     return (
     <>
-         <a href="/"><h1 id="page-title">The Hat Game</h1></a>
-        <a href="/create-game">Create Game</a> 
+         <a href="/" id="page-title"><h1>The Hat Game</h1></a>
     </>
     )
 }

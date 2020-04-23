@@ -2,6 +2,7 @@
 
 .App {
     text-align: center;
+    font-family: avenir;
   }
   
   .game {
@@ -13,4 +14,61 @@
       border: 1px solid black;
       display: inline-block;
   }
+
+  input {
+    height: 23px;
+    border: 1px solid black;
+    margin: 0 5px;
+    font-size: 15px;
+    border-radius: 5px;
+    color: black;
+}
+
+input[type=number] {
+  width: 25px;
+  padding: 0 9px;
+}
+
+  input[type="text"] {
+    margin: 5px;
+    padding: 0 18px;
+  }
   
+input[type="submit"] {
+  padding: 0 18px;
+  background-color: #c1a7a7;
+}
+
+.flex-container-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-title {
+  text-decoration: underline;
+}
+
+
+/* Nav bar */
+
+a#page-title {
+  text-decoration: none;
+}
+
+.create-game-button {
+  border: 1px solid black;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 9px;
+  color: black;
+}
+
+/* Create Teams */
+
+.game-title {
+  text-decoration: underline;
+  padding: 10px;
+  background: orange;
+  border-radius: 14px;
+}

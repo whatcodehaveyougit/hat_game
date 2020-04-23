@@ -38,9 +38,21 @@ function Dashboard() {
           .then(game => setCreatedGame(game));
     }
 
-    // renderGames = (routerProps) => {
-    //   console.log(routerProps);
-    // }
+    function onPlayerPost(newPlayerName, teamName){
+      fetch("/players/", {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: newPlayerName,
+          team: teamName,
+          game: `games/${createdGame._links.self.href}`
+        })
+      })
+      
+    }
 
  
         return (
@@ -61,7 +73,7 @@ function Dashboard() {
                     <Route exact path="/create-game" render={() => <CreateGame onGamePost={onGamePost} /> } />
                    
                     {/* I have put in this ternary as before it was trying to load the component before the state had been set to pass down */}
-                    { createdGame ? <Route exact path="/create-teams" render={() => <CreateTeams createdGame={createdGame} /> } /> : null }
+                    { createdGame ? <Route exact path="/create-teams" render={() => <CreateTeams createdGame={createdGame} onPlayerPost={onPlayerPost} /> } /> : null }
             </Router>
             </>
         )
