@@ -1,14 +1,16 @@
+/* Global Styles */
+
 .App {
-  text-align: center;
-}
-
-.game {
-  background-color: white;
+    text-align: center;
+  }
+  
+  .game {
     background-color: white;
-    padding: 10px 15px;
-    font-size: 18px;
-    border-radius: 18px;
-    border: 1px solid black;
-    display: inline-block;
-}
-
+      background-color: white;
+      padding: 10px 15px;
+      font-size: 18px;
+      border-radius: 18px;
+      border: 1px solid black;
+      display: inline-block;
+  }
+  
