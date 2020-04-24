@@ -1,4 +1,5 @@
 import React ,{useState} from 'react'
+import { Redirect } from 'react-router-dom'
 import '../App.css'
 import team from '../style/team.png'
 
@@ -12,6 +13,8 @@ export default function CreateTeams(props){
     const [displaySubmittedTeams, setDisplaySubmittedTeams] = useState(false);
     const [displayNewTeamsButton, setDisplayNewTeamsButton] = useState(false)
 
+    const [redirect, setRedirect] = useState(false);
+
     const handlePlayerSubmit = (e) => {
         e.preventDefault();
         props.onPlayerPost(playerName, teamName)
@@ -19,7 +22,6 @@ export default function CreateTeams(props){
         setTeamName('');
         setSubmittedPlayers(submittedPlayers => [...submittedPlayers, playerName])
         setDisplayNewTeamsButton(true)
-        // setRedirect(true)
        }
 
     const addNewTeam = (e) => {
@@ -34,9 +36,14 @@ export default function CreateTeams(props){
         setSubmittedTeamName(teamName)
     }
 
-    // const handleClick = () => { 
-    // }
+    const moveToAddCluesPage = (e) => {
+        setRedirect(true)
+        console.log("test");   
+    }
 
+    if (redirect) {
+        return <Redirect to='/add-clues' />
+    }
   
     
 
@@ -92,7 +99,7 @@ export default function CreateTeams(props){
                 {/* <input type="number" name="maxPlayersPerTeam" min="1" max="7" /> */}
                 <h3>Finished Adding Teams?</h3>
                 <br></br>
-                <a href="/add-clues-to-hat"><button>Start Adding Clues to the Hat</button></a>
+                <button onClick={moveToAddCluesPage}>Start Adding Clues to the Hat</button>
             </div> }
         </>
     )

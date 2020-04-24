@@ -7,8 +7,8 @@ export default function Games(props) {
   return (
       <>
       <h3>Your Previous Games</h3>
-    { props.games.map((games, i) => (
-        <a href={games.title} ><div className="game" key={i}>{games.title}</div></a>
+    { props.games.map((games) => (
+       <div className="game">{games.title}</div>
     ))}
     </>
   )

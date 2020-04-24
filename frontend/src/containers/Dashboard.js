@@ -7,13 +7,11 @@ import CreateGame from '../components/CreateGame.js'
 import CreateTeams from '../components/CreateTeams.js'
 import HomePage from '../components/HomePage.js'
 
-function Dashboard() {
+export default function Dashboard() {
     
-    // Keeping local state in a functional component!
-    // Games is the state item ----- setGames is the function that alters the state
-    // useState([]) sets games as an empty array 
     const [games, setGames] = useState([])
     const [createdGame, setCreatedGame] = useState()
+    const [playersInCreatedGame, setPlayersInCreatedGame] = useState([])
 
     // This is basically ComponentDidMount due to the empty array, only gets rendered once
     useEffect(() => {
@@ -23,6 +21,11 @@ function Dashboard() {
         .then(games => setGames( games ))
         .catch(err => console.error);
     }, [])
+
+    function test(player) {
+      setPlayersInCreatedGame(playersInCreatedGame => [...playersInCreatedGame, player])
+      console.log("players" + {playersInCreatedGame});
+    }
 
     function onGamePost(newGame){
         fetch("/games/", {
@@ -52,10 +55,25 @@ function Dashboard() {
           game: `games/${createdGame._links.self.href}`
         })
       })
-      
+      .then(res => res.json())
+      .then(player => test(player));
     }
 
- 
+      function onCluePost(newClue){
+        fetch("/clues/", {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            content: newClue,
+            game: `games/${createdGame._links.self.href}`
+          })
+        })
+      }
+      
+
         return (
           <>
           <Navbar />
@@ -72,14 +90,11 @@ function Dashboard() {
                     </Switch> */}
 
                     <Route exact path="/create-game" render={() => <CreateGame onGamePost={onGamePost} /> } />
-                    <Route exact path="/add-clues-to-hat" render={() => <AddClues /> } /> 
+                    <Route exact path="/add-clues" render={() => <AddClues createdGame={createdGame} /> } /> 
+
                     {/* I have put in this ternary as before it was trying to load the component before the state had been set to pass down */}
                     { createdGame ? <Route exact path="/create-teams" render={() => <CreateTeams createdGame={createdGame} onPlayerPost={onPlayerPost} /> } /> : null }
             </Router>
             </>
         )
-
-    
 }
-
-export default Dashboard

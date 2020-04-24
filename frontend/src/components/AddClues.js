@@ -1,8 +1,10 @@
 import React from 'react'
 
-export default function AddClues(){
+export default function AddClues(props){
+
+    console.log(props)
 
     return(
-        "Hello"
+        "Click on the name of your game"
     )
 }
