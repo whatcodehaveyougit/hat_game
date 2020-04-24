@@ -1,4 +1,4 @@
-import React ,{useState} from 'react'
+import React, {useState} from 'react'
 import { Redirect } from 'react-router-dom'
 import '../App.css'
 import team from '../style/team.png'

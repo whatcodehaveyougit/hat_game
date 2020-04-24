@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import {BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom"
 import Game from '../components/Game'
 import AddClues from '../components/AddClues.js'
+import AddCluesPlayer from '../components/AddCluesPlayer.js'
 import CreateGame from '../components/CreateGame.js'
 import CreateTeams from '../components/CreateTeams.js'
 import HomePage from '../components/HomePage.js'
@@ -24,7 +25,6 @@ export default function Dashboard() {
 
     function test(player) {
       setPlayersInCreatedGame(playersInCreatedGame => [...playersInCreatedGame, player])
-      console.log("players" + {playersInCreatedGame});
     }
 
     function onGamePost(newGame){
@@ -90,7 +90,9 @@ export default function Dashboard() {
                     </Switch> */}
 
                     <Route exact path="/create-game" render={() => <CreateGame onGamePost={onGamePost} /> } />
-                    <Route exact path="/add-clues" render={() => <AddClues createdGame={createdGame} /> } /> 
+                    <Route exact path="/add-clues" render={() => <AddClues createdGame={createdGame} playersInCreatedGame={playersInCreatedGame} /> } /> 
+                    <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} /> } />
+
 
                     {/* I have put in this ternary as before it was trying to load the component before the state had been set to pass down */}
                     { createdGame ? <Route exact path="/create-teams" render={() => <CreateTeams createdGame={createdGame} onPlayerPost={onPlayerPost} /> } /> : null }
