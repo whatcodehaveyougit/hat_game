@@ -5,17 +5,17 @@
     font-family: avenir;
   }
   
-  .game {
+.game {
+  background-color: white;
     background-color: white;
-      background-color: white;
-      padding: 10px 15px;
-      font-size: 18px;
-      border-radius: 18px;
-      border: 1px solid black;
-      display: inline-block;
-  }
+    padding: 10px 15px;
+    font-size: 18px;
+    border-radius: 18px;
+    border: 1px solid black;
+    display: inline-block;
+}
 
-  input {
+ input {
     height: 23px;
     border: 1px solid black;
     margin: 0 5px;
@@ -49,6 +49,14 @@ input[type="submit"] {
   text-decoration: underline;
 }
 
+button {
+  border: 1px solid black;
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 4px 17px;
+  margin-bottom:10px;
+}
+
 
 /* Nav bar */
 
@@ -71,4 +79,46 @@ a#page-title {
   padding: 10px;
   background: orange;
   border-radius: 14px;
+}
+
+.players-in-team {
+  padding:0;
+  list-style-type: none;
+}
+
+img.hat {
+  transform: rotate(180deg);
+}
+
+.teams-added-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.team-added-to-game {
+  margin: 20px;
+}
+
+img.team {
+  width: 48%;
+}
+
+
+
+
+
+
+/* Clue */
+
+.clue-container {
+  position: relative;
+}
+
+.clue-in-hat {
+  position: absolute;
+  left: 47%;
+  z-index: 2;
+  top: 63%;
+  color:white;
+  list-style-type: none;
 }
