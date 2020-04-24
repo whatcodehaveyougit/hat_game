@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import {BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom"
 import Game from '../components/Game'
+import AddClues from '../components/AddClues.js'
 import CreateGame from '../components/CreateGame.js'
 import CreateTeams from '../components/CreateTeams.js'
 import HomePage from '../components/HomePage.js'
@@ -71,7 +72,7 @@ function Dashboard() {
                     </Switch> */}
 
                     <Route exact path="/create-game" render={() => <CreateGame onGamePost={onGamePost} /> } />
-                   
+                    <Route exact path="/add-clues-to-hat" render={() => <AddClues /> } /> 
                     {/* I have put in this ternary as before it was trying to load the component before the state had been set to pass down */}
                     { createdGame ? <Route exact path="/create-teams" render={() => <CreateTeams createdGame={createdGame} onPlayerPost={onPlayerPost} /> } /> : null }
             </Router>

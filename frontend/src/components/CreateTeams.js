@@ -44,9 +44,6 @@ export default function CreateTeams(props){
         <>
             <h3>Now lets create teams for <span className="game-title">{ props.createdGame.title }</span> </h3>
             
-            <label>How many clues can each player add to the hat?</label>
-            <input type="number" name="maxPlayersPerTeam" min="1" max="7" />
-                
             { submittedTeamName ? null : <form onSubmit={handleTeamNameSubmit}>
                 <div>
                     <label>Team Name:</label>
@@ -72,7 +69,7 @@ export default function CreateTeams(props){
                     ))}
                 </ul> : null }
 
-                    { displayNewTeamsButton ? 
+                    { displayNewTeamsButton && submittedTeamName ? 
                         <div> 
                             <button onClick={addNewTeam}>Add {submittedTeamName} to Game!</button> 
                         </div> : null }
@@ -90,7 +87,13 @@ export default function CreateTeams(props){
                             </div>
                              : null }
                         </div> : null}
-            
+            { submittedTeams.length > 1 && <div>
+                {/* <label>How many clues can each player add to the hat?</label> */}
+                {/* <input type="number" name="maxPlayersPerTeam" min="1" max="7" /> */}
+                <h3>Finished Adding Teams?</h3>
+                <br></br>
+                <a href="/add-clues-to-hat"><button>Start Adding Clues to the Hat</button></a>
+            </div> }
         </>
     )
 }
