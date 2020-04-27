@@ -5,6 +5,7 @@ import GameHome from '../components/GameHome.js'
 import AddClues from '../components/AddClues.js'
 import AddCluesPlayer from '../components/AddCluesPlayer.js'
 import CreateGame from '../components/CreateGame.js'
+import GameScreen from '../components/GameScreen.js'
 import CreateTeams from '../components/CreateTeams.js'
 import HomePage from '../components/HomePage.js'
 import Test from '../components/Test.js'
@@ -88,7 +89,7 @@ export default function Dashboard() {
                     
                     <Route exact path="/" render={() => <HomePage games={games} setSelectedGame={setSelectedGame}   /> } />
                     { selectedGame ? <Route exact path="/game-home" render={() => <GameHome game={selectedGame} /> } /> : null }
-
+                    <Route exact path="/my-hat-game" render={() => <GameScreen selectedGame={selectedGame} /> } />
                     <Route exact path="/create-game" render={() => <CreateGame onGamePost={onGamePost} /> } />
                     <Route exact path="/add-clues" render={() => <AddClues createdGame={createdGame} playersInCreatedGame={playersInCreatedGame} /> } /> 
                     <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} /> } />
