@@ -13,18 +13,14 @@ public class Player {
     @Column(name="name")
     private String name;
 
-    @Column(name="team")
-    private String team;
-
     @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name="game_id", nullable = false)
-    private Game game;
+    @JoinColumn(name="team_id", nullable = false)
+    private Team team;
 
-    public Player(String name, String team, Game game){
+    public Player(String name, Team team){
         this.id = id;
         this.name = name;
         this.team = team;
-        this.game = game;
     }
 
     public Player(){
@@ -46,19 +42,12 @@ public class Player {
         this.name = name;
     }
 
-    public String getTeam() {
+    public Team getTeam() {
         return team;
     }
 
-    public void setTeam(String team) {
+    public void setTeam(Team team) {
         this.team = team;
     }
 
-    public Game getGame() {
-        return game;
-    }
-
-    public void getGame(Game game) {
-        this.game = game;
-    }
 }

@@ -19,7 +19,7 @@ public class Game {
 
     @JsonIgnore
     @OneToMany(mappedBy = "game", cascade = CascadeType.REMOVE)
-    private List<Player> players;
+    private List<Team> teams;
 
     @JsonIgnore
     @OneToMany(mappedBy = "game", cascade = CascadeType.REMOVE)
@@ -28,7 +28,7 @@ public class Game {
     public Game(String title){
         this.id = id;
         this.title = title;
-        this.players = new ArrayList<Player>();
+        this.teams = new ArrayList<Team>();
         this.clues = new ArrayList<Clue>();
     }
 
@@ -51,12 +51,12 @@ public class Game {
         this.title = title;
     }
 
-    public List<Player> getPlayers() {
-        return players;
+    public List<Team> getTeams() {
+        return teams;
     }
 
-    public void setPlayers(List<Player> players) {
-        this.players = players;
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 
     public List<Clue> getClues() {
