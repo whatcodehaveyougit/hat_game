@@ -1,9 +1,6 @@
 import React from 'react'
 
-// export default ({ match: { params: {gameTitle}}}) => <h1>{gameTitle}</h1>
-
-
-const Game = () => {
+export default function GameHome() {
     return (
         <>
             {/* <h1>{ title }</h1> */}
@@ -12,4 +9,3 @@ const Game = () => {
     )
 }
 
-export default Game

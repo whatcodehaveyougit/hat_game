@@ -122,3 +122,14 @@ img.team {
   color:white;
   list-style-type: none;
 }
+
+/* Mapping of Players to then add Clues */
+
+.player-name-to-add-clues {
+  padding: 20px;
+  border: 1px solid black;
+}
+
+.player-name-to-add-clues:hover {
+  text-decoration: underline;
+}

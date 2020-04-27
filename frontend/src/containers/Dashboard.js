@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import {BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom"
-import Game from '../components/Game'
+import GameHome from '../components/GameHome.js'
 import AddClues from '../components/AddClues.js'
 import AddCluesPlayer from '../components/AddCluesPlayer.js'
 import CreateGame from '../components/CreateGame.js'
 import CreateTeams from '../components/CreateTeams.js'
 import HomePage from '../components/HomePage.js'
+import Test from '../components/Test.js'
 
 export default function Dashboard() {
     
@@ -80,23 +81,18 @@ export default function Dashboard() {
             <Router>
                     
                     <Route exact path="/" render={() => <HomePage games={games}   /> } />
-
-                    {/* <Switch>
-                      <Route path='/create-game' component={CreateGame} />
-                    </Switch> */}
-
-                    {/* <Switch>
-                      <Route path = "/game/:gameTitle" component={Game} />}/>
-                    </Switch> */}
+                    <Router exact path="game-home" render={() => <GameHome /> } />
 
                     <Route exact path="/create-game" render={() => <CreateGame onGamePost={onGamePost} /> } />
                     <Route exact path="/add-clues" render={() => <AddClues createdGame={createdGame} playersInCreatedGame={playersInCreatedGame} /> } /> 
                     <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} /> } />
 
-
                     {/* I have put in this ternary as before it was trying to load the component before the state had been set to pass down */}
                     { createdGame ? <Route exact path="/create-teams" render={() => <CreateTeams createdGame={createdGame} onPlayerPost={onPlayerPost} /> } /> : null }
+                    <Router exact path="/test" render={() => <Test /> } />
+
             </Router>
+
             </>
         )
 }
