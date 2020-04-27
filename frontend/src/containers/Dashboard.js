@@ -14,6 +14,8 @@ export default function Dashboard() {
     const [games, setGames] = useState([])
     const [createdGame, setCreatedGame] = useState()
     const [playersInCreatedGame, setPlayersInCreatedGame] = useState([])
+    const [selectedGame, setSelectedGame] = useState({})
+
 
     // This is basically ComponentDidMount due to the empty array, only gets rendered once
     useEffect(() => {
@@ -73,6 +75,10 @@ export default function Dashboard() {
           })
         })
       }
+
+      // function setSelectedGame(game){
+      //   console.log(game)
+      // }
       
 
         return (
@@ -80,8 +86,8 @@ export default function Dashboard() {
           <Navbar />
             <Router>
                     
-                    <Route exact path="/" render={() => <HomePage games={games}   /> } />
-                    <Router exact path="game-home" render={() => <GameHome /> } />
+                    <Route exact path="/" render={() => <HomePage games={games} setSelectedGame={setSelectedGame}   /> } />
+                    { selectedGame ? <Route exact path="/game-home" render={() => <GameHome game={selectedGame} /> } /> : null }
 
                     <Route exact path="/create-game" render={() => <CreateGame onGamePost={onGamePost} /> } />
                     <Route exact path="/add-clues" render={() => <AddClues createdGame={createdGame} playersInCreatedGame={playersInCreatedGame} /> } /> 

@@ -7,7 +7,7 @@ export default function HomePage(props) {
     return (
         <>
             <a className="create-game-button" href="/create-game">Create Game</a> 
-            <Games games={props.games}/>
+            <Games games={props.games} setSelectedGame={props.setSelectedGame} />
         </>
     )
 }
