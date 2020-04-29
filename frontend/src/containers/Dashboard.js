@@ -9,6 +9,8 @@ import GameScreen from '../components/GameScreen.js'
 import CreateTeams from '../components/CreateTeams.js'
 import HomePage from '../components/HomePage.js'
 import Test from '../components/Test.js'
+import ActivePlayerScreen from '../components/ActivePlayerScreen.js'
+import TurnOverScreen from '../components/TurnOverScreen.js'
 
 export default function Dashboard() {
     
@@ -17,6 +19,8 @@ export default function Dashboard() {
     const [createdTeam, setCreatedTeam] = useState()
     const [playersInCreatedGame, setPlayersInCreatedGame] = useState([])
     const [selectedGame, setSelectedGame] = useState({})
+    const [redirect, setRedirect] = useState(false)
+    const [displayButton, setDisplayButton] = useState(true)
 
 
     // Aka ComponentDidMount
@@ -108,9 +112,10 @@ export default function Dashboard() {
                     <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} /> } />
 
                     { selectedGame ? <Route exact path="/game-home" render={() => <GameHome game={selectedGame} /> } /> : null }
-        { selectedGame ? <Route exact path="/my-hat-game" render={() => <GameScreen selectedGame={selectedGame} /> } /> : null } 
+                    { selectedGame ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} /> } /> : null } 
+                    <Route exact path="/the-hat-game/player-with-hat" render={() => <ActivePlayerScreen selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} /> } />
+                    <Route exact path="/the-hat-game/turn-over" render={() => <TurnOverScreen setRedirect={setRedirect} setDisplayButton={setDisplayButton} /> } />
 
-                    
             </Router>
 
             </>

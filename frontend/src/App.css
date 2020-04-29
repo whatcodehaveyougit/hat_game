@@ -133,3 +133,22 @@ img.team {
 .player-name-to-add-clues:hover {
   text-decoration: underline;
 }
+
+
+
+/* Active Player Screen */
+
+.start-clock {
+  background-color: red;
+  color: white;
+  margin-top: 20px;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  font-size: 35px;
+}
+
+.time-left {
+  font-size: 60px;
+  margin-top: 40px;
+}

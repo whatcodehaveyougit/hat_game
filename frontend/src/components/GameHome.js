@@ -11,7 +11,7 @@ export default function GameHome(props) {
     }
 
     if(readyTeamsCount >= props.game.teams.length ){
-        return <Redirect to='/my-hat-game'/>
+        return <Redirect to='/the-hat-game'/>
     }
 
     return (
@@ -21,10 +21,13 @@ export default function GameHome(props) {
             <h1>{props.game.title}</h1>
             <h3>Teams Ready To Play! : {readyTeamsCount}</h3>
             { props ? props.game.teams.map((team, index) => (
+                <>
                 <div key={index} className={`${playerReadyCss} ? player-ready : null`} > Are team {team.name} ready to play?</div>
+                <button key={team} onClick={playerReady} >Aye!</button>
+                </>
     )) : null  }
 
-            <button onClick={playerReady} >Aye!</button>
+            
 
         </>
     )
