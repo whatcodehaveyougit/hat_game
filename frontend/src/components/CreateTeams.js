@@ -18,22 +18,23 @@ export default function CreateTeams(props){
     const handlePlayerSubmit = (e) => {
         e.preventDefault();
         props.onPlayerPost(playerName, teamName)
+        setSubmittedPlayers(submittedPlayers => [...submittedPlayers, playerName])
         setPlayerName('');
         setTeamName('');
-        setSubmittedPlayers(submittedPlayers => [...submittedPlayers, playerName])
         setDisplayNewTeamsButton(true)
        }
+
+    const handleTeamNameSubmit = (e) => {
+        e.preventDefault();
+        props.onTeamPost(teamName)
+        setSubmittedTeamName(teamName)
+    }
 
     const addNewTeam = (e) => {
         addSubmittedTeam(submittedTeams => [...submittedTeams, submittedTeamName]);
         setSubmittedTeamName('');
         setSubmittedPlayers('')
         setDisplaySubmittedTeams(true);
-    }
-
-    const handleTeamNameSubmit = (e) => {
-        e.preventDefault();
-        setSubmittedTeamName(teamName)
     }
 
     const moveToAddCluesPage = (e) => {

@@ -1,9 +1,7 @@
 import React, {useState} from 'react'
 
 export default function GameScreen(props) {
-    const [game, setGame] = useState(props.selectedGame)
-    console.log(game);
-    
+    const [game, setGame] = useState(props.selectedGame)    
 
     return (
         <>
@@ -11,8 +9,9 @@ export default function GameScreen(props) {
         <button>Grab the Hat</button>
 
         <h3>Dynamic Scores</h3>
-        <div>Team1: 10</div>
-        <div>Team2: 10</div>
+        { game ? game.teams.map((team, index) => (
+                <div key={index}> {team.name} : {team.score} </div>
+        )) : null  }
 
         </>
     )

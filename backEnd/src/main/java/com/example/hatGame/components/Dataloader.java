@@ -46,16 +46,11 @@ public class Dataloader implements ApplicationRunner {
         Team team1 = new Team("Hummus", contest1);
         teamRepo.save(team1);
 
-
         Player player1 = new Player("Jimmy", team1);
         playerRepo.save(player1);
 
         Player player2 = new Player("Mark", team1);
         playerRepo.save(player2);
-
-
-
-
 
     }
 }
