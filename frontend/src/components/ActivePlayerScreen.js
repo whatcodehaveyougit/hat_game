@@ -8,20 +8,52 @@ const ActivePlayerScreen = (props) => {
     const [seconds, setSeconds] = useState(60);
     const [isActive, setIsActive] = useState(false);
     const [redirect, setRedirect] = useState(props.redirect)
-        
-    console.log(redirect + " redirect status");
-    console.log();
-    
-    function toggle() {
-        setIsActive(!isActive);
-    }
+    const [cluesArray, setCluesArray] = useState(props.selectedGame.clues)
+    const [currentClue, setCurrentClue] = useState()
+    const [counter, setCounter] = useState(0)
+    const [emptyHatRedirect, setEmptyHatRedirect] = useState(false)
+
+    if (emptyHatRedirect){
+        return <Redirect to='/the-hat-is-empty'/>
+        }
+
+    if(redirect) {
+        return <Redirect to='/the-hat-game/turn-over' />
+    }    
+
+    // function toggle() {
+    //     setIsActive(!isActive);
+    // }
     
     function startRound() {
         setDisplayButton(false)
         setIsActive(true);
         startTimer(60)
+        nextClue()
     }
 
+    function nextClue(){
+        incrementCounter()
+        .then(isHatEmpty())
+    }
+
+    function incrementCounter(){
+     return new Promise((resolve, reject) => {
+        setCounter(counter + 1)
+     })
+    } 
+
+    function isHatEmpty(){
+        return new Promise((resolve, reject) => {     
+        if (cluesArray.length === counter){
+            setEmptyHatRedirect(true) 
+            return reject      
+        } else {
+            setCurrentClue(cluesArray[counter].content)
+        }
+     })
+    }
+  
     function startTimer(seconds) {
         let clock = setInterval(function () {
             seconds = seconds - 1    
@@ -35,19 +67,17 @@ const ActivePlayerScreen = (props) => {
     }
 
 
-    function handleRedirect(){
-        setRedirect(true)
-    }
-    
-    if(redirect) {
-        return <Redirect to='/the-hat-game/turn-over' />
-    }
+    // function handleRedirect(){
+    //     setRedirect(true)
+    // }
 
     return (
         <>
-        <h1>Have you picked up the hat?</h1>
-        { displayButton ? <button className="start-clock" onClick={startRound}>Start the Clock</button> : null }
-        { isActive ? <div className="time-left"> {seconds} </div> : null}
+            { displayButton ? <h1>Have you picked up the hat?</h1> : null }
+            { displayButton ? <button className="start-clock" onClick={startRound}>Start the Clock</button> : null }
+            { isActive ? <div className="time-left"> {seconds} </div> : null}
+            { displayButton ? null : <div>Current Clues: <br/><span className="current-clue">{currentClue}</span></div> }
+            <button onClick={nextClue}>Next Clue</button>
         </>
     )
 }

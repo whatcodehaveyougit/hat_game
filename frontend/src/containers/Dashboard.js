@@ -11,6 +11,7 @@ import HomePage from '../components/HomePage.js'
 import ClockTest from '../components/ClockTest.js'
 import ActivePlayerScreen from '../components/ActivePlayerScreen.js'
 import TurnOverScreen from '../components/TurnOverScreen.js'
+import EmptyHat from '../components/EmptyHat.js'
 
 export default function Dashboard() {
     
@@ -116,6 +117,7 @@ export default function Dashboard() {
                     <Route exact path="/test-clock" render={() => <ClockTest selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} /> } />
 
                     <Route exact path="/the-hat-game/turn-over" render={() => <TurnOverScreen setRedirect={setRedirect} setDisplayButton={setDisplayButton} /> } />
+                    <Route exact path="/the-hat-is-empty" render={() => <EmptyHat /> } />
 
             </Router>
 

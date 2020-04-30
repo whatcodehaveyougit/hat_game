@@ -158,6 +158,11 @@ img.team {
   font-size: 35px;
 }
 
+.current-clue {
+  font-size: 40px;
+  font-weight: 700;
+}
+
 .time-left {
   font-size: 60px;
   margin-top: 40px;
