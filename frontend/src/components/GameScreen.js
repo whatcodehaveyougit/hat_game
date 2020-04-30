@@ -4,11 +4,10 @@ import {Link} from 'react-router-dom'
 import ActivePlayerScreen from './ActivePlayerScreen'
 
 export default function GameScreen(props) {
-console.log(props);
 
     return (
         <>
-        <h1>{props ? props.selectedGame.teams[0].name : null} to go now </h1>
+        <h1>{props ? props.selectedTeam.name : null} to go now </h1>
         
         <div>Choose a player from your team!</div>
         <Link to="/the-hat-game/player-with-hat">Grab the Hat</Link>

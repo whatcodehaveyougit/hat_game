@@ -22,7 +22,7 @@ const ActivePlayerScreen = (props) => {
     
     function startRound() {
         setDisplayButton(false)
-        startTimer(5)
+        startTimer(1)
         nextClue()
     }
 

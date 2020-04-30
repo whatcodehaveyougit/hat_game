@@ -20,6 +20,8 @@ export default function Dashboard() {
     const [createdTeam, setCreatedTeam] = useState()
     const [playersInCreatedGame, setPlayersInCreatedGame] = useState([])
     const [selectedGame, setSelectedGame] = useState({})
+    const [selectedTeam, setSelectedTeam] = useState()
+    const [selectedTeamCounter, setSelectedTeamCounter] = useState(0)
     const [redirect, setRedirect] = useState(false)
     const [displayButton, setDisplayButton] = useState(true)
 
@@ -99,8 +101,18 @@ export default function Dashboard() {
       }
 
       function changeSelectedTeam(){
-        console.log("change team");
-        
+        if (selectedTeamCounter === selectedGame.teams.length){
+          console.log("back to zero");
+          setSelectedTeam(selectedGame.teams[0])
+          setSelectedTeamCounter(1)
+        } else {
+          console.log("setting selected team");    
+          setSelectedTeam(selectedGame.teams[selectedTeamCounter])
+          setSelectedTeamCounter(selectedTeamCounter + 1)
+          console.log(selectedTeamCounter) 
+          console.log(selectedTeam);
+        }
+
       }
 
         return (
@@ -116,8 +128,8 @@ export default function Dashboard() {
                     <Route exact path="/add-clues" render={() => <AddClues createdGame={createdGame} playersInCreatedGame={playersInCreatedGame} /> } /> 
                     <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} /> } />
 
-                    { selectedGame ? <Route exact path="/game-home" render={() => <ReadyToPlay game={selectedGame} /> } /> : null }
-                    { selectedGame ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} /> } /> : null } 
+                    { selectedGame ? <Route exact path="/game-home" render={() => <ReadyToPlay game={selectedGame}  changeSelectedTeam={changeSelectedTeam} /> } /> : null }
+                    { selectedGame ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} selectedTeam={selectedTeam} /> } /> : null } 
                     <Route exact path="/the-hat-game/player-with-hat" render={() => <ActivePlayerScreen selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} /> } />
                     <Route exact path="/test-clock" render={() => <ClockTest selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} /> } />
 

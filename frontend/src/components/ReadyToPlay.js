@@ -1,10 +1,16 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Redirect } from 'react-router-dom'
 import '../App.css'
 
 export default function ReadyToPlay(props) {
     const [readyTeamsCount, setReadyTeamsCount] = useState(0) 
     const [playerReadyCss, setPlayerReadyCss] = useState(false)
+
+
+    useEffect(() => {
+       console.log("useEffect running");
+       props.changeSelectedTeam()
+    }, [])
 
     function playerReady(){
         setReadyTeamsCount(readyTeamsCount + 1)
