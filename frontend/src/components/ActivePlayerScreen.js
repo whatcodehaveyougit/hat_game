@@ -6,7 +6,6 @@ const ActivePlayerScreen = (props) => {
     
     const [displayButton, setDisplayButton] = useState(props.displayButton)
     const [seconds, setSeconds] = useState(60);
-    const [isActive, setIsActive] = useState(false);
     const [redirect, setRedirect] = useState(props.redirect)
     const [cluesArray, setCluesArray] = useState(props.selectedGame.clues)
     const [currentClue, setCurrentClue] = useState()
@@ -20,15 +19,10 @@ const ActivePlayerScreen = (props) => {
     if(redirect) {
         return <Redirect to='/the-hat-game/turn-over' />
     }    
-
-    // function toggle() {
-    //     setIsActive(!isActive);
-    // }
     
     function startRound() {
         setDisplayButton(false)
-        setIsActive(true);
-        startTimer(60)
+        startTimer(5)
         nextClue()
     }
 
@@ -66,18 +60,13 @@ const ActivePlayerScreen = (props) => {
         }, 1000);
     }
 
-
-    // function handleRedirect(){
-    //     setRedirect(true)
-    // }
-
     return (
         <>
             { displayButton ? <h1>Have you picked up the hat?</h1> : null }
             { displayButton ? <button className="start-clock" onClick={startRound}>Start the Clock</button> : null }
-            { isActive ? <div className="time-left"> {seconds} </div> : null}
+            { displayButton ? null : <div className="time-left"> {seconds} </div> }
             { displayButton ? null : <div>Current Clues: <br/><span className="current-clue">{currentClue}</span></div> }
-            <button onClick={nextClue}>Next Clue</button>
+            { displayButton ? null : <button onClick={nextClue}>Next Clue</button> }
         </>
     )
 }

@@ -34,23 +34,41 @@ public class Dataloader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args){
 
-        Game contest1 = new Game("Hummus");
+        Game contest1 = new Game("The FA Cup of Hat Games");
         contestRepo.save(contest1);
 
-        Clue clue1 = new Clue("007", contest1);
+        Clue clue1 = new Clue("Bob Odenkirk", contest1);
         clueRepo.save(clue1);
 
         Clue clue2 = new Clue("12 years a slave", contest1);
         clueRepo.save(clue2);
 
-        Team team1 = new Team("Hummus", contest1);
+        Clue clue3 = new Clue("Christian Bale", contest1);
+        clueRepo.save(clue3);
+
+        Clue clue4 = new Clue("Jimmy McGill", contest1);
+        clueRepo.save(clue4);
+
+        Team team1 = new Team("Team 1", contest1);
         teamRepo.save(team1);
+
+        Team team2 = new Team("Team 2", contest1);
+        teamRepo.save(team2);
+
+        Team team3 = new Team("Team 3", contest1);
+        teamRepo.save(team3);
 
         Player player1 = new Player("Jimmy", team1);
         playerRepo.save(player1);
 
         Player player2 = new Player("Mark", team1);
         playerRepo.save(player2);
+
+        Player player3 = new Player("Sandy", team1);
+        playerRepo.save(player3);
+
+        Player player4 = new Player("Thorfin", team1);
+        playerRepo.save(player4);
 
     }
 }

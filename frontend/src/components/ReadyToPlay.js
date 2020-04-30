@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { Redirect } from 'react-router-dom'
 import '../App.css'
 
-export default function GameHome(props) {
+export default function ReadyToPlay(props) {
     const [readyTeamsCount, setReadyTeamsCount] = useState(0) 
     const [playerReadyCss, setPlayerReadyCss] = useState(false)
 
@@ -17,16 +17,15 @@ export default function GameHome(props) {
     return (
         <>
             <h1>{ props.game.title }</h1>
-             <p>This is a component to be renders on the dynamic game route</p>
-            <h1>{props.game.title}</h1>
             <h3>Teams Ready To Play! : {readyTeamsCount}</h3>
+            <div className="grid-container three-cols">
             { props ? props.game.teams.map((team, index) => (
-                <>
-                <div key={index} className={`${playerReadyCss} ? player-ready : null`} > Are team {team.name} ready to play?</div>
-                <button key={team} onClick={playerReady} >Aye!</button>
-                </>
+                <div>
+                    <div key={index} className={`${playerReadyCss} ? player-ready : null`} > Are team {team.name} ready to play?</div>
+                    <button key={team} onClick={playerReady} >Aye!</button>
+                </div>
     )) : null  }
-
+            </div>
             
 
         </>

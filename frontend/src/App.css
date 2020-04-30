@@ -57,6 +57,13 @@ button {
   margin-bottom:10px;
 }
 
+.grid-container {
+  display: grid;
+}
+
+.three-cols {
+  grid-template-columns: 1fr 1fr 1fr;
+}
 
 /* Nav bar */
 
@@ -137,13 +144,6 @@ img.team {
   color: white;
   font-weight: 700;
 
-}
-
-/*  Add Clues Component */
-
-.players-adding-clues-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
 }
 
 /* Active Player Screen */

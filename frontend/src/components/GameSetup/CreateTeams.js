@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Redirect } from 'react-router-dom'
-import '../App.css'
-import team from '../style/team.png'
+import '../../App.css'
+import team from '../../style/team.png'
 
 export default function CreateTeams(props){
     const [playerName, setPlayerName] = useState('');

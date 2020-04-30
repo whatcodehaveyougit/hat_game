@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import Navbar from '../components/Navbar'
+import Navbar from './Navbar'
 import {BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom"
-import GameHome from '../components/GameHome.js'
-import AddClues from '../components/AddClues.js'
-import AddCluesPlayer from '../components/AddCluesPlayer.js'
-import CreateGame from '../components/CreateGame.js'
+import ReadyToPlay from '../components/ReadyToPlay.js'
+import AddClues from '../components/GameSetup/AddClues.js'
+import AddCluesPlayer from '../components/GameSetup/AddCluesPlayer.js'
+import CreateGame from '../components/GameSetup/CreateGame.js'
 import GameScreen from '../components/GameScreen.js'
-import CreateTeams from '../components/CreateTeams.js'
+import CreateTeams from '../components/GameSetup/CreateTeams.js'
 import HomePage from '../components/HomePage.js'
 import ClockTest from '../components/ClockTest.js'
 import ActivePlayerScreen from '../components/ActivePlayerScreen.js'
@@ -98,6 +98,11 @@ export default function Dashboard() {
         })
       }
 
+      function changeSelectedTeam(){
+        console.log("change team");
+        
+      }
+
         return (
           <>
           <Navbar />
@@ -111,12 +116,12 @@ export default function Dashboard() {
                     <Route exact path="/add-clues" render={() => <AddClues createdGame={createdGame} playersInCreatedGame={playersInCreatedGame} /> } /> 
                     <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} /> } />
 
-                    { selectedGame ? <Route exact path="/game-home" render={() => <GameHome game={selectedGame} /> } /> : null }
+                    { selectedGame ? <Route exact path="/game-home" render={() => <ReadyToPlay game={selectedGame} /> } /> : null }
                     { selectedGame ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} /> } /> : null } 
                     <Route exact path="/the-hat-game/player-with-hat" render={() => <ActivePlayerScreen selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} /> } />
                     <Route exact path="/test-clock" render={() => <ClockTest selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} /> } />
 
-                    <Route exact path="/the-hat-game/turn-over" render={() => <TurnOverScreen setRedirect={setRedirect} setDisplayButton={setDisplayButton} /> } />
+                    <Route exact path="/the-hat-game/turn-over" render={() => <TurnOverScreen setRedirect={setRedirect} setDisplayButton={setDisplayButton} changeSelectedTeam={changeSelectedTeam} /> } />
                     <Route exact path="/the-hat-is-empty" render={() => <EmptyHat /> } />
 
             </Router>
