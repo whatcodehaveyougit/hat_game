@@ -11,18 +11,19 @@ export default function ActivePlayerScreen(){
         // startClock()
       }
 
-    //   useEffect(() => {
-    //     console.log('Do something after counter has changed', clock);
-    //     startClock()
-    //  })
+      useEffect(() => {
+        console.log('Do something after counter has changed', clock);
+        startClock()
+     })
 
-
+     function startClock(){
         if(clock) {
             setInterval(() => {
                 if(clock > 0 )
                 setClock(clock => clock - 1 ) 
             }, 1000)
          }
+        }
 
     return (
         <>

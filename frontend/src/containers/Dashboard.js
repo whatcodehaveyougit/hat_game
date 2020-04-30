@@ -8,7 +8,7 @@ import CreateGame from '../components/CreateGame.js'
 import GameScreen from '../components/GameScreen.js'
 import CreateTeams from '../components/CreateTeams.js'
 import HomePage from '../components/HomePage.js'
-import Test from '../components/Test.js'
+import ClockTest from '../components/ClockTest.js'
 import ActivePlayerScreen from '../components/ActivePlayerScreen.js'
 import TurnOverScreen from '../components/TurnOverScreen.js'
 
@@ -107,13 +107,14 @@ export default function Dashboard() {
                     <Route exact path="/create-game" render={() => <CreateGame onGamePost={onGamePost} /> } />
                      {/* I have put in this ternary as before it was trying to load the component before the state had been set to pass down  */}
                     { createdGame ? <Route exact path="/create-teams" render={() => <CreateTeams createdGame={createdGame} onPlayerPost={onPlayerPost} onTeamPost={onTeamPost} /> } /> : null }
-                    <Router exact path="/test" render={() => <Test /> } />
                     <Route exact path="/add-clues" render={() => <AddClues createdGame={createdGame} playersInCreatedGame={playersInCreatedGame} /> } /> 
                     <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} /> } />
 
                     { selectedGame ? <Route exact path="/game-home" render={() => <GameHome game={selectedGame} /> } /> : null }
                     { selectedGame ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} /> } /> : null } 
                     <Route exact path="/the-hat-game/player-with-hat" render={() => <ActivePlayerScreen selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} /> } />
+                    <Route exact path="/test-clock" render={() => <ClockTest selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} /> } />
+
                     <Route exact path="/the-hat-game/turn-over" render={() => <TurnOverScreen setRedirect={setRedirect} setDisplayButton={setDisplayButton} /> } />
 
             </Router>
