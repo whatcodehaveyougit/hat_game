@@ -13,6 +13,9 @@ public class Clue {
     @Column(name="content")
     private String content;
 
+    @Column(name="guessed")
+    private Boolean guessed;
+
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name="game_id", nullable = false)
     private Game game;
@@ -21,6 +24,7 @@ public class Clue {
         this.id = id;
         this.content = content;
         this.game = game;
+        this.guessed = guessed;
     }
 
     public Clue(){
@@ -50,4 +54,11 @@ public class Clue {
         this.game = game;
     }
 
+    public Boolean getGuessed() {
+        return guessed;
+    }
+
+    public void setGuessed(Boolean guessStatus) {
+        this.guessed = guessed;
+    }
 }

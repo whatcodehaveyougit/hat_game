@@ -128,13 +128,23 @@ img.team {
 .player-name-to-add-clues {
   padding: 20px;
   border: 1px solid black;
+  margin: 2% 4%;
+  border-radius: 12px;
 }
 
 .player-name-to-add-clues:hover {
-  text-decoration: underline;
+  background-color:#6418bf;
+  color: white;
+  font-weight: 700;
+
 }
 
+/*  Add Clues Component */
 
+.players-adding-clues-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
 
 /* Active Player Screen */
 

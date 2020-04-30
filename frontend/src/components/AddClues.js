@@ -14,13 +14,14 @@ if(redirect) {
 }
     return(
         <>
-      <h3>Players</h3>
+      <h3>Time to Add Clues to the Hat</h3>
+      <div className="players-adding-clues-container">
     { props.playersInCreatedGame.map((player) => (
         <div class="player-name-to-add-clues">
-           <div className="players" onClick={handleRedirect}>{player.name}</div>            
+           <div className="player" onClick={handleRedirect}>{player.name} <br/> is ready to start adding clues!</div>            
         </div>
     ))}
-
+    </div>
     </>
     )
 }
