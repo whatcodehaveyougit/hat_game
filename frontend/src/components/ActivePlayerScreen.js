@@ -4,7 +4,7 @@ import '../App.css'
 
 const ActivePlayerScreen = (props) => {
     
-    const [displayButton, setDisplayButton] = useState(props.displayButton)
+    const [timerStarted, setTimerStarted] = useState(props.timerStarted)
     const [seconds, setSeconds] = useState(60);
     const [redirect, setRedirect] = useState(props.redirect)
     const [cluesArray, setCluesArray] = useState(props.selectedGame.clues)
@@ -21,7 +21,7 @@ const ActivePlayerScreen = (props) => {
     }    
     
     function startRound() {
-        setDisplayButton(false)
+        setTimerStarted(false)
         startTimer(1)
         nextClue()
     }
@@ -62,11 +62,11 @@ const ActivePlayerScreen = (props) => {
 
     return (
         <>
-            { displayButton ? <h1>Have you picked up the hat?</h1> : null }
-            { displayButton ? <button className="start-clock" onClick={startRound}>Start the Clock</button> : null }
-            { displayButton ? null : <div className="time-left"> {seconds} </div> }
-            { displayButton ? null : <div>Current Clues: <br/><span className="current-clue">{currentClue}</span></div> }
-            { displayButton ? null : <button onClick={nextClue}>Next Clue</button> }
+            { timerStarted ? <h1>Have you picked up the hat?</h1> : null }
+            { timerStarted ? <button className="start-clock" onClick={startRound}>Start the Clock</button> : null }
+            { timerStarted ? null : <div className="time-left"> {seconds} </div> }
+            { timerStarted ? null : <div>Current Clues: <br/><span className="current-clue">{currentClue}</span></div> }
+            { timerStarted ? null : <button onClick={nextClue}>Next Clue</button> }
         </>
     )
 }

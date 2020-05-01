@@ -5,7 +5,7 @@
     font-family: avenir;
   }
   
-.game {
+.box {
   background-color: white;
     background-color: white;
     padding: 10px 15px;
@@ -13,6 +13,10 @@
     border-radius: 18px;
     border: 1px solid black;
     display: inline-block;
+}
+
+.box:hover {
+  cursor: pointer;
 }
 
  input {
@@ -143,8 +147,8 @@ img.team {
   background-color:#6418bf;
   color: white;
   font-weight: 700;
-
 }
+
 
 /* Active Player Screen */
 

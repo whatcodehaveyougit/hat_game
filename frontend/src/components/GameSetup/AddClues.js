@@ -18,7 +18,7 @@ if(redirect) {
       <div className="grid-container three-cols">
     { props.playersInCreatedGame.map((player) => (
         <div class="player-name-to-add-clues">
-           <div className="player" onClick={handleRedirect}>{player.name} <br/> is ready to start adding clues!</div>            
+           <div className="player" onClick={handleRedirect}>{player.name} <br/>Start Adding Clues!</div>            
         </div>
     ))}
     </div>

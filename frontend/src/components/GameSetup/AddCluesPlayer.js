@@ -1,24 +1,14 @@
 import React, {useState} from 'react'
-import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function AddCluesPlayer(props){
 const [clueContent, setClueContent] = useState('')
-const [redirect, setRedirect] = useState(false)
 
 const handleClueSubmit = (e) => {
     e.preventDefault();
     props.onCluePost(clueContent)
     setClueContent('')
 }
-
-function handleRedirect(){
-    setRedirect(true)
-}
-
-if(redirect) {
-    return <Redirect to='/' />
-}
-
 
     return (
         <>
@@ -28,7 +18,7 @@ if(redirect) {
                 <input type="submit" />
             </form>
 
-            <button onClick={handleRedirect}>Finished Adding Clues!</button>
+            <Link to="/"><button>Finished Adding Clues!</button></Link>
         </>
     )
 }
