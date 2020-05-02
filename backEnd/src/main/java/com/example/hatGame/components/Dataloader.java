@@ -37,16 +37,16 @@ public class Dataloader implements ApplicationRunner {
         Game contest1 = new Game("The FA Cup of Hat Games");
         contestRepo.save(contest1);
 
-        Clue clue1 = new Clue("Bob Odenkirk", contest1);
+        Clue clue1 = new Clue("Bob Odenkirk", false, contest1);
         clueRepo.save(clue1);
 
-        Clue clue2 = new Clue("12 years a slave", contest1);
+        Clue clue2 = new Clue("12 years a slave",false, contest1);
         clueRepo.save(clue2);
 
-        Clue clue3 = new Clue("Christian Bale", contest1);
+        Clue clue3 = new Clue("Christian Bale",false, contest1);
         clueRepo.save(clue3);
 
-        Clue clue4 = new Clue("Jimmy McGill", contest1);
+        Clue clue4 = new Clue("Jimmy McGill",false, contest1);
         clueRepo.save(clue4);
 
         Team team1 = new Team("Team 1", contest1);

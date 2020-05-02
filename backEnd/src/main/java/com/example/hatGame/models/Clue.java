@@ -20,11 +20,11 @@ public class Clue {
     @JoinColumn(name="game_id", nullable = false)
     private Game game;
 
-    public Clue(String content, Game game){
+    public Clue(String content, Boolean guessed, Game game){
         this.id = id;
         this.content = content;
-        this.game = game;
         this.guessed = guessed;
+        this.game = game;
     }
 
     public Clue(){

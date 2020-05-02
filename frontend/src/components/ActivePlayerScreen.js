@@ -17,9 +17,11 @@ const ActivePlayerScreen = (props) => {
     function startRound() {
         setTimerStarted(true)
         nextClue()
+        props.getTeamsCurrentScore()
     }
 
     function nextClue(){
+        props.onClueGuessed()
         incrementCounter()
         .then(isHatEmpty())
     }
@@ -33,10 +35,11 @@ const ActivePlayerScreen = (props) => {
     function isHatEmpty(){
         return new Promise((resolve, reject) => {     
         if (cluesArray.length === counter){
+            props.endTurnSetScoreInDb()
             setEmptyHatRedirect(true)
             return reject    
         } else {
-            setCurrentClue(cluesArray[counter].content)
+            setCurrentClue(cluesArray[counter])
         }
      })
     }
@@ -71,10 +74,9 @@ const ActivePlayerScreen = (props) => {
             { timerStarted ? null : <h1>Have you picked up the hat?</h1> }
             { timerStarted ? null : <button className="start-clock" onClick={startRound}>Start the Clock</button> }
             { timerStarted ? <div className="time-left"> {timeLeft} </div> : null}
-            { timerStarted ? <div>Current Clues: <br/><span className="current-clue">{currentClue}</span></div> : null }
+            { timerStarted ? <div>Current Clues: <br/><span className="current-clue">{currentClue.content}</span></div> : null }
             { timerStarted ? <button onClick={nextClue}>Next Clue</button> : null }  
-            { emptyHatRedirect ? <Redirect to='/the-hat-is-empty'/> : null }       
-        }
+            { emptyHatRedirect ? <Redirect to='/the-hat-is-empty'/> : null } 
         </>
     )
 }

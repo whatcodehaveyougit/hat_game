@@ -12,6 +12,7 @@ import ClockTest from '../components/ClockTest.js'
 import ActivePlayerScreen from '../components/ActivePlayerScreen.js'
 import TurnOverScreen from '../components/TurnOverScreen.js'
 import EmptyHat from '../components/EmptyHat.js'
+import { getNodeText } from '@testing-library/react'
 
 export default function Dashboard() {
     
@@ -24,9 +25,8 @@ export default function Dashboard() {
     const [selectedTeamCounter, setSelectedTeamCounter] = useState(0)
     const [redirect, setRedirect] = useState(false)
     const [displayButton, setDisplayButton] = useState(true)
+    const [currentScore, setCurrentScore] = useState()
 
-
-    // Aka ComponentDidMount
     useEffect(() => {
         fetch("/games/")
         .then(res => res.json())
@@ -100,19 +100,41 @@ export default function Dashboard() {
         })
       }
 
+      function endTurnSetScoreInDb(){  
+        fetch("/teams/2", {
+          method: 'PATCH',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            score: currentScore
+          }) 
+      })
+    }
+      function onClueGuessed(){
+        console.log("clue guessed!" + currentScore);        
+        setCurrentScore(currentScore + 1)
+      }
+
+
       function changeSelectedTeam(){
+        endTurnSetScoreInDb()
         if (selectedTeamCounter === selectedGame.teams.length){
           console.log("back to zero");
           setSelectedTeam(selectedGame.teams[0])
           setSelectedTeamCounter(1)
         } else {
-          console.log("setting selected team");    
           setSelectedTeam(selectedGame.teams[selectedTeamCounter])
           setSelectedTeamCounter(selectedTeamCounter + 1)
-          console.log(selectedTeamCounter) 
-          console.log(selectedTeam);
         }
-
+      }
+ 
+      function getTeamsCurrentScore(){
+        fetch("/teams/2")
+        .then(res => res.json())
+        .then(resTwo => setCurrentScore(resTwo.score))
+        .then(res => console.log(currentScore + ": current score set"));
       }
 
         return (
@@ -128,9 +150,9 @@ export default function Dashboard() {
                     <Route exact path="/add-clues" render={() => <AddClues createdGame={createdGame} playersInCreatedGame={playersInCreatedGame} /> } /> 
                     <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} /> } />
 
-                    { selectedGame ? <Route exact path="/game-home" render={() => <ReadyToPlay game={selectedGame}  changeSelectedTeam={changeSelectedTeam} /> } /> : null }
+                    { selectedGame ? <Route exact path="/game-home" render={() => <ReadyToPlay game={selectedGame}  changeSelectedTeam={changeSelectedTeam}  selectedTeam={selectedTeam} /> } /> : null }
                     { selectedGame ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} selectedTeam={selectedTeam} /> } /> : null } 
-                    <Route exact path="/the-hat-game/player-with-hat" render={() => <ActivePlayerScreen selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} /> } />
+                    <Route exact path="/the-hat-game/player-with-hat" render={() => <ActivePlayerScreen selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} onClueGuessed={onClueGuessed} getTeamsCurrentScore={getTeamsCurrentScore} endTurnSetScoreInDb={endTurnSetScoreInDb} /> } />
                     <Route exact path="/test-clock" render={() => <ClockTest selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} /> } />
 
                     <Route exact path="/the-hat-game/turn-over" render={() => <TurnOverScreen setRedirect={setRedirect} setDisplayButton={setDisplayButton} changeSelectedTeam={changeSelectedTeam} /> } />

@@ -14,7 +14,7 @@ public class ClueTest {
     @Test
     public void get_clue_name(){
         contest = new Game("Hummus");
-        clue = new Clue("sword", contest);
+        clue = new Clue("sword", false, contest);
         assertEquals("sword", clue.getContent());
     }
     

@@ -6,17 +6,12 @@ export default function ReadyToPlay(props) {
     const [readyTeamsCount, setReadyTeamsCount] = useState(0) 
     const [playerReadyCss, setPlayerReadyCss] = useState(false)
 
-
-    useEffect(() => {
-       console.log("useEffect running");
-       props.changeSelectedTeam()
-    }, [])
-
     function playerReady(){
         setReadyTeamsCount(readyTeamsCount + 1)
     }
 
     if(readyTeamsCount >= props.game.teams.length ){
+        props.changeSelectedTeam()
         return <Redirect to='/the-hat-game'/>
     }
 
