@@ -164,7 +164,7 @@ export default function Dashboard() {
           }) 
       })
       setCurrentRound(nextRound)
-      if (currentRound > 3){
+      if (currentRound > 10){
         setGameOver(true)
       }
     }
@@ -184,7 +184,7 @@ export default function Dashboard() {
                     <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} /> } />
 
                     { selectedGame ? <Route exact path="/game-home" render={() => <ReadyToPlay selectedGame={selectedGame}  startRoundWithTeamOne={startRoundWithTeamOne} selectedTeam={selectedTeam} /> } /> : null }
-                    { selectedGame ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} selectedTeam={selectedTeam} currentRound={currentRound} gameOver={gameOver} /> } /> : null } 
+                    { selectedGame  && selectedTeam? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} selectedTeam={selectedTeam} currentRound={currentRound} gameOver={gameOver} /> } /> : null } 
                     <Route exact path="/the-hat-game/player-with-hat" render={() => <ActivePlayerScreen selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} onClueGuessed={onClueGuessed} getTeamsCurrentScore={getTeamsCurrentScore} endTurnSetDbScore={endTurnSetDbScore} /> } />
                     <Route exact path="/test-clock" render={() => <ClockTest selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} /> } />
 
