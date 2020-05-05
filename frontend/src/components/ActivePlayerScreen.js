@@ -7,7 +7,7 @@ const ActivePlayerScreen = (props) => {
     // Timer
     const [timerStarted, setTimerStarted] = useState(false)
     const [clock, setClock] = useState(null)
-    const [timeLeft, setTimeLeft] = useState(5);
+    const [timeLeft, setTimeLeft] = useState(4);
     // Clues
     const [cluesArray, setCluesArray] = useState(props.selectedGame.clues)
     const [currentClue, setCurrentClue] = useState()
@@ -35,7 +35,7 @@ const ActivePlayerScreen = (props) => {
     function isHatEmpty(){
         return new Promise((resolve, reject) => {     
         if (cluesArray.length === counter){
-            props.endTurnSetScoreInDb()
+            props.endTurnSetDbScore()
             setEmptyHatRedirect(true)
             return reject    
         } else {

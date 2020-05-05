@@ -46,6 +46,14 @@ public class Clue {
         this.content = content;
     }
 
+    public Boolean getGuessed() {
+        return guessed;
+    }
+
+    public void setGuessed(Boolean guessStatus) {
+        this.guessed = guessed;
+    }
+
     public Game getGame() {
         return game;
     }
@@ -54,11 +62,5 @@ public class Clue {
         this.game = game;
     }
 
-    public Boolean getGuessed() {
-        return guessed;
-    }
 
-    public void setGuessed(Boolean guessStatus) {
-        this.guessed = guessed;
-    }
 }

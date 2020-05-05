@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom'
 export default function TurnOverScreen(props){
 
     function handleRedirect(){
-        props.setRedirect(false)
         props.setDisplayButton(true)
-        props.changeSelectedTeam()
+        props.changeAndSetSelectedTeam()
     }
     
 

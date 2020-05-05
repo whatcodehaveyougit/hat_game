@@ -11,7 +11,7 @@ export default function ReadyToPlay(props) {
     }
 
     if(readyTeamsCount >= props.game.teams.length ){
-        props.changeSelectedTeam()
+        props.startRoundWithTeamOne()
         return <Redirect to='/the-hat-game'/>
     }
 
@@ -21,9 +21,9 @@ export default function ReadyToPlay(props) {
             <h3>Teams Ready To Play! : {readyTeamsCount}</h3>
             <div className="grid-container three-cols">
             { props ? props.game.teams.map((team, index) => (
-                <div>
-                    <div key={index} className={`${playerReadyCss} ? player-ready : null`} > Are team {team.name} ready to play?</div>
-                    <button key={team} onClick={playerReady} >Aye!</button>
+                <div key={index}>
+                    <div className={`${playerReadyCss} ? player-ready : null`} > Are team {team.name} ready to play?</div>
+                    <button onClick={playerReady} >Aye!</button>
                 </div>
     )) : null  }
             </div>
