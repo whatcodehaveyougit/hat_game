@@ -12,10 +12,13 @@ public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long Id;
 
     @Column(name="title")
     private String title;
+
+    @Column(name="round")
+    private int round;
 
     @JsonIgnore
     @OneToMany(mappedBy = "game", cascade = CascadeType.REMOVE)
@@ -26,8 +29,9 @@ public class Game {
     private List<Clue> clues;
 
     public Game(String title){
-        this.id = id;
+        this.Id = Id;
         this.title = title;
+        this.round = 1;
         this.teams = new ArrayList<Team>();
         this.clues = new ArrayList<Clue>();
     }
@@ -36,11 +40,11 @@ public class Game {
     }
 
     public Long getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.Id = Id;
     }
 
     public String getTitle() {
@@ -49,6 +53,14 @@ public class Game {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getRound() {
+        return round;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
     }
 
     public List<Team> getTeams() {

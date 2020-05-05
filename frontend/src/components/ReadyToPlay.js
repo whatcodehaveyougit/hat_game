@@ -10,17 +10,25 @@ export default function ReadyToPlay(props) {
         setReadyTeamsCount(readyTeamsCount + 1)
     }
 
-    if(readyTeamsCount >= props.game.teams.length ){
+    if(readyTeamsCount >= props.selectedGame.teams.length ){
         props.startRoundWithTeamOne()
         return <Redirect to='/the-hat-game'/>
     }
 
+    if(props.selectedGame){
+        if (props.selectedGame.round > 3){
+            return <Redirect to='/game-over'/>
+        }
+    } else {
+        return null
+    }
+
     return (
         <>
-            <h1>{ props.game.title }</h1>
+            <h1>{ props.selectedGame.title }</h1>
             <h3>Teams Ready To Play! : {readyTeamsCount}</h3>
             <div className="grid-container three-cols">
-            { props ? props.game.teams.map((team, index) => (
+            { props ? props.selectedGame.teams.map((team, index) => (
                 <div key={index}>
                     <div className={`${playerReadyCss} ? player-ready : null`} > Are team {team.name} ready to play?</div>
                     <button onClick={playerReady} >Aye!</button>

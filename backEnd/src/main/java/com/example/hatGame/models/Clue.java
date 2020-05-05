@@ -8,7 +8,7 @@ public class Clue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long Id;
 
     @Column(name="content")
     private String content;
@@ -21,7 +21,7 @@ public class Clue {
     private Game game;
 
     public Clue(String content, Boolean guessed, Game game){
-        this.id = id;
+        this.Id = Id;
         this.content = content;
         this.guessed = guessed;
         this.game = game;
@@ -31,11 +31,11 @@ public class Clue {
     }
 
     public Long getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.Id = Id;
     }
 
     public String getContent() {

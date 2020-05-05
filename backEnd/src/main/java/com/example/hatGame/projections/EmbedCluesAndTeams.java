@@ -11,6 +11,7 @@ import java.util.List;
 public interface EmbedCluesAndTeams {
     Long getId();
     String getTitle();
+    int getRound();
     List<Team> getTeams();
     List<Clue> getClues();
 }
