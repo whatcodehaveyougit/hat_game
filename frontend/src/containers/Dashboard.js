@@ -112,15 +112,22 @@ export default function Dashboard() {
 
       function startRoundWithTeamOne(){
         setSelectedTeam(selectedGame.teams[0])
-        setCurrentRound(selectedGame.round)
-        console.log(selectedGame.round + " is the round");
-        
+        setCurrentRound(selectedGame.round)        
       }
 
       // During Turn
 
-      function onClueGuessed(){
-        console.log("clue guessed!" + currentScore);        
+      function onClueGuessed(clueId){        
+          fetch(`/clues/${clueId}`, {
+            method: 'PATCH',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              guessed: true
+            }) 
+        })
         setCurrentScore(currentScore + 1)
       }
 

@@ -21,7 +21,9 @@ const ActivePlayerScreen = (props) => {
     }
 
     function nextClue(){
-        props.onClueGuessed()
+        if(currentClue){ 
+          props.onClueGuessed(currentClue.id)
+        }
         incrementCounter()
         .then(isHatEmpty())
     }
@@ -74,7 +76,7 @@ const ActivePlayerScreen = (props) => {
             { timerStarted ? null : <h1>Have you picked up the hat?</h1> }
             { timerStarted ? null : <button className="start-clock" onClick={startRound}>Start the Clock</button> }
             { timerStarted ? <div className="time-left"> {timeLeft} </div> : null}
-            { timerStarted ? <div>Current Clues: <br/><span className="current-clue">{currentClue.content}</span></div> : null }
+            { timerStarted && currentClue? <div>Current Clues: <br/><span className="current-clue">{currentClue.content}</span></div> : null }
             { timerStarted ? <button onClick={nextClue}>Next Clue</button> : null }  
             { emptyHatRedirect ? <Redirect to='/the-hat-is-empty'/> : null } 
         </>

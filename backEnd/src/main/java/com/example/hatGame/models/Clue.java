@@ -50,7 +50,7 @@ public class Clue {
         return guessed;
     }
 
-    public void setGuessed(Boolean guessStatus) {
+    public void setGuessed(Boolean guessed) {
         this.guessed = guessed;
     }
 
