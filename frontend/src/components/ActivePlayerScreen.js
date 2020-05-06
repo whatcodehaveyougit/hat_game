@@ -48,11 +48,9 @@ const ActivePlayerScreen = (props) => {
     
     function startRound() {
         setTimerStarted(true)
-        setCurrentClue(cluesInHat[counter])
+        if(cluesInHat > 1) { setCurrentClue(cluesInHat[counter]) } else { setEmptyHatRedirect(true) }
         incrementCounter()
         props.getTeamsCurrentScore()
-        console.log("cloues in hat " + cluesInHat);
-        
     }
 
     function nextClue(){
@@ -69,7 +67,7 @@ const ActivePlayerScreen = (props) => {
 
     function isHatEmpty(){
         return new Promise((resolve, reject) => {     
-        if (cluesInHat.length === counter){
+        if (cluesInHat.length < counter){
             props.endTurnSetDbScore()
             setEmptyHatRedirect(true)
             return reject    
