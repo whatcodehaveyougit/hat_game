@@ -29,6 +29,7 @@ export default function Dashboard() {
     const [displayButton, setDisplayButton] = useState(true)
     const [currentScore, setCurrentScore] = useState()
     const [gameOver, setGameOver] = useState(false)
+    const [emptyHatRedirect, setEmptyHatRedirect] = useState(false)
 
     useEffect(() => {
         fetch("/games/")
@@ -170,10 +171,23 @@ export default function Dashboard() {
             round: nextRound
           }) 
       })
+        selectedGame.clues.forEach(clue => {
+          fetch(`/clues/${clue.id}`, {
+            method: 'PATCH',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              guessed: false
+            }) 
+        })    
+      })
       setCurrentRound(nextRound)
-      if (currentRound > 10){
-        setGameOver(true)
-      }
+      setEmptyHatRedirect(false)
+      // if (currentRound > 40){
+      //   setGameOver(true)
+      // }
     }
   
 
@@ -192,7 +206,10 @@ export default function Dashboard() {
 
                     { selectedGame ? <Route exact path="/game-home" render={() => <ReadyToPlay selectedGame={selectedGame}  startRoundWithTeamOne={startRoundWithTeamOne} selectedTeam={selectedTeam} /> } /> : null }
                     { selectedGame  && selectedTeam? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} selectedTeam={selectedTeam} currentRound={currentRound} gameOver={gameOver} /> } /> : null } 
-                    <Route exact path="/the-hat-game/player-with-hat" render={() => <ActivePlayerScreen selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} onClueGuessed={onClueGuessed} getTeamsCurrentScore={getTeamsCurrentScore} endTurnSetDbScore={endTurnSetDbScore} /> } />
+                    <Route exact path="/the-hat-game/player-with-hat" render={() => 
+                    <ActivePlayerScreen selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} onClueGuessed={onClueGuessed} getTeamsCurrentScore={getTeamsCurrentScore} endTurnSetDbScore={endTurnSetDbScore} 
+                    emptyHatRedirect={emptyHatRedirect} setEmptyHatRedirect={setEmptyHatRedirect} /> } />
+
                     <Route exact path="/test-clock" render={() => <ClockTest selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} /> } />
 
                     <Route exact path="/the-hat-game/turn-over" render={() => <TurnOverScreen setRedirect={setRedirect} setDisplayButton={setDisplayButton} changeAndSetSelectedTeam={changeAndSetSelectedTeam} /> } />

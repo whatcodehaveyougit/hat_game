@@ -13,7 +13,6 @@ const ActivePlayerScreen = (props) => {
     const [cluesInHat, setCluesInHat] = useState([])
     const [currentClue, setCurrentClue] = useState()
     const [counter, setCounter] = useState(0)
-    const [emptyHatRedirect, setEmptyHatRedirect] = useState(false)
     
     useEffect(() => { 
       if(cluesArray){
@@ -46,9 +45,22 @@ const ActivePlayerScreen = (props) => {
       setCluesInHat(array)
   }
     
+
+  // Need to Order this function so everythign is getting called one after the other, chained in promises etc.
     function startRound() {
+      // console.log("empty hat redirect is" + props.emptyHatRedirect);
+      // console.log("clues in hat, here ?" + cluesInHat);
+      
         setTimerStarted(true)
-        if(cluesInHat > 1) { setCurrentClue(cluesInHat[counter]) } else { setEmptyHatRedirect(true) }
+        filterOutGuessedClues(cluesArray)  
+
+        if(cluesInHat.length > 1) { 
+          setCurrentClue(cluesInHat[counter]) 
+        } else { 
+          console.log(cluesInHat + "cloue in hat are...");
+          // The bug is here the clues are not going into the hat...
+          props.setEmptyHatRedirect(true) 
+        }
         incrementCounter()
         props.getTeamsCurrentScore()
     }
@@ -67,9 +79,9 @@ const ActivePlayerScreen = (props) => {
 
     function isHatEmpty(){
         return new Promise((resolve, reject) => {     
-        if (cluesInHat.length < counter){
+        if (cluesInHat.length <= counter){
             props.endTurnSetDbScore()
-            setEmptyHatRedirect(true)
+            props.setEmptyHatRedirect(true)
             return reject    
         } else {
             setCurrentClue(cluesInHat[counter])
@@ -106,7 +118,7 @@ const ActivePlayerScreen = (props) => {
             { timerStarted ? <div className="time-left"> {timeLeft} </div> : null}
             { timerStarted && currentClue? <div>Current Clues: <br/><span className="current-clue">{currentClue.content}</span></div> : null }
             { timerStarted ? <button onClick={nextClue}>Next Clue</button> : null }  
-            { emptyHatRedirect ? <Redirect to='/the-hat-is-empty'/> : null } 
+            { props.emptyHatRedirect ? <Redirect to='/the-hat-is-empty'/> : null } 
         </>
     )
 }
