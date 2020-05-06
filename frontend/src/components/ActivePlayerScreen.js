@@ -10,22 +10,55 @@ const ActivePlayerScreen = (props) => {
     const [timeLeft, setTimeLeft] = useState(4);
     // Clues
     const [cluesArray, setCluesArray] = useState(props.selectedGame.clues)
+    const [cluesInHat, setCluesInHat] = useState([])
     const [currentClue, setCurrentClue] = useState()
     const [counter, setCounter] = useState(0)
     const [emptyHatRedirect, setEmptyHatRedirect] = useState(false)
     
+    useEffect(() => { 
+      if(cluesArray){
+        filterOutGuessedClues(cluesArray)  
+    }
+  }, [cluesArray]);
+
+    function filterOutGuessedClues(arrayOfClues){      
+      let unGuessedClues = []
+      return new Promise((resolve, reject) => {     
+        arrayOfClues.forEach(clue => {
+            if(!clue.guessed){
+            unGuessedClues.push(clue)
+            }
+        })
+      }).then(shuffle(unGuessedClues))
+    }
+
+    function shuffle(array) {      
+      let counter = array.length;
+      while (counter > 0) {
+          let index = Math.floor(Math.random() * counter);
+  
+          counter--;
+
+          let temp = array[counter];
+          array[counter] = array[index];
+          array[index] = temp;
+      }
+      setCluesInHat(array)
+  }
+    
     function startRound() {
         setTimerStarted(true)
-        nextClue()
+        setCurrentClue(cluesInHat[counter])
+        incrementCounter()
         props.getTeamsCurrentScore()
+        console.log("cloues in hat " + cluesInHat);
+        
     }
 
     function nextClue(){
-        if(currentClue){ 
           props.onClueGuessed(currentClue.id)
-        }
-        incrementCounter()
-        .then(isHatEmpty())
+          incrementCounter()
+          .then(isHatEmpty())
     }
 
     function incrementCounter(){
@@ -36,19 +69,18 @@ const ActivePlayerScreen = (props) => {
 
     function isHatEmpty(){
         return new Promise((resolve, reject) => {     
-        if (cluesArray.length === counter){
+        if (cluesInHat.length === counter){
             props.endTurnSetDbScore()
             setEmptyHatRedirect(true)
             return reject    
         } else {
-            setCurrentClue(cluesArray[counter])
+            setCurrentClue(cluesInHat[counter])
         }
      })
     }
   
     useEffect(() => {
         if (!timerStarted) return
-        console.log("useEffect ran");
 
         const intervalId = setInterval(() => {
           console.log("timer ticks");
@@ -62,9 +94,7 @@ const ActivePlayerScreen = (props) => {
           })
         }, 1000);
 
-        // clear interval on re-render to avoid memory leaks
         return () => {
-            console.log("interval was cleared");  
             clearInterval(intervalId);
           }
         }, [timerStarted])

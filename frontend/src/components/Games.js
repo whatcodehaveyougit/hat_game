@@ -16,7 +16,7 @@ if(redirect) {
 
   return (
       <>
-      <h3>Your Previous Games</h3>
+      <h3>Games In Progress</h3>
     { props.games.map((game, index) => (
        <div key={index} onClick={() => handleRedirect(game)} className="box">{game.title}</div>
     ))}
