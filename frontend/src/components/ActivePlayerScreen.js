@@ -6,86 +6,95 @@ const ActivePlayerScreen = (props) => {
     
     // Timer
     const [timerStarted, setTimerStarted] = useState(false)
-    const [clock, setClock] = useState(null)
     const [timeLeft, setTimeLeft] = useState(4);
     // Clues
     const [cluesArray, setCluesArray] = useState(props.selectedGame.clues)
     const [cluesInHat, setCluesInHat] = useState([])
     const [currentClue, setCurrentClue] = useState()
-    const [counter, setCounter] = useState(0)
-    
+    const [turnCount, setTurnCount] = useState(0)
+    const [clueCount, setClueCount] = useState(0)
+   
+    // Happens on page load and after every turn
+    // Having turnCount is not very elegant it has to be said. Not very description 
     useEffect(() => { 
-      if(cluesArray){
-        filterOutGuessedClues(cluesArray)  
+      // Need this to happen on page load AND after someone's turn
+      if(cluesArray && turnCount === 0){
+        console.log(cluesArray);
+        
+        filterOutGuessedClues(cluesArray)
+        .then(res => console.log("response " + res))
+        .then(isHatEmpty()) 
+        .then(shuffle(cluesInHat)) 
+        console.log("use effect on mount"); 
+    } else {
+      filterOutGuessedClues(cluesInHat)
+      .then(isHatEmpty()) 
+      .then(shuffle(cluesInHat)) 
+      console.log("use effect on mount"); 
     }
-  }, [cluesArray]);
+  }, [turnCount]);
 
     function filterOutGuessedClues(arrayOfClues){      
-      let unGuessedClues = []
-      return new Promise((resolve, reject) => {     
-        arrayOfClues.forEach(clue => {
-            if(!clue.guessed){
-            unGuessedClues.push(clue)
-            }
-        })
-      }).then(shuffle(unGuessedClues))
-    }
+      return new Promise(resolve => {
+        let array = []; 
+          arrayOfClues.forEach(clue => {
+              if(clue.guessed === false){
+              array.push(clue)
+              }
+            })
+            console.log("1. Unguessed clues: fromn filter " + array)
+            resolve(array)
+          })  
+        }
+    
 
-    function shuffle(array) {      
+    function shuffle(array) { 
       let counter = array.length;
       while (counter > 0) {
           let index = Math.floor(Math.random() * counter);
-  
-          counter--;
+            counter--;
 
           let temp = array[counter];
           array[counter] = array[index];
           array[index] = temp;
       }
+      console.log("Shuffle Cloues, 2, cloues are " + array);
       setCluesInHat(array)
-  }
+      }
     
 
-  // Need to Order this function so everythign is getting called one after the other, chained in promises etc.
+  // THIS CHAIN OF PROMISES IS NOT WORKING !!!
     function startRound() {
-      // console.log("empty hat redirect is" + props.emptyHatRedirect);
-      // console.log("clues in hat, here ?" + cluesInHat);
-      
+        console.log("round started" );
         setTimerStarted(true)
-        filterOutGuessedClues(cluesArray)  
-
-        if(cluesInHat.length > 1) { 
-          setCurrentClue(cluesInHat[counter]) 
-        } else { 
-          console.log(cluesInHat + "cloue in hat are...");
-          // The bug is here the clues are not going into the hat...
-          props.setEmptyHatRedirect(true) 
-        }
+        setCurrentClue(cluesInHat[clueCount]) 
         incrementCounter()
         props.getTeamsCurrentScore()
     }
 
     function nextClue(){
           props.onClueGuessed(currentClue.id)
-          incrementCounter()
+          currentClue.guessed = true
+          .then(incrementCounter())
           .then(isHatEmpty())
+          .then(setCurrentClue(cluesInHat[clueCount]))
     }
 
     function incrementCounter(){
      return new Promise((resolve, reject) => {
-        setCounter(counter + 1)
+        setClueCount(clueCount + 1)
      })
     } 
 
     function isHatEmpty(){
         return new Promise((resolve, reject) => {     
-        if (cluesInHat.length <= counter){
+        if (cluesInHat.length === 0){
             props.endTurnSetDbScore()
             props.setEmptyHatRedirect(true)
+            console.log(cluesInHat.length + "clues array length");
+            
             return reject    
-        } else {
-            setCurrentClue(cluesInHat[counter])
-        }
+        } 
      })
     }
   
@@ -97,6 +106,7 @@ const ActivePlayerScreen = (props) => {
           setTimeLeft(prevTimeLeft => {
             if (prevTimeLeft === 1) {
               clearInterval(intervalId)
+              setTurnCount(turnCount + 1)
               return <Redirect to='/the-hat-game/turn-over'/>
             } else {
               return prevTimeLeft - 1

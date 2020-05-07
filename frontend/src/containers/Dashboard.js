@@ -22,6 +22,7 @@ export default function Dashboard() {
     const [createdTeam, setCreatedTeam] = useState()
     const [playersInCreatedGame, setPlayersInCreatedGame] = useState([])
     const [selectedGame, setSelectedGame] = useState({})
+    // const [selectedGameClues, setSelectedGameClues] = useState(selectedGame.clues)
     const [currentRound, setCurrentRound] = useState()
     const [selectedTeam, setSelectedTeam] = useState()
     const [selectedTeamCounter, setSelectedTeamCounter] = useState(1)
@@ -106,7 +107,6 @@ export default function Dashboard() {
       fetch(`/teams/${selectedTeamCounter}`)
       .then(res => res.json())
       .then(resTwo => setCurrentScore(resTwo.score))
-      .then(res => console.log(currentScore + ": current score set"));
     }
 
     // Start of Turn / Round
