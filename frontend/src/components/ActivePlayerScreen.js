@@ -20,17 +20,15 @@ const ActivePlayerScreen = (props) => {
       // Need this to happen on page load AND after someone's turn
       if(cluesArray && turnCount === 0){
         console.log(cluesArray);
-        
         filterOutGuessedClues(cluesArray)
-        .then(res => console.log("response " + res))
-        .then(isHatEmpty()) 
-        .then(shuffle(cluesInHat)) 
+        .then(res => isHatEmpty(res))
+        .then(res => shuffle(res)) 
         console.log("use effect on mount"); 
     } else {
       filterOutGuessedClues(cluesInHat)
-      .then(isHatEmpty()) 
-      .then(shuffle(cluesInHat)) 
-      console.log("use effect on mount"); 
+      .then(res => isHatEmpty(res))
+      .then(res => shuffle(res)) 
+      console.log("use effect after each turn - cards shuffled"); 
     }
   }, [turnCount]);
 
@@ -71,12 +69,20 @@ const ActivePlayerScreen = (props) => {
         incrementCounter()
         props.getTeamsCurrentScore()
     }
+    
+    function setClueGuessedToTrue(){
+      return new Promise((resolve, reject) => {
+        resolve(
+        currentClue.guessed = true
+        )
+      })
+    }
 
     function nextClue(){
           props.onClueGuessed(currentClue.id)
-          currentClue.guessed = true
+          setClueGuessedToTrue()
           .then(incrementCounter())
-          .then(isHatEmpty())
+          .then(isHatEmpty(cluesInHat))
           .then(setCurrentClue(cluesInHat[clueCount]))
     }
 
@@ -86,15 +92,17 @@ const ActivePlayerScreen = (props) => {
      })
     } 
 
-    function isHatEmpty(){
+    function isHatEmpty(clues){
         return new Promise((resolve, reject) => {     
-        if (cluesInHat.length === 0){
+        if (clues.length === 0){
             props.endTurnSetDbScore()
             props.setEmptyHatRedirect(true)
-            console.log(cluesInHat.length + "clues array length");
+            console.log(clues.length + "clues array length");
             
             return reject    
-        } 
+        } else {
+          resolve(clues)
+        }
      })
     }
   
@@ -123,7 +131,7 @@ const ActivePlayerScreen = (props) => {
 
     return (
         <>
-            { timerStarted ? null : <h1>Have you picked up the hat?</h1> }
+            { timerStarted ? null : <><h1>Have you picked up the hat?</h1> <h3>{ cluesInHat.length } clues left in hat</h3> </> }
             { timerStarted ? null : <button className="start-clock" onClick={startRound}>Start the Clock</button> }
             { timerStarted ? <div className="time-left"> {timeLeft} </div> : null}
             { timerStarted && currentClue? <div>Current Clues: <br/><span className="current-clue">{currentClue.content}</span></div> : null }
