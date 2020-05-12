@@ -40,6 +40,17 @@ export default function Dashboard() {
         .catch(err => console.error);
     }, [])
 
+    const updateSelectedGame = (e) => {
+      // e.preventDefault()
+      // console.log("pushed");
+      
+      fetch(`/games/`)
+      .then(res => res.json())
+      .then(resTwo => resTwo._embedded.games[0])
+      .then(game => setSelectedGame( game ))
+      .catch(err => console.error);
+    }
+
     function onGamePost(newGame){
         fetch("/games/", {
             method: 'POST',
@@ -71,7 +82,7 @@ export default function Dashboard() {
       .then(team => setCreatedTeam(team));
     }
 
-    function onPlayerPost(newPlayerName, teamName){
+    function onPlayerPost(newPlayerName){  
       fetch("/players/", {
         method: 'POST',
         headers: {
@@ -84,7 +95,7 @@ export default function Dashboard() {
         })
       })
       .then(res => res.json())
-      .then(player => test(player));
+      // .then(player => test(player));
     }
 
       function onCluePost(newClue){
@@ -205,7 +216,7 @@ export default function Dashboard() {
                     <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} /> } />
 
                     { selectedGame ? <Route exact path="/game-home" render={() => <ReadyToPlay selectedGame={selectedGame}  startRoundWithTeamOne={startRoundWithTeamOne} selectedTeam={selectedTeam} /> } /> : null }
-                    { selectedGame  && selectedTeam? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} selectedTeam={selectedTeam} currentRound={currentRound} gameOver={gameOver} /> } /> : null } 
+                    { selectedGame  && selectedTeam? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} selectedTeam={selectedTeam} updateSelectedGame={updateSelectedGame} currentRound={currentRound} gameOver={gameOver} /> } /> : null } 
                     <Route exact path="/the-hat-game/player-with-hat" render={() => 
                     <ActivePlayerScreen selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} onClueGuessed={onClueGuessed} getTeamsCurrentScore={getTeamsCurrentScore} endTurnSetDbScore={endTurnSetDbScore} 
                     emptyHatRedirect={emptyHatRedirect} setEmptyHatRedirect={setEmptyHatRedirect} /> } />
