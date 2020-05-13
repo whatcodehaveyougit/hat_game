@@ -11,17 +11,16 @@ export default function ReadyToPlay(props) {
     }
 
     if(readyTeamsCount >= props.selectedGame.teams.length ){
-        props.startRoundWithTeamOne()
         return <Redirect to='/the-hat-game'/>
     }
 
-    if(props.selectedGame){
-        if (props.selectedGame.round > 3){
-            return <Redirect to='/game-over'/>
-        }
-    } else {
-        return null
-    }
+    // if(props.selectedGame){
+    //     if (props.selectedGame.round > 3){
+    //         return <Redirect to='/game-over'/>
+    //     }
+    // } else {
+    //     return null
+    // }
 
     return (
         <>

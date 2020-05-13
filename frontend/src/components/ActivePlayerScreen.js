@@ -15,20 +15,15 @@ const ActivePlayerScreen = (props) => {
     const [clueCount, setClueCount] = useState(0)
    
     // Happens on page load and after every turn
-    // Having turnCount is not very elegant it has to be said. Not very description 
     useEffect(() => { 
-      // Need this to happen on page load AND after someone's turn
       if(cluesArray && turnCount === 0){
-        console.log(cluesArray);
         filterOutGuessedClues(cluesArray)
         .then(res => isHatEmpty(res))
         .then(res => shuffle(res)) 
-        console.log("use effect on mount"); 
     } else {
       filterOutGuessedClues(cluesInHat)
       .then(res => isHatEmpty(res))
       .then(res => shuffle(res)) 
-      console.log("use effect after each turn - cards shuffled"); 
     }
   }, [turnCount]);
 
@@ -44,7 +39,22 @@ const ActivePlayerScreen = (props) => {
             resolve(array)
           })  
         }
-    
+
+    function isHatEmpty(clues){
+      return new Promise((resolve, reject) => {     
+      if (clues.length === 0){
+          console.log("hat is empty activated");
+        
+          setTimeLeft(0)
+          props.endOfTurn()
+          // very unclear what this redirect does - doesn't actually work 
+          props.setEmptyHatRedirect(true)          
+          return(reject)    
+      } else {
+        resolve(clues)
+      }
+    })
+  }
 
     function shuffle(array) { 
       let counter = array.length;
@@ -58,12 +68,9 @@ const ActivePlayerScreen = (props) => {
       }
       console.log("Shuffle Cloues, 2, cloues are " + array);
       setCluesInHat(array)
-      }
+  }
     
-
-  // THIS CHAIN OF PROMISES IS NOT WORKING !!!
-    function startRound() {
-        console.log("round started" );
+    function startTurn() {
         setTimerStarted(true)
         setCurrentClue(cluesInHat[clueCount]) 
         incrementCounter()
@@ -92,23 +99,8 @@ const ActivePlayerScreen = (props) => {
      })
     } 
 
-    function isHatEmpty(clues){
-        return new Promise((resolve, reject) => {     
-        if (clues.length === 0){
-            props.endTurnSetDbScore()
-            props.setEmptyHatRedirect(true)
-            console.log(clues.length + "clues array length");
-            
-            return reject    
-        } else {
-          resolve(clues)
-        }
-     })
-    }
-  
     useEffect(() => {
         if (!timerStarted) return
-
         const intervalId = setInterval(() => {
           console.log("timer ticks");
           setTimeLeft(prevTimeLeft => {
@@ -132,7 +124,7 @@ const ActivePlayerScreen = (props) => {
     return (
         <>
             { timerStarted ? null : <><h1>Have you picked up the hat?</h1> <h3>{ cluesInHat.length } clues left in hat</h3> </> }
-            { timerStarted ? null : <button className="start-clock" onClick={startRound}>Start the Clock</button> }
+            { timerStarted ? null : <button className="start-clock" onClick={startTurn}>Start the Clock</button> }
             { timerStarted ? <div className="time-left"> {timeLeft} </div> : null}
             { timerStarted && currentClue? <div>Current Clues: <br/><span className="current-clue">{currentClue.content}</span></div> : null }
             { timerStarted ? <button onClick={nextClue}>Next Clue</button> : null }  

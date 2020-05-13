@@ -5,7 +5,7 @@ export default function TurnOverScreen(props){
 
     function handleRedirect(){
         props.setDisplayButton(true)
-        props.changeAndSetSelectedTeam()
+        props.endOfTurn()
     }
     
 

@@ -20,6 +20,9 @@ public class Game {
     @Column(name="round")
     private int round;
 
+    @Column(name="activeTeam")
+    private int activeTeam;
+
     @JsonIgnore
     @OneToMany(mappedBy = "game", cascade = CascadeType.REMOVE)
     private List<Team> teams;
@@ -31,6 +34,7 @@ public class Game {
     public Game(String title){
         this.Id = Id;
         this.title = title;
+        this.activeTeam = 0;
         this.round = 1;
         this.teams = new ArrayList<Team>();
         this.clues = new ArrayList<Clue>();
@@ -61,6 +65,14 @@ public class Game {
 
     public void setRound(int round) {
         this.round = round;
+    }
+
+    public int getActiveTeam() {
+        return activeTeam;
+    }
+
+    public void setActiveTeam(int activeTeam) {
+        this.activeTeam = activeTeam;
     }
 
     public List<Team> getTeams() {
