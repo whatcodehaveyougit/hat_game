@@ -1,18 +1,21 @@
-import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
+import { Link, Redirect } from 'react-router-dom'
 
 export default function TurnOverScreen(props){
 
-    function handleRedirect(){
+    function endOfTurn(){
         props.setDisplayButton(true)
         props.endOfTurn()
     }
-    
 
     return (
         <>
+           {/* This is not working for some reason */}
+            { props.emptyHatRedirect ? <Redirect to='/the-hat-is-empty'/> :  
+            <> 
             <h1>Time is Out!!</h1>
-            <Link to="/the-hat-game" onClick={handleRedirect}>Return to Game Screen</Link>
+            <Link to="/the-hat-game" onClick={endOfTurn}>Return to Game Screen</Link> 
+            </> } 
         </>
     )
 }

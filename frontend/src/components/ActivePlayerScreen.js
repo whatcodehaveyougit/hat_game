@@ -31,7 +31,6 @@ const ActivePlayerScreen = (props) => {
               array.push(clue)
               }
             })
-            console.log("1. Unguessed clues: fromn filter " + array)
             resolve(array)
           })  
         }
@@ -41,8 +40,7 @@ const ActivePlayerScreen = (props) => {
       if (clues.length === 0){
           console.log("hat is empty activated");     
           setTimeLeft(0)
-          props.endOfTurn()
-          props.setEmptyHatRedirect(true)          
+          props.hatIsEmpty()
           return(reject)    
       } else {
         resolve(clues)
@@ -50,12 +48,16 @@ const ActivePlayerScreen = (props) => {
     })
   }
 
+  // For some reason this is not working
+  // function goToEmptyHatPage(){
+  //   return <Redirect to='/the-hat-is-empty'/>
+  // }
+
     function shuffle(array) { 
       let counter = array.length;
       while (counter > 0) {
           let index = Math.floor(Math.random() * counter);
             counter--;
-
           let temp = array[counter];
           array[counter] = array[index];
           array[index] = temp;
@@ -66,30 +68,27 @@ const ActivePlayerScreen = (props) => {
     
     function startTurn() {
         setTimerStarted(true)
-        setCurrentClue(cluesInHat[clueCount]) 
-        incrementCounter()
+        setCurrentClue(cluesInHat[0]) 
         props.getTeamsCurrentScore()
     }
-    
-    function setClueGuessedToTrue(){
-      return new Promise((resolve, reject) => {
-        resolve(
-        currentClue.guessed = true
-        )
-      })
-    }
+  
 
     function nextClue(){
-          props.onClueGuessed(currentClue.id)
-          setClueGuessedToTrue()
-          .then(incrementCounter())
-          .then(isHatEmpty(cluesInHat))
-          .then(setCurrentClue(cluesInHat[clueCount]))
+          props.onClueGuessed(currentClue.id)  
+          isHatEmpty(cluesInHat)
+          .then(clueCountSetter())
+          .then(setCurrentClue(cluesInHat[0]))
+          
+          // .then(setCurrentClue(cluesInHat[clueCount]))
     }
 
-    function incrementCounter(){
+    function clueCountSetter(){
      return new Promise((resolve, reject) => {
-        setClueCount(clueCount + 1)
+      const deck = cluesInHat;
+
+          deck.shift();
+          setCluesInHat(deck)
+    
      })
     } 
 

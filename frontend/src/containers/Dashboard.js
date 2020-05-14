@@ -188,7 +188,8 @@ export default function Dashboard() {
       } 
     }
 
-      function endOfRound(){          
+      function endOfRound(){   
+        setEmptyHatRedirect(false)       
         const nextRound = selectedGame.round + 1
         fetch(`/games/${selectedGame.id}`, {
           method: 'PATCH',
@@ -212,7 +213,12 @@ export default function Dashboard() {
             }) 
         })    
       })
-      setEmptyHatRedirect(false)
+    }
+
+    function hatIsEmpty(){
+      console.log("hat is empty");
+      
+      setEmptyHatRedirect(true);
     }
     
   
@@ -234,10 +240,10 @@ export default function Dashboard() {
                     { orderedTeams ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} updateSelectedGame={updateSelectedGame} gameOver={gameOver} orderedTeams={orderedTeams} /> } /> : null } 
                     <Route exact path="/the-hat-game/player-with-hat" render={() => 
                     <ActivePlayerScreen selectedGame={selectedGame} displayButton={displayButton} onClueGuessed={onClueGuessed} getTeamsCurrentScore={getTeamsCurrentScore} endOfTurn={endOfTurn}
-                    emptyHatRedirect={emptyHatRedirect} setEmptyHatRedirect={setEmptyHatRedirect} /> } />
+                    hatIsEmpty={hatIsEmpty} emptyHatRedirect={emptyHatRedirect} /> } />
 
-                    <Route exact path="/the-hat-game/turn-over" render={() => <TurnOverScreen setDisplayButton={setDisplayButton} endOfTurn={endOfTurn} /> } />
-                    <Route exact path="/the-hat-is-empty" render={() => <EmptyHat endOfRound={endOfRound} /> } />
+                    <Route exact path="/the-hat-game/turn-over" render={() => <TurnOverScreen setDisplayButton={setDisplayButton} endOfTurn={endOfTurn} emptyHatRedirect={emptyHatRedirect} /> } />
+                    <Route exact path="/the-hat-is-empty" render={() => <EmptyHat endOfRound={endOfRound} setDisplayButton={setDisplayButton} endOfTurn={endOfTurn} /> } />
                     <Route exact path="/game-over" render={() => <GameOver /> } />
             </Router>
             </>
