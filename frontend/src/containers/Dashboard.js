@@ -10,7 +10,7 @@ import CreateTeams from '../components/GameSetup/CreateTeams.js'
 import HomePage from '../components/HomePage.js'
 import ActivePlayerScreen from '../components/ActivePlayerScreen.js'
 import TurnOverScreen from '../components/TurnOverScreen.js'
-import EmptyHat from '../components/EmptyHat.js'
+import RoundOver from '../components/RoundOver.js'
 import GameOver from '../components/GameOver.js'
 
 export default function Dashboard() {
@@ -226,7 +226,7 @@ export default function Dashboard() {
                      emptyHatRedirect={emptyHatRedirect} /> } />
 
                     <Route exact path="/the-hat-game/turn-over" render={() => <TurnOverScreen endOfTurn={endOfTurn} emptyHatRedirect={emptyHatRedirect} /> } />
-                    <Route exact path="/the-hat-is-empty" render={() => <EmptyHat endOfRound={endOfRound} endOfTurn={endOfTurn} /> } />
+                    <Route exact path="/the-hat-is-empty" render={() => <RoundOver endOfRound={endOfRound} endOfTurn={endOfTurn} /> } />
                     <Route exact path="/game-over" render={() => <GameOver orderedTeams={orderedTeams}  /> } />
             </Router>
             </>

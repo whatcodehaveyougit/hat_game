@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {Link } from 'react-router-dom'
-import EmptyHat from './EmptyHat.js'
+import EmptyHat from './RoundOver.js'
 import '../App.css'
 
 export default function GameScreen(props) {

@@ -15,6 +15,7 @@ const ActivePlayerScreen = (props) => {
     useEffect(() => { 
       if(cluesArray){
         filterOutGuessedClues(cluesArray)
+        // this isEmpty function is now redundant in this current state.  The page is constantly checking if hat is empty and will redirect when it is.
         .then(res => isHatEmpty(res))
         .then(res => shuffle(res)) 
     }
@@ -63,20 +64,12 @@ const ActivePlayerScreen = (props) => {
         setTimerStarted(true)
         props.getTeamsCurrentScore()
     }
-  
-     function setClueGuessedToTrue(){
-      return new Promise((resolve, reject) => {
-        resolve(
-        cluesInHat[0] = true
-        )
-      })
-    }
 
     function clueGuessedCorrectly(){
           props.onClueGuessed(cluesInHat[0].id)  
-          setClueGuessedToTrue()
-          .then(removeGuessedClueFromHatArray())
-          .then(array => isHatEmpty(array))
+          removeGuessedClueFromHatArray()
+          // How is it still working with this commented out?  Should be broke, not setting state of cluesInHat anywhere ??
+          // .then(array => isHatEmpty(array))
     }
 
     function removeGuessedClueFromHatArray(){
@@ -87,6 +80,7 @@ const ActivePlayerScreen = (props) => {
      })
     } 
 
+    // Is timir continuing to tick after page redirected
     useEffect(() => {
         if (!timerStarted) return
         const intervalId = setInterval(() => {
