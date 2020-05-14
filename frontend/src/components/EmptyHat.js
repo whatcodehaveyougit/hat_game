@@ -6,6 +6,10 @@ export default function EmptyHat(props){
     useEffect(() => {
         props.endOfTurn()
     })
+
+    // This is the hack that I used so that both the endOfTurn function and endOfRound would run and do their job
+    // Without this fix they would both run but not complete their database operations.  
+    // Maybe call these 2 functiosn together was putting too much strain on the DB ?
   
 
     return (

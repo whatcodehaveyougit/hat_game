@@ -3,10 +3,6 @@ import { Link, Redirect } from 'react-router-dom'
 
 export default function TurnOverScreen(props){
 
-    // function endOfTurn(){
-    //     props.endOfTurn()
-    // }
-
     return (
         <>
            {/* This is not working for some reason */}

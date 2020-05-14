@@ -37,16 +37,15 @@ const ActivePlayerScreen = (props) => {
       return new Promise((resolve, reject) => {     
       if (clues.length === 0){
           setTimeLeft(0)
+          // I can't call props.endOfTurn() because the page redirects before that can happen
+          // To be honest I don't even need this function anymore with the code on line 115
+          // This was not working - should have done though?
+          // return <Redirect to='/the-hat-is-empty'/>
       } else {
         resolve(clues)
       }
     })
   }
-
-  // For some reason this is not working
-  // function goToEmptyHatPage(){
-  //   return <Redirect to='/the-hat-is-empty'/>
-  // }
 
     function shuffle(array) { 
       let counter = array.length;

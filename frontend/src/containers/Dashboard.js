@@ -8,12 +8,10 @@ import CreateGame from '../components/GameSetup/CreateGame.js'
 import GameScreen from '../components/GameScreen.js'
 import CreateTeams from '../components/GameSetup/CreateTeams.js'
 import HomePage from '../components/HomePage.js'
-import ClockTest from '../components/ClockTest.js'
 import ActivePlayerScreen from '../components/ActivePlayerScreen.js'
 import TurnOverScreen from '../components/TurnOverScreen.js'
 import EmptyHat from '../components/EmptyHat.js'
 import GameOver from '../components/GameOver.js'
-import { getNodeText } from '@testing-library/react'
 
 export default function Dashboard() {
     
@@ -23,7 +21,6 @@ export default function Dashboard() {
     const [playersInCreatedGame, setPlayersInCreatedGame] = useState([])
     const [selectedGame, setSelectedGame] = useState({})
     const [orderedTeams, setOrderedTeams] = useState([]);
-    // const [selectedGameClues, setSelectedGameClues] = useState(selectedGame.clues)
     const [currentRound, setCurrentRound] = useState()
     const [selectedTeam, setSelectedTeam] = useState()
     const [selectedTeamCounter, setSelectedTeamCounter] = useState(0)
