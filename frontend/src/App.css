@@ -115,9 +115,12 @@ img.team {
 }
 
 
+/* Game Screen */
 
-
-
+.button-link a {
+  text-decoration: none;
+  color: black;
+}
 
 /* Clue */
 

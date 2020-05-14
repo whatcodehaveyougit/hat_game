@@ -12,7 +12,6 @@ const ActivePlayerScreen = (props) => {
     const [cluesInHat, setCluesInHat] = useState([])
     const [currentClue, setCurrentClue] = useState()
     const [turnCount, setTurnCount] = useState(0)
-    const [clueCount, setClueCount] = useState(0)
    
     useEffect(() => { 
       if(cluesArray){
@@ -36,6 +35,8 @@ const ActivePlayerScreen = (props) => {
         }
 
     function isHatEmpty(clues){
+      console.log("its at least called" + clues.length);
+      
       return new Promise((resolve, reject) => {     
       if (clues.length === 0){
           console.log("hat is empty activated");     
@@ -62,7 +63,6 @@ const ActivePlayerScreen = (props) => {
           array[counter] = array[index];
           array[index] = temp;
       }
-      console.log("Shuffle Cloues, 2, cloues are " + array);
       setCluesInHat(array)
   }
     
@@ -72,23 +72,28 @@ const ActivePlayerScreen = (props) => {
         props.getTeamsCurrentScore()
     }
   
-
-    function nextClue(){
-          props.onClueGuessed(currentClue.id)  
-          isHatEmpty(cluesInHat)
-          .then(clueCountSetter())
-          .then(setCurrentClue(cluesInHat[0]))
-          
-          // .then(setCurrentClue(cluesInHat[clueCount]))
+    // Need to do this so the player who empties has can re fill hat
+     function setClueGuessedToTrue(){
+      return new Promise((resolve, reject) => {
+        resolve(
+        currentClue.guessed = true
+        )
+      })
     }
 
-    function clueCountSetter(){
+    function clueGuessedCorrectly(){
+          props.onClueGuessed(currentClue.id)  
+          setClueGuessedToTrue()
+          .then(removeGuessedClueFromHatArray())
+          .then(isHatEmpty(cluesInHat))
+          .then(setCurrentClue(cluesInHat[0]))
+    }
+
+    function removeGuessedClueFromHatArray(){
      return new Promise((resolve, reject) => {
       const deck = cluesInHat;
-
           deck.shift();
           setCluesInHat(deck)
-    
      })
     } 
 
@@ -118,7 +123,7 @@ const ActivePlayerScreen = (props) => {
             { timerStarted ? null : <button className="start-clock" onClick={startTurn}>Start the Clock</button> }
             { timerStarted ? <div className="time-left"> {timeLeft} </div> : null}
             { timerStarted && currentClue? <div>Current Clues: <br/><span className="current-clue">{currentClue.content}</span></div> : null }
-            { timerStarted ? <button onClick={nextClue}>Next Clue</button> : null }  
+            { timerStarted ? <button onClick={clueGuessedCorrectly}>We got it! Next Clue Please!</button> : null }  
             { props.emptyHatRedirect ? <Redirect to='/the-hat-is-empty'/> : null } 
         </>
     )

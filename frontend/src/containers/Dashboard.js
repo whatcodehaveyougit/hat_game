@@ -217,7 +217,6 @@ export default function Dashboard() {
 
     function hatIsEmpty(){
       console.log("hat is empty");
-      
       setEmptyHatRedirect(true);
     }
     
@@ -237,14 +236,14 @@ export default function Dashboard() {
                     <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} /> } />
 
                     { selectedGame ? <Route exact path="/ready-to-play" render={() => <ReadyToPlay selectedGame={selectedGame} /> } /> : null }
-                    { orderedTeams ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} updateSelectedGame={updateSelectedGame} gameOver={gameOver} orderedTeams={orderedTeams} /> } /> : null } 
+                    { orderedTeams ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} updateSelectedGame={updateSelectedGame} gameOver={gameOver} orderedTeams={orderedTeams} emptyHatRedirect={emptyHatRedirect} /> } /> : null } 
                     <Route exact path="/the-hat-game/player-with-hat" render={() => 
                     <ActivePlayerScreen selectedGame={selectedGame} displayButton={displayButton} onClueGuessed={onClueGuessed} getTeamsCurrentScore={getTeamsCurrentScore} endOfTurn={endOfTurn}
                     hatIsEmpty={hatIsEmpty} emptyHatRedirect={emptyHatRedirect} /> } />
 
                     <Route exact path="/the-hat-game/turn-over" render={() => <TurnOverScreen setDisplayButton={setDisplayButton} endOfTurn={endOfTurn} emptyHatRedirect={emptyHatRedirect} /> } />
                     <Route exact path="/the-hat-is-empty" render={() => <EmptyHat endOfRound={endOfRound} setDisplayButton={setDisplayButton} endOfTurn={endOfTurn} /> } />
-                    <Route exact path="/game-over" render={() => <GameOver /> } />
+                    <Route exact path="/game-over" render={() => <GameOver orderedTeams={orderedTeams}  /> } />
             </Router>
             </>
         )
