@@ -27,7 +27,6 @@ export default function Dashboard() {
     const [currentRound, setCurrentRound] = useState()
     const [selectedTeam, setSelectedTeam] = useState()
     const [selectedTeamCounter, setSelectedTeamCounter] = useState(0)
-    const [redirect, setRedirect] = useState(false)
     const [displayButton, setDisplayButton] = useState(true)
     const [currentScore, setCurrentScore] = useState()
     const [gameOver, setGameOver] = useState(false)
@@ -144,7 +143,8 @@ export default function Dashboard() {
 
       // End of Turn 
 
-      function endTurnSetDbScore(){  
+      function endTurnSetDbScore(){ 
+        console.log("end of turn db tunning - DB") 
         fetch(`/teams/${selectedGame.teams[selectedGame.activeTeam].id}`, {
           method: 'PATCH',
           headers: {
@@ -158,9 +158,10 @@ export default function Dashboard() {
     }
 
       function endOfTurn(){
+        console.log("end of turn running dashboard");
         endTurnSetDbScore()
           if (selectedGame.activeTeam + 1 === selectedGame.teams.length){
-              fetch(`/game/${selectedGame.id}`, {
+              fetch(`/games/${selectedGame.id}`, {
                 method: 'PATCH',
                 headers: {
                   'Accept': 'application/json',
@@ -183,8 +184,7 @@ export default function Dashboard() {
                   activeTeam: newTeam
                 }) 
             })
-            console.log(selectedGame.activeTeam + "selectedGame active Team");
-                
+            console.log(selectedGame.activeTeam + "selectedGame active Team");         
       } 
     }
 
@@ -233,10 +233,10 @@ export default function Dashboard() {
                     { selectedGame ? <Route exact path="/ready-to-play" render={() => <ReadyToPlay selectedGame={selectedGame} /> } /> : null }
                     { orderedTeams ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} updateSelectedGame={updateSelectedGame} gameOver={gameOver} orderedTeams={orderedTeams} /> } /> : null } 
                     <Route exact path="/the-hat-game/player-with-hat" render={() => 
-                    <ActivePlayerScreen selectedGame={selectedGame} redirect={redirect} displayButton={displayButton} onClueGuessed={onClueGuessed} getTeamsCurrentScore={getTeamsCurrentScore} endOfTurn={endOfTurn}
+                    <ActivePlayerScreen selectedGame={selectedGame} displayButton={displayButton} onClueGuessed={onClueGuessed} getTeamsCurrentScore={getTeamsCurrentScore} endOfTurn={endOfTurn}
                     emptyHatRedirect={emptyHatRedirect} setEmptyHatRedirect={setEmptyHatRedirect} /> } />
 
-                    <Route exact path="/the-hat-game/turn-over" render={() => <TurnOverScreen setRedirect={setRedirect} setDisplayButton={setDisplayButton} endOfTurn={endOfTurn} /> } />
+                    <Route exact path="/the-hat-game/turn-over" render={() => <TurnOverScreen setDisplayButton={setDisplayButton} endOfTurn={endOfTurn} /> } />
                     <Route exact path="/the-hat-is-empty" render={() => <EmptyHat endOfRound={endOfRound} /> } />
                     <Route exact path="/game-over" render={() => <GameOver /> } />
             </Router>

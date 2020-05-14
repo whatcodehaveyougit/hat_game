@@ -14,18 +14,14 @@ const ActivePlayerScreen = (props) => {
     const [turnCount, setTurnCount] = useState(0)
     const [clueCount, setClueCount] = useState(0)
    
-    // Happens on page load and after every turn
     useEffect(() => { 
-      if(cluesArray && turnCount === 0){
+      if(cluesArray){
         filterOutGuessedClues(cluesArray)
         .then(res => isHatEmpty(res))
         .then(res => shuffle(res)) 
-    } else {
-      filterOutGuessedClues(cluesInHat)
-      .then(res => isHatEmpty(res))
-      .then(res => shuffle(res)) 
     }
   }, [turnCount]);
+// This turn count should not be necessary - it is to stop it going on an infinite loop
 
     function filterOutGuessedClues(arrayOfClues){      
       return new Promise(resolve => {
@@ -43,11 +39,9 @@ const ActivePlayerScreen = (props) => {
     function isHatEmpty(clues){
       return new Promise((resolve, reject) => {     
       if (clues.length === 0){
-          console.log("hat is empty activated");
-        
+          console.log("hat is empty activated");     
           setTimeLeft(0)
           props.endOfTurn()
-          // very unclear what this redirect does - doesn't actually work 
           props.setEmptyHatRedirect(true)          
           return(reject)    
       } else {
@@ -102,11 +96,9 @@ const ActivePlayerScreen = (props) => {
     useEffect(() => {
         if (!timerStarted) return
         const intervalId = setInterval(() => {
-          console.log("timer ticks");
           setTimeLeft(prevTimeLeft => {
             if (prevTimeLeft === 1) {
               clearInterval(intervalId)
-              setTurnCount(turnCount + 1)
               return <Redirect to='/the-hat-game/turn-over'/>
             } else {
               return prevTimeLeft - 1
