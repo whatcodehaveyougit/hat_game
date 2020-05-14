@@ -27,7 +27,6 @@ export default function Dashboard() {
     const [currentRound, setCurrentRound] = useState()
     const [selectedTeam, setSelectedTeam] = useState()
     const [selectedTeamCounter, setSelectedTeamCounter] = useState(0)
-    const [displayButton, setDisplayButton] = useState(true)
     const [currentScore, setCurrentScore] = useState()
     const [gameOver, setGameOver] = useState(false)
     const [emptyHatRedirect, setEmptyHatRedirect] = useState(false)
@@ -127,7 +126,7 @@ export default function Dashboard() {
     }
 
       // During Turn
-      function onClueGuessed(clueId){        
+      function onClueGuessed(clueId){ 
           fetch(`/clues/${clueId}`, {
             method: 'PATCH',
             headers: {
@@ -143,8 +142,8 @@ export default function Dashboard() {
 
       // End of Turn 
 
-      function endTurnSetDbScore(){ 
-        console.log("end of turn db tunning - DB") 
+      function endOfTurn(){
+        console.log("end of turn")
         fetch(`/teams/${selectedGame.teams[selectedGame.activeTeam].id}`, {
           method: 'PATCH',
           headers: {
@@ -154,12 +153,8 @@ export default function Dashboard() {
           body: JSON.stringify({
             score: currentScore
           }) 
-      }).then (() =>  setCurrentScore(0))
-    }
+        })
 
-      function endOfTurn(){
-        console.log("end of turn running dashboard");
-        endTurnSetDbScore()
           if (selectedGame.activeTeam + 1 === selectedGame.teams.length){
               fetch(`/games/${selectedGame.id}`, {
                 method: 'PATCH',
@@ -171,7 +166,6 @@ export default function Dashboard() {
                   activeTeam: 0
                 }) 
             })
-            console.log("active team set to zero")    
           } else { 
            let newTeam = selectedGame.activeTeam + 1           
               fetch(`/games/${selectedGame.id}`, {
@@ -184,12 +178,12 @@ export default function Dashboard() {
                   activeTeam: newTeam
                 }) 
             })
-            console.log(selectedGame.activeTeam + "selectedGame active Team");         
       } 
     }
 
       function endOfRound(){   
-        setEmptyHatRedirect(false)       
+        console.log("end of round dashboard running");
+
         const nextRound = selectedGame.round + 1
         fetch(`/games/${selectedGame.id}`, {
           method: 'PATCH',
@@ -215,13 +209,6 @@ export default function Dashboard() {
       })
     }
 
-    function hatIsEmpty(){
-      console.log("hat is empty");
-      setEmptyHatRedirect(true);
-    }
-    
-  
-  
         return (
           <>
           <Navbar />
@@ -236,13 +223,13 @@ export default function Dashboard() {
                     <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} /> } />
 
                     { selectedGame ? <Route exact path="/ready-to-play" render={() => <ReadyToPlay selectedGame={selectedGame} /> } /> : null }
-                    { orderedTeams ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} updateSelectedGame={updateSelectedGame} gameOver={gameOver} orderedTeams={orderedTeams} emptyHatRedirect={emptyHatRedirect} /> } /> : null } 
+                    { orderedTeams ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} updateSelectedGame={updateSelectedGame} gameOver={gameOver} orderedTeams={orderedTeams} /> } /> : null } 
                     <Route exact path="/the-hat-game/player-with-hat" render={() => 
-                    <ActivePlayerScreen selectedGame={selectedGame} displayButton={displayButton} onClueGuessed={onClueGuessed} getTeamsCurrentScore={getTeamsCurrentScore} endOfTurn={endOfTurn}
-                    hatIsEmpty={hatIsEmpty} emptyHatRedirect={emptyHatRedirect} /> } />
+                    <ActivePlayerScreen selectedGame={selectedGame} onClueGuessed={onClueGuessed} getTeamsCurrentScore={getTeamsCurrentScore} endOfTurn={endOfTurn}
+                     emptyHatRedirect={emptyHatRedirect} /> } />
 
-                    <Route exact path="/the-hat-game/turn-over" render={() => <TurnOverScreen setDisplayButton={setDisplayButton} endOfTurn={endOfTurn} emptyHatRedirect={emptyHatRedirect} /> } />
-                    <Route exact path="/the-hat-is-empty" render={() => <EmptyHat endOfRound={endOfRound} setDisplayButton={setDisplayButton} endOfTurn={endOfTurn} /> } />
+                    <Route exact path="/the-hat-game/turn-over" render={() => <TurnOverScreen endOfTurn={endOfTurn} emptyHatRedirect={emptyHatRedirect} /> } />
+                    <Route exact path="/the-hat-is-empty" render={() => <EmptyHat endOfRound={endOfRound} endOfTurn={endOfTurn} /> } />
                     <Route exact path="/game-over" render={() => <GameOver orderedTeams={orderedTeams}  /> } />
             </Router>
             </>

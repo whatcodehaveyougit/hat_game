@@ -13,9 +13,7 @@ export default function GameScreen(props) {
             <h2>Choose a player from your team!</h2>
             <div><button className="button-link"><Link to="/the-hat-game/player-with-hat">Grab the Hat</Link></button></div>
             <button onClick={props.updateSelectedGame}>Update Game Info</button>
-            {props.emptyHatRedirect ? <button><Link to="/the-hat-is-empty">Empty Hat - please refill!</Link></button> : null}
 
-            {props.emptyHatRedirect ? <EmptyHat /> : null }
             <h3>Scores</h3>
             { props ? props.orderedTeams.map((team, index) => (
                     <div key={index}> {team.name} : {team.score} </div>
