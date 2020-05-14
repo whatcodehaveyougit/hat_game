@@ -21,9 +21,6 @@ export default function Dashboard() {
     const [playersInCreatedGame, setPlayersInCreatedGame] = useState([])
     const [selectedGame, setSelectedGame] = useState({})
     const [orderedTeams, setOrderedTeams] = useState([]);
-    const [currentRound, setCurrentRound] = useState()
-    const [selectedTeam, setSelectedTeam] = useState()
-    const [selectedTeamCounter, setSelectedTeamCounter] = useState(0)
     const [currentScore, setCurrentScore] = useState()
     const [gameOver, setGameOver] = useState(false)
     const [emptyHatRedirect, setEmptyHatRedirect] = useState(false)
