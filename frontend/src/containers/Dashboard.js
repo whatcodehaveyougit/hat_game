@@ -94,7 +94,14 @@ export default function Dashboard() {
         })
       })
       .then(res => res.json())
-      // .then(player => test(player));
+      .then(player => addPlayerToState(player));
+    }
+
+    function addPlayerToState(player){
+      console.log("function runs" + playersInCreatedGame)
+      let array = playersInCreatedGame
+      array.push(player)
+      setPlayersInCreatedGame(array)
     }
 
       function onCluePost(newClue){

@@ -31,7 +31,7 @@ export default function CreateTeams(props){
 
     const addNewTeam = (e) => {
         addSubmittedTeam(submittedTeams => [...submittedTeams, submittedTeamName]);
-        setSubmittedTeamName('');
+        setSubmittedTeamName(null);
         setSubmittedPlayers('')
         setDisplaySubmittedTeams(true);
     }
@@ -57,17 +57,18 @@ export default function CreateTeams(props){
             </form> : null
 }
 
-                { submittedTeamName ? <h3>{submittedTeamName}</h3> : null } 
+                { submittedTeamName ? <h3>{ "TeamName: " + submittedTeamName}</h3> : null } 
                 { submittedPlayers ? 
                 <ul className="players-in-team">
-                    {submittedPlayers.map((query, i) => (
-                    <li>{ query} </li>
+                    {submittedPlayers.map((player, i) => (
+                    <li key={i}>{ player} </li>
                     ))}
                 </ul> : null }
 
-                    { displayNewTeamsButton && submittedTeamName ? 
+                    { submittedPlayers.length > 0 ? 
                         <div> 
-                            <button onClick={addNewTeam}>Add {submittedTeamName} to Game!</button> 
+                            <h4>When your team is complete...</h4>
+                            <button className="add-team" onClick={addNewTeam}>Add Team {submittedTeamName} to The Hat Game!</button> 
                         </div> : null }
                     
                 { displaySubmittedTeams ?
@@ -75,9 +76,9 @@ export default function CreateTeams(props){
                             { submittedTeams ? 
                             <div className="teams-added-container">
                                 {submittedTeams.map((teamName, i) => (
-                                <div className="team-in-hat">
-                                <h4>{ teamName } </h4>
-                                <img className="team" src={ team } />  
+                                <div className="team-in-hat" key={i}>
+                                    <h4>{ teamName } </h4>
+                                    <img className="team" src={ team } />  
                                 </div>    
                                     ))} 
                             </div>
@@ -87,8 +88,10 @@ export default function CreateTeams(props){
                 {/* <label>How many clues can each player add to the hat?</label> */}
                 {/* <input type="number" name="maxPlayersPerTeam" min="1" max="7" /> */}
                 <h3>Finished Adding Teams?</h3>
-                <br></br>
-                <Link to="/add-clues"><button>Start Adding Clues to the Hat</button></Link>
+                
+                <div>
+                    <Link to="/add-clues"><button>Start Adding Clues to the Hat</button></Link>
+                </div>
             </div> }
         </>
     )

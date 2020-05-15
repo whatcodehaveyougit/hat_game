@@ -114,6 +114,11 @@ img.team {
   width: 48%;
 }
 
+button.add-team {
+  background-color: #503333;
+  color: white;
+}
+
 
 /* Game Screen */
 
