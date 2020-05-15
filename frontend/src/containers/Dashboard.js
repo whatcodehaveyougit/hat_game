@@ -37,11 +37,18 @@ export default function Dashboard() {
     const updateSelectedGame = (e) => {  
       fetch(`/games/`)
       .then(res => res.json())
-      .then(resTwo => resTwo._embedded.games[0])
-      .then(game => setSelectedGame( game ))
-      .catch(err => console.error);
+      // .then(res => console.log(res._embedded.games[0].id + selectedGame.id))
+      .then((resTwo) => {
+          resTwo._embedded.games.forEach(game => { 
+          if (game.id == selectedGame.id){
+          setSelectedGame(game)
+          }
+        })
+      })
     }
 
+    // inventory.find( ({ name }) => name === 'cherries' );
+    
     useEffect(() => {
       if(selectedGame.teams){
         const orderedTeams = selectedGame.teams.sort((a, b) => (a.id > b.id) ? 1 : -1);
