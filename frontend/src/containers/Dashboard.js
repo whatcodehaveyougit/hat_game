@@ -33,7 +33,7 @@ export default function Dashboard() {
         .catch(err => console.error);
     }, [])
 
-    // Not a solution - picks the first game out of the array
+    // Shuold not have to do this - the data structures are not consistant - annoying!
     const updateSelectedGame = (e) => {  
       fetch(`/games/`)
       .then(res => res.json())
