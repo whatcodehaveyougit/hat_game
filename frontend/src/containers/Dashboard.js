@@ -150,9 +150,8 @@ export default function Dashboard() {
 
       // End of Turn 
 
-      function endOfTurn(){
-        console.log("end of turn")
-        fetch(`/teams/${selectedGame.teams[selectedGame.activeTeam].id}`, {
+      async function endOfTurn(){
+        await fetch(`/teams/${selectedGame.teams[selectedGame.activeTeam].id}`, {
           method: 'PATCH',
           headers: {
             'Accept': 'application/json',
@@ -164,7 +163,7 @@ export default function Dashboard() {
         })
 
           if (selectedGame.activeTeam + 1 === selectedGame.teams.length){
-              fetch(`/games/${selectedGame.id}`, {
+              return fetch(`/games/${selectedGame.id}`, {
                 method: 'PATCH',
                 headers: {
                   'Accept': 'application/json',
@@ -176,7 +175,7 @@ export default function Dashboard() {
             })
           } else { 
            let newTeam = selectedGame.activeTeam + 1           
-              fetch(`/games/${selectedGame.id}`, {
+              return fetch(`/games/${selectedGame.id}`, {
                 method: 'PATCH',
                 headers: {
                   'Accept': 'application/json',
@@ -189,11 +188,10 @@ export default function Dashboard() {
       } 
     }
 
-      function endOfRound(){   
-        console.log("end of round dashboard running");
+      async function endOfRound(){   
 
         const nextRound = selectedGame.round + 1
-        fetch(`/games/${selectedGame.id}`, {
+        await fetch(`/games/${selectedGame.id}`, {
           method: 'PATCH',
           headers: {
             'Accept': 'application/json',
@@ -203,8 +201,8 @@ export default function Dashboard() {
             round: nextRound
           }) 
       })
-        selectedGame.clues.forEach(clue => {
-          fetch(`/clues/${clue.id}`, {
+      await selectedGame.clues.forEach(clue => {
+           fetch(`/clues/${clue.id}`, {
             method: 'PATCH',
             headers: {
               'Accept': 'application/json',
@@ -215,6 +213,7 @@ export default function Dashboard() {
             }) 
         })    
       })
+   
     }
 
         return (

@@ -85,10 +85,7 @@ export default function CreateTeams(props){
                              : null }
                         </div> : null}
             { submittedTeams.length > 1 && <div>
-                {/* <label>How many clues can each player add to the hat?</label> */}
-                {/* <input type="number" name="maxPlayersPerTeam" min="1" max="7" /> */}
                 <h3>Finished Adding Teams?</h3>
-                
                 <div>
                     <Link to="/add-clues"><button>Start Adding Clues to the Hat</button></Link>
                 </div>
