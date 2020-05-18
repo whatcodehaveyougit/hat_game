@@ -13,6 +13,9 @@ public class Player {
     @Column(name="name")
     private String name;
 
+    @Column(name="addedClues")
+    private Boolean addedClues;
+
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name="team_id", nullable = false)
     private Team team;
@@ -20,6 +23,7 @@ public class Player {
     public Player(String name, Team team){
         this.Id = Id;
         this.name = name;
+        this.addedClues = false;
         this.team = team;
     }
 
@@ -40,6 +44,14 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getAddedClues() {
+        return addedClues;
+    }
+
+    public void setAddedClues(Boolean addedClues) {
+        this.addedClues = addedClues;
     }
 
     public Team getTeam() {

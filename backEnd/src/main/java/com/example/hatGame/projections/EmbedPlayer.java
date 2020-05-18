@@ -10,6 +10,7 @@ import java.util.List;
 public interface EmbedPlayer {
     Long getId();
     String getName();
+    Boolean getAddedClues();
     int getScore();
     List<Player> getPlayers();
 }
