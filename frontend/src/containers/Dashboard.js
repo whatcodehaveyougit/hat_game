@@ -12,6 +12,7 @@ import ActivePlayerScreen from '../components/ActivePlayerScreen.js'
 import TurnOverScreen from '../components/TurnOverScreen.js'
 import RoundOver from '../components/RoundOver.js'
 import GameOver from '../components/GameOver.js'
+import AddCluesHome from '../components/GameSetup/AddCluesHome.js'
 
 export default function Dashboard() {
     
@@ -20,6 +21,7 @@ export default function Dashboard() {
     const [createdTeam, setCreatedTeam] = useState()
     const [playersInCreatedGame, setPlayersInCreatedGame] = useState([])
     const [selectedGame, setSelectedGame] = useState({})
+    const [selectedGamePlayers, setSelectedGamePlayers] = useState([])
     const [orderedTeams, setOrderedTeams] = useState([]);
     const [currentScore, setCurrentScore] = useState()
     const [gameOver, setGameOver] = useState(false)
@@ -37,7 +39,6 @@ export default function Dashboard() {
     const updateSelectedGame = (e) => {  
       fetch(`/games/`)
       .then(res => res.json())
-      // .then(res => console.log(res._embedded.games[0].id + selectedGame.id))
       .then((resTwo) => {
           resTwo._embedded.games.forEach(game => { 
           if (game.id == selectedGame.id){
@@ -46,15 +47,25 @@ export default function Dashboard() {
         })
       })
     }
-
-    // inventory.find( ({ name }) => name === 'cherries' );
     
     useEffect(() => {
       if(selectedGame.teams){
         const orderedTeams = selectedGame.teams.sort((a, b) => (a.id > b.id) ? 1 : -1);
         setOrderedTeams(orderedTeams)
       }
+      getPlayers()
     }, [selectedGame])
+
+    function getPlayers(){
+      fetch(`/games/${selectedGame.id}/teams`)
+        .then(res => res.json())
+        .then(resTwo => resTwo._embedded.teams.players)
+        .then(players => setSelectedGamePlayers(players))
+        .then((players) => {
+          return players;
+        })
+        .catch(err => console.error);
+    }
   
 
     function onGamePost(newGame){
@@ -228,8 +239,9 @@ export default function Dashboard() {
                     { createdGame ? <Route exact path="/create-teams" render={() => <CreateTeams createdGame={createdGame} onPlayerPost={onPlayerPost} onTeamPost={onTeamPost} /> } /> : null }
                     <Route exact path="/add-clues" render={() => <AddClues createdGame={createdGame} playersInCreatedGame={playersInCreatedGame} /> } /> 
                     <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} /> } />
+                    <Route exact path="/add-clues-home" render={() => <AddCluesHome getPlayers={getPlayers} selectedGamePlayers={selectedGamePlayers} /> } />
 
-                    { selectedGame ? <Route exact path="/ready-to-play" render={() => <ReadyToPlay selectedGame={selectedGame} /> } /> : null }
+                    { selectedGame ? <Route exact path="/ready-to-play" render={() => <ReadyToPlay selectedGame={selectedGame} selectedGamePlayers={selectedGamePlayers} /> } /> : null }
                     { orderedTeams ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} updateSelectedGame={updateSelectedGame} gameOver={gameOver} orderedTeams={orderedTeams} /> } /> : null } 
                     <Route exact path="/the-hat-game/player-with-hat" render={() => 
                     <ActivePlayerScreen selectedGame={selectedGame} onClueGuessed={onClueGuessed} getTeamsCurrentScore={getTeamsCurrentScore} endOfTurn={endOfTurn}

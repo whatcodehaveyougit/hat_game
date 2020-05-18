@@ -6,17 +6,18 @@ export default function ReadyToPlay(props) {
     const [haveAllPlayersAddedClues, setHaveAllPlayersAddedClues] = useState(false)
 
     useEffect(() => {
+        console.log(props.selectedGamePlayers);
         checkIfAllPlayersAddedClues()
     })
 
     function checkIfAllPlayersAddedClues(){
         const counter = 0;
-        props.selectedGame.teams.players.forEach(player => {
+        props.selectedGamePlayers.forEach(player => {
             if(player.added_clues){
                 counter++
             }
         });
-        if (counter === props.selectedGame.players.length){
+        if (counter === props.selectedGamePlayers){
            setHaveAllPlayersAddedClues(true)
         }
     }
@@ -37,8 +38,8 @@ export default function ReadyToPlay(props) {
             </div>  
         :
             <div>
-                <h1>Everyone Please Add Your Clues to the Hat</h1>
-                <Link><button>Click Here to Add Clues</button></Link>
+                <h1>Everyone Please Add Their Clues to the Hat</h1>
+                <Link to='/add-clues-home'><button>Click Here to Add Your Clues</button></Link>
             </div>     
         }
     </>

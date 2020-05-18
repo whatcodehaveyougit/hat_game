@@ -1,20 +1,18 @@
 import React, {useState} from 'react'
-import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import '../../App.css'
 
 export default function AddClues(props){
-const [redirect, setRedirect] = useState(false)
 
-function handleRedirect(){
-    setRedirect(true)
-}
-
-if(redirect) {
-    return <Redirect to='/add-clues/player' />
-}
     return(
         <>
-      <h3>Tell every to refresh their page and start adding clues!</h3>
-    </>
+            <h2>Now, as game master you need to:</h2>
+
+            <h3>Tell every to refresh their page and start adding clues!</h3>
+
+            <h3>Then... feel free to</h3>
+
+            <Link to="/add-clues-home"><button>Start Adding Clues</button></Link>
+        </>
     )
 }
