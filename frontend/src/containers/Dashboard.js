@@ -59,14 +59,11 @@ export default function Dashboard() {
     async function asyncSetSelectedGame(game){
       return new Promise((resolve, reject) => {     
         setSelectedGame(game)
-        resolve(game)
-        console.log("async fun");
-        
+        resolve(game)        
       })
     }
 
     async function getPlayers(game){
-        console.log("get palyers called");
         const array = []
         await fetch(`/games/${game.id}/teams`)
         .then(res => res.json())
@@ -80,16 +77,15 @@ export default function Dashboard() {
         .catch(err => console.error)
       }
 
-    function finshedAddingClues(){
-      console.log(playerAddingClues + "player added clues")
+    function finishedAddingClues(){
       fetch(`/players/${playerAddingClues.id}`, {
-        method: 'POST',
+        method: 'PATCH',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          clues_added: true
+          addedClues: true
         })
       })
     }
@@ -263,7 +259,7 @@ export default function Dashboard() {
                      {/* I have put in this ternary as before it was trying to load the component before the state had been set to pass down  */}
                     { createdGame ? <Route exact path="/create-teams" render={() => <CreateTeams createdGame={createdGame} onPlayerPost={onPlayerPost} onTeamPost={onTeamPost} /> } /> : null }
                     <Route exact path="/add-clues" render={() => <AddClues createdGame={createdGame} playersInCreatedGame={playersInCreatedGame} /> } /> 
-                    <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} finshedAddingClues={finshedAddingClues} /> } />
+                    <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} finishedAddingClues={finishedAddingClues} /> } />
                     <Route exact path="/add-clues-home" render={() => <AddCluesHome selectedGamePlayers={selectedGamePlayers} setPlayerAddingClues={setPlayerAddingClues} /> } />
 
                     { selectedGame ? <Route exact path="/ready-to-play" render={() => <ReadyToPlay selectedGame={selectedGame} selectedGamePlayers={selectedGamePlayers} /> } /> : null }

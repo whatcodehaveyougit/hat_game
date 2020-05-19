@@ -10,21 +10,25 @@ export default function AddCluesHome(props){
     }, [props.selectedGamePlayers])
 
     function filterPlayers(players){
+        console.log(players.toString());
         const array = [];
         players.forEach(player => {
-            if(!player.added_clues){
+            if(player.addedClues === false){
                 array.push(player)
             }
         })
         setFilteredPlayers(array)
+        console.log(array + "array");
     }
 
     return (
         <>
-            <h1>Select a name and start adding clues!</h1>
+           
 
-            { 
-                filteredPlayers.map((player) => (
+            { filteredPlayers.length > 0 ?  
+            <div>
+            <h1>Select a name and start adding clues!</h1>
+                { filteredPlayers.map((player) => (
                     <div className="player-name-to-add-clues" key={player.name}>
                         <Link to="/add-clues/player" onClick={() => props.setPlayerAddingClues(player)}>
                             <div className="player">
@@ -33,7 +37,10 @@ export default function AddCluesHome(props){
                             </div>
                         </Link>            
                     </div>
-            ))
+                    )
+                )}
+            </div> :
+            <h1>Everyone has added Clues to the Hat!</h1>
         }
         </>
     )

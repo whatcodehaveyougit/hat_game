@@ -13,7 +13,7 @@ public class Player {
     @Column(name="name")
     private String name;
 
-    @Column(name="addedClues")
+    @Column(name="has_added_clues")
     private Boolean addedClues;
 
     @ManyToOne(cascade = CascadeType.REMOVE)

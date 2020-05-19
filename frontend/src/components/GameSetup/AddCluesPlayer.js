@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function AddCluesPlayer(props){
 
+
 const [clueContent, setClueContent] = useState('')
 
 const handleClueSubmit = (e) => {
