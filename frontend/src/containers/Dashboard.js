@@ -131,7 +131,8 @@ export default function Dashboard() {
         },
         body: JSON.stringify({
           name: newPlayerName,
-          team: `teams/${createdTeam._links.self.href}`
+          team: `teams/${createdTeam._links.self.href}`,
+          addedClues: false
         })
       })
       .then(res => res.json())
@@ -163,9 +164,11 @@ export default function Dashboard() {
     // Setup for round 
 
     function getTeamsCurrentScore(){
+      console.log('Get teams current score called');
       fetch(`/teams/${selectedGame.teams[selectedGame.activeTeam].id}`)
       .then(res => res.json())
       .then(team => setCurrentScore(team.score))
+      .then(res => console.log(res))
     }
 
       // During Turn

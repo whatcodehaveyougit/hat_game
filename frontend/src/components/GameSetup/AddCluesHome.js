@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 
 export default function AddCluesHome(props){
-    const [filteredPlayers, setFilteredPlayers] = useState([]);
+    const [playersToAddClues, setPlayersToAddClues] = useState([]);
 
     useEffect(() => {
         filterPlayers(props.selectedGamePlayers)
@@ -11,24 +11,23 @@ export default function AddCluesHome(props){
 
     function filterPlayers(players){
         console.log(players.toString());
-        const array = [];
+        const playersToAddCluesArray = [];
         players.forEach(player => {
-            if(player.addedClues === false){
-                array.push(player)
+            if(!player.addedClues){
+                playersToAddCluesArray.push(player)
             }
         })
-        setFilteredPlayers(array)
-        console.log(array + "array");
+        setPlayersToAddClues(playersToAddCluesArray)
     }
 
     return (
         <>
            
 
-            { filteredPlayers.length > 0 ?  
+            { playersToAddClues.length > 0 ?  
             <div>
             <h1>Select a name and start adding clues!</h1>
-                { filteredPlayers.map((player) => (
+                { playersToAddClues.map((player) => (
                     <div className="player-name-to-add-clues" key={player.name}>
                         <Link to="/add-clues/player" onClick={() => props.setPlayerAddingClues(player)}>
                             <div className="player">

@@ -12,7 +12,7 @@ export default function AddClues(props){
 
             <h3>Then... feel free to</h3>
 
-            <Link to="/add-clues-home"><button>Start Adding Clues</button></Link>
+            <Link to="/"><button>Start Adding Clues</button></Link>
         </>
     )
 }

@@ -15,8 +15,6 @@ const ActivePlayerScreen = (props) => {
     useEffect(() => { 
       if(cluesArray){
         filterOutGuessedClues(cluesArray)
-        // this isEmpty function is now redundant in this current state.  The page is constantly checking if hat is empty and will redirect when it is.
-        .then(res => isHatEmpty(res))
         .then(res => shuffle(res)) 
     }
   }, [turnCount]);
@@ -33,20 +31,6 @@ const ActivePlayerScreen = (props) => {
             resolve(array)
           })  
         }
-
-    function isHatEmpty(clues){      
-      return new Promise((resolve, reject) => {     
-      if (clues.length === 0){
-          setTimeLeft(0)
-          // I can't call props.endOfTurn() because the page redirects before that can happen
-          // To be honest I don't even need this function anymore with the code on line 115
-          // This was not working - should have done though?
-          // return <Redirect to='/the-hat-is-empty'/>
-      } else {
-        resolve(clues)
-      }
-    })
-  }
 
     function shuffle(array) { 
       let counter = array.length;
@@ -68,16 +52,12 @@ const ActivePlayerScreen = (props) => {
     function clueGuessedCorrectly(){
           props.onClueGuessed(cluesInHat[0].id)  
           removeGuessedClueFromHatArray()
-          // How is it still working with this commented out?  Should be broke, not setting state of cluesInHat anywhere ??
-          // .then(array => isHatEmpty(array))
     }
 
     function removeGuessedClueFromHatArray(){
-     return new Promise((resolve, reject) => {
-      const deck = cluesInHat;
+          const deck = cluesInHat;
           deck.shift();
-          return(deck)
-     })
+          setCluesInHat(deck)
     } 
 
     // Is timir continuing to tick after page redirected
