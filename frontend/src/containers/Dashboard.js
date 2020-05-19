@@ -22,6 +22,7 @@ export default function Dashboard() {
     const [playersInCreatedGame, setPlayersInCreatedGame] = useState([])
     const [selectedGame, setSelectedGame] = useState({})
     const [selectedGamePlayers, setSelectedGamePlayers] = useState([])
+    const [playerAddingClues, setPlayerAddingClues] = useState({})
     const [orderedTeams, setOrderedTeams] = useState([]);
     const [currentScore, setCurrentScore] = useState()
     const [gameOver, setGameOver] = useState(false)
@@ -53,18 +54,44 @@ export default function Dashboard() {
         const orderedTeams = selectedGame.teams.sort((a, b) => (a.id > b.id) ? 1 : -1);
         setOrderedTeams(orderedTeams)
       }
-      getPlayers()
     }, [selectedGame])
 
-    function getPlayers(){
-      fetch(`/games/${selectedGame.id}/teams`)
+    async function asyncSetSelectedGame(game){
+      return new Promise((resolve, reject) => {     
+        setSelectedGame(game)
+        resolve(game)
+        console.log("async fun");
+        
+      })
+    }
+
+    async function getPlayers(game){
+        console.log("get palyers called");
+        const array = []
+        await fetch(`/games/${game.id}/teams`)
         .then(res => res.json())
-        .then(resTwo => resTwo._embedded.teams.players)
-        .then(players => setSelectedGamePlayers(players))
-        .then((players) => {
-          return players;
+        .then(resTwo => resTwo._embedded.teams.forEach(team => {
+          team.players.forEach(player => {
+            array.push(player)
+          })
+        }))
+        .then(players => setSelectedGamePlayers(array))
+        .then(console.log(selectedGamePlayers))
+        .catch(err => console.error)
+      }
+
+    function finshedAddingClues(){
+      console.log(playerAddingClues + "player added clues")
+      fetch(`/players/${playerAddingClues.id}`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          clues_added: true
         })
-        .catch(err => console.error);
+      })
     }
   
 
@@ -131,7 +158,8 @@ export default function Dashboard() {
           },
           body: JSON.stringify({
             content: newClue,
-            game: `games/${createdGame._links.self.href}`
+            game: `games/${selectedGame._links.self.href}`,
+            guessed: false
           })
         })
       }
@@ -172,7 +200,6 @@ export default function Dashboard() {
             score: currentScore
           }) 
         })
-
           if (selectedGame.activeTeam + 1 === selectedGame.teams.length){
               return fetch(`/games/${selectedGame.id}`, {
                 method: 'PATCH',
@@ -200,7 +227,6 @@ export default function Dashboard() {
     }
 
       async function endOfRound(){   
-
         const nextRound = selectedGame.round + 1
         await fetch(`/games/${selectedGame.id}`, {
           method: 'PATCH',
@@ -224,7 +250,6 @@ export default function Dashboard() {
             }) 
         })    
       })
-   
     }
 
         return (
@@ -232,14 +257,14 @@ export default function Dashboard() {
           <Navbar />
             <Router>
                     
-                    <Route exact path="/" render={() => <HomePage games={games} setSelectedGame={setSelectedGame}   /> } />
+                    <Route exact path="/" render={() => <HomePage games={games} asyncSetSelectedGame={asyncSetSelectedGame} getPlayers={getPlayers}   /> } />
         
                     <Route exact path="/create-game" render={() => <CreateGame onGamePost={onGamePost} /> } />
                      {/* I have put in this ternary as before it was trying to load the component before the state had been set to pass down  */}
                     { createdGame ? <Route exact path="/create-teams" render={() => <CreateTeams createdGame={createdGame} onPlayerPost={onPlayerPost} onTeamPost={onTeamPost} /> } /> : null }
                     <Route exact path="/add-clues" render={() => <AddClues createdGame={createdGame} playersInCreatedGame={playersInCreatedGame} /> } /> 
-                    <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} /> } />
-                    <Route exact path="/add-clues-home" render={() => <AddCluesHome getPlayers={getPlayers} selectedGamePlayers={selectedGamePlayers} /> } />
+                    <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} finshedAddingClues={finshedAddingClues} /> } />
+                    <Route exact path="/add-clues-home" render={() => <AddCluesHome selectedGamePlayers={selectedGamePlayers} setPlayerAddingClues={setPlayerAddingClues} /> } />
 
                     { selectedGame ? <Route exact path="/ready-to-play" render={() => <ReadyToPlay selectedGame={selectedGame} selectedGamePlayers={selectedGamePlayers} /> } /> : null }
                     { orderedTeams ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} updateSelectedGame={updateSelectedGame} gameOver={gameOver} orderedTeams={orderedTeams} /> } /> : null } 

@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 
 export default function AddCluesPlayer(props){
+
 const [clueContent, setClueContent] = useState('')
 
 const handleClueSubmit = (e) => {
@@ -17,7 +18,7 @@ const handleClueSubmit = (e) => {
                     <input type="text" required value={clueContent} onChange={(e) => setClueContent(e.target.value)} />
                     <input type="submit" />
                 </form>
-            <Link to="/"><button>Finished Adding Clues!</button></Link>
+            <Link to="/"><button onClick={props.finishedAddingClues}>Finished Adding Clues!</button></Link>
         </>
     )
 }
