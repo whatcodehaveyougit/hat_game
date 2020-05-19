@@ -29,12 +29,16 @@ export default function Dashboard() {
     const [emptyHatRedirect, setEmptyHatRedirect] = useState(false)
 
     useEffect(() => {
-        fetch("/games/")
-        .then(res => res.json())
-        .then(resTwo => resTwo._embedded.games)
-        .then(games => setGames( games ))
-        .catch(err => console.error);
+     fetchGames()
     }, [])
+
+    function fetchGames(){
+      fetch("/games/")
+      .then(res => res.json())
+      .then(resTwo => resTwo._embedded.games)
+      .then(games => setGames( games ))
+      .catch(err => console.error);
+    }
 
     // Shuold not have to do this - the data structures are not consistant - annoying!
     const updateSelectedGame = (e) => {  
@@ -99,7 +103,8 @@ export default function Dashboard() {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              title: newGame
+              title: newGame,
+              round: 1
             })
           })
           .then(res => res.json())
@@ -256,7 +261,7 @@ export default function Dashboard() {
           <Navbar />
             <Router>
                     
-                    <Route exact path="/" render={() => <HomePage games={games} asyncSetSelectedGame={asyncSetSelectedGame} getPlayers={getPlayers}   /> } />
+                    <Route exact path="/" render={() => <HomePage games={games} fetchGames={fetchGames} asyncSetSelectedGame={asyncSetSelectedGame} getPlayers={getPlayers}   /> } />
         
                     <Route exact path="/create-game" render={() => <CreateGame onGamePost={onGamePost} /> } />
                      {/* I have put in this ternary as before it was trying to load the component before the state had been set to pass down  */}
@@ -265,7 +270,7 @@ export default function Dashboard() {
                     <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} finishedAddingClues={finishedAddingClues} /> } />
                     <Route exact path="/add-clues-home" render={() => <AddCluesHome selectedGamePlayers={selectedGamePlayers} setPlayerAddingClues={setPlayerAddingClues} /> } />
 
-                    { selectedGame ? <Route exact path="/ready-to-play" render={() => <ReadyToPlay selectedGame={selectedGame} selectedGamePlayers={selectedGamePlayers} /> } /> : null }
+                    { selectedGame ? <Route exact path="/ready-to-play" render={() => <ReadyToPlay selectedGame={selectedGame} selectedGamePlayers={selectedGamePlayers} updateSelectedGame={updateSelectedGame} /> } /> : null }
                     { orderedTeams ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} updateSelectedGame={updateSelectedGame} gameOver={gameOver} orderedTeams={orderedTeams} /> } /> : null } 
                     <Route exact path="/the-hat-game/player-with-hat" render={() => 
                     <ActivePlayerScreen selectedGame={selectedGame} onClueGuessed={onClueGuessed} getTeamsCurrentScore={getTeamsCurrentScore} endOfTurn={endOfTurn}

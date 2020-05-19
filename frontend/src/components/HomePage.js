@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import Games from './Games.js'
 
 export default function HomePage(props) {
+
+    useEffect(() => {
+        props.fetchGames()
+    }, [])
 
     return (
         <>

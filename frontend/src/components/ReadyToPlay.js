@@ -42,7 +42,7 @@ export default function ReadyToPlay(props) {
                 <h1>It is now time to play</h1>
                 <h1>{ props.selectedGame.title }</h1>
                 <h1>ARE YOU READY?</h1>
-                <Link to="/the-hat-game"><button>Aye!</button></Link>
+                <Link to="/the-hat-game" onClick={props.updateSelectedGame}><button>Aye!</button></Link>
             </div> :
             <div>
                 <h1>Everyone Please Add Their Clues to the Hat</h1>
