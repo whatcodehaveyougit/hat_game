@@ -2,8 +2,19 @@
 
 .App {
     text-align: center;
-    font-family: avenir;
   }
+
+body {
+  background-color: #1f099a;
+  font-family: monospace;
+}
+
+.main-content {
+  background-color: white;
+  display: inline-block;
+  padding: 40px 100px;
+  border-radius: 10px;
+}
   
 .box {
   background-color: white;
@@ -14,6 +25,8 @@
     border: 1px solid black;
     display: inline-block;
 }
+
+
 
 .box:hover {
   cursor: pointer;

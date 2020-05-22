@@ -14,6 +14,15 @@ import RoundOver from '../components/RoundOver.js'
 import GameOver from '../components/GameOver.js'
 import AddCluesHome from '../components/GameSetup/AddCluesHome.js'
 
+var API 
+if (process.env.NODE_ENV !== "production"){
+  API = process.env.REACT_APP_API
+} else {
+  API = ""
+}
+
+console.log(API + "This is the API ");
+
 export default function Dashboard() {
     
     const [games, setGames] = useState([])
@@ -33,7 +42,7 @@ export default function Dashboard() {
     }, [])
 
     function fetchGames(){
-      fetch("/games/")
+      fetch(`${API}/games/`)
       .then(res => res.json())
       .then(resTwo => resTwo._embedded.games)
       .then(games => setGames( games ))
@@ -42,7 +51,7 @@ export default function Dashboard() {
 
     // Shuold not have to do this - the data structures are not consistant - annoying!
     const updateSelectedGame = (e) => {  
-      fetch(`/games/`)
+      fetch(`${API}/games/`)
       .then(res => res.json())
       .then((resTwo) => {
           resTwo._embedded.games.forEach(game => { 
@@ -69,7 +78,7 @@ export default function Dashboard() {
 
     async function getPlayers(game){
         const array = []
-        await fetch(`/games/${game.id}/teams`)
+        await fetch(`${API}/games/${game.id}/teams`)
         .then(res => res.json())
         .then(resTwo => resTwo._embedded.teams.forEach(team => {
           team.players.forEach(player => {
@@ -82,7 +91,7 @@ export default function Dashboard() {
       }
 
     function finishedAddingClues(){
-      fetch(`/players/${playerAddingClues.id}`, {
+      fetch(`${API}/players/${playerAddingClues.id}`, {
         method: 'PATCH',
         headers: {
           'Accept': 'application/json',
@@ -96,7 +105,7 @@ export default function Dashboard() {
   
 
     function onGamePost(newGame){
-        fetch("/games/", {
+        fetch(`${API}/games/`, {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -112,7 +121,7 @@ export default function Dashboard() {
     }
 
     function onTeamPost(newTeamName){
-      fetch("/teams/",{
+      fetch(`${API}/teams/`,{
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -128,7 +137,7 @@ export default function Dashboard() {
     }
 
     function onPlayerPost(newPlayerName){  
-      fetch("/players/", {
+      fetch(`${API}/players/`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -145,14 +154,13 @@ export default function Dashboard() {
     }
 
     function addPlayerToState(player){
-      console.log("function runs" + playersInCreatedGame)
       let array = playersInCreatedGame
       array.push(player)
       setPlayersInCreatedGame(array)
     }
 
       function onCluePost(newClue){
-        fetch("/clues/", {
+        fetch(`${API}/clues/`, {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -169,7 +177,6 @@ export default function Dashboard() {
     // Setup for round 
 
     function getTeamsCurrentScore(){
-      console.log('Get teams current score called');
       fetch(`/teams/${selectedGame.teams[selectedGame.activeTeam].id}`)
       .then(res => res.json())
       .then(team => setCurrentScore(team.score))
@@ -178,7 +185,7 @@ export default function Dashboard() {
 
       // During Turn
       function onClueGuessed(clueId){ 
-          fetch(`/clues/${clueId}`, {
+          fetch(`${API}/clues/${clueId}`, {
             method: 'PATCH',
             headers: {
               'Accept': 'application/json',
@@ -205,7 +212,7 @@ export default function Dashboard() {
           }) 
         })
           if (selectedGame.activeTeam + 1 === selectedGame.teams.length){
-              return fetch(`/games/${selectedGame.id}`, {
+              return fetch(`${API}/games/${selectedGame.id}`, {
                 method: 'PATCH',
                 headers: {
                   'Accept': 'application/json',
@@ -217,7 +224,7 @@ export default function Dashboard() {
             })
           } else { 
            let newTeam = selectedGame.activeTeam + 1           
-              return fetch(`/games/${selectedGame.id}`, {
+              return fetch(`${API}/games/${selectedGame.id}`, {
                 method: 'PATCH',
                 headers: {
                   'Accept': 'application/json',
@@ -232,7 +239,7 @@ export default function Dashboard() {
 
       async function endOfRound(){   
         const nextRound = selectedGame.round + 1
-        await fetch(`/games/${selectedGame.id}`, {
+        await fetch(`${API}/games/${selectedGame.id}`, {
           method: 'PATCH',
           headers: {
             'Accept': 'application/json',
@@ -243,7 +250,7 @@ export default function Dashboard() {
           }) 
       })
       await selectedGame.clues.forEach(clue => {
-           fetch(`/clues/${clue.id}`, {
+           fetch(`${API}/clues/${clue.id}`, {
             method: 'PATCH',
             headers: {
               'Accept': 'application/json',

@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import Games from './Games.js'
+import hat from '../assets/hat.png'
+import '../App.css'
 
 export default function HomePage(props) {
 
@@ -9,8 +11,11 @@ export default function HomePage(props) {
 
     return (
         <>
-            <a className="create-game-button" href="/create-game">Create Game</a> 
-            <Games games={props.games} getPlayers={props.getPlayers} asyncSetSelectedGame={props.asyncSetSelectedGame} />
+            <section class="main-content">
+               
+                <Games games={props.games} getPlayers={props.getPlayers} asyncSetSelectedGame={props.asyncSetSelectedGame} />
+            </section>
+            <div><img className="team" src={ hat } /></div>
         </>
     )
 }
