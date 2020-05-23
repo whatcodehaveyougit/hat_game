@@ -25,7 +25,7 @@ export default function GameScreen(props) {
                 </div>
 
                 <div className="game-screen-btn-wrapper">
-                    <button className="big-btn yellow-btn" onClick={props.updateSelectedGame}>Update Game Info</button>
+                    <button className="big-btn on-hover-underline yellow-btn" onClick={props.updateSelectedGame}>Update Game Info</button>
                 </div>
 
                 

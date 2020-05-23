@@ -39,6 +39,10 @@ button {
   text-decoration: none;
 }
 
+.on-hover-underline:hover {
+  text-decoration: underline;
+}
+
 input {
   height: 23px;
   border: 1px solid black;
@@ -98,11 +102,15 @@ body {
     border-radius: 18px;
     border: 1px solid black;
     display: inline-block;
+    margin: 5px 0;
 }
 
 
 .box:hover {
   cursor: pointer;
+  background-color: var(--yellow-btn);
+  font-size: 25px;
+  transition: font 0.3s ease;
 }
 
 .flex-container-center {
@@ -129,6 +137,10 @@ h1 {
   font-size: 30px;
 }
 
+h2 {
+  font-size: 25px;
+}
+
 .body-content h1, .body-content h2 {
   margin: 10px 0;
 }
@@ -145,6 +157,10 @@ h1 {
 .lets-go-img {
     height: 129px;
     padding: 0 0 30px;
+}
+
+.ready-to-play h1 {
+  background-color: var(--yellow-btn) ;
 }
 
 /* Game Screen */

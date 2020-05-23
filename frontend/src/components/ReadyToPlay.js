@@ -37,10 +37,10 @@ export default function ReadyToPlay(props) {
     return (
         <> 
         { haveAllPlayersAddedClues ? 
-            <div>
+            <div className="ready-to-play">
                 <h1>The clues have been added...</h1>
                 <h1>Trash talk has been dished...</h1>
-                <h1>Now it's time to play</h1>
+                <h1>It's time to play</h1>
                 <h1>{ props.selectedGame.title }</h1>
                 <h1>ARE YOU READY?</h1>
                 <Link to="/the-hat-game" onClick={props.updateSelectedGame}><img className="lets-go-img" src={letsGo} /></Link>
