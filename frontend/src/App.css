@@ -10,6 +10,9 @@
   cursor: pointer;
 }
 
+a {
+  text-decoration: none;
+}
 
 button {
   border: 1px solid black;
@@ -235,19 +238,6 @@ img.hat-on-game-screen {
   -moz-animation-name: bounce;
 }
 
-/* .animation:hover {
-    cursor: pointer;
-    transform: rotate(360deg);
-    transition: all 0.3s ease-in-out 0s;
-} */
-
-
-/* .animation:hover {
-  -webkit-animation: swing 1s ease;
-  animation: swing 1s ease;
-  -webkit-animation-iteration-count: 1;
-  animation-iteration-count: 1;
-} */
 
 .highlight {
   background-color: #ccff00;
@@ -292,6 +282,31 @@ img.hat-on-game-screen {
 }
 
 .time-left {
-  font-size: 60px;
+  display: inline-block;
+  font-size: 20px;
   margin-top: 40px;
+  border: 1px solid;
+  border-radius: 100%;
+  padding:20px;
+}
+
+.active-player-screen-wrapper > div {
+  margin-top: 20px;
+}
+
+.current-clue-wrapper {
+  background-color: #FFA500;
+  padding: 15px;
+}
+
+.next-clue {
+  width: 50%;
+  height: 65px;
+}
+
+/* Turn over */
+
+.turn-over-btn {
+  width: 54%;
+  height: 43px;
 }

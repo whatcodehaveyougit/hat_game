@@ -15,7 +15,7 @@ import GameOver from '../components/GameOver.js'
 import AddCluesHome from '../components/GameSetup/AddCluesHome.js'
 
 var API 
-if (process.env.NODE_ENV !== "production"){
+if (process.env.NODE_ENV === "production"){
   API = process.env.REACT_APP_API
 } else {
   API = ""

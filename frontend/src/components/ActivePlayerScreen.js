@@ -6,7 +6,7 @@ const ActivePlayerScreen = (props) => {
     
     // Timer
     const [timerStarted, setTimerStarted] = useState(false)
-    const [timeLeft, setTimeLeft] = useState(4);
+    const [timeLeft, setTimeLeft] = useState(60);
     // Clues
     const [cluesArray, setCluesArray] = useState(props.selectedGame.clues)
     const [cluesInHat, setCluesInHat] = useState([])
@@ -83,11 +83,14 @@ const ActivePlayerScreen = (props) => {
 
     return (
         <>
-            { timerStarted ? null : <><h1>Have you picked up the hat?</h1> <h3>{ cluesInHat.length } clues left in hat</h3> </> }
-            { timerStarted ? null : <button className="start-clock" onClick={startTurn}>Start the Clock</button> }
-            { timerStarted ? <div className="time-left"> {timeLeft} </div> : null}
-            { timerStarted ? <div>Current Clues: <br/><span className="current-clue">{ cluesInHat.length > 0 ? cluesInHat[0].content : <Redirect to='/the-hat-is-empty'/>  }</span></div> : null }
-            { timerStarted ? <button className="big-btn yellow-btn" onClick={clueGuessedCorrectly}>Got it. <br/> Next Clue Please!</button> : null }  
+            
+              { timerStarted ? null : <><h1>Have you picked up the hat?</h1> <h3>{ cluesInHat.length } clues left in hat</h3> </> }
+              { timerStarted ? null : <button className="start-clock" onClick={startTurn}>Start the Clock</button> }
+            <div className="active-player-screen-wrapper">
+              { timerStarted ? <div className="time-left"> {timeLeft} </div> : null}
+              { timerStarted ? <div className="current-clue-wrapper">Current Clue: <br/><span className="current-clue">{ cluesInHat.length > 0 ? cluesInHat[0].content : <Redirect to='/the-hat-is-empty'/>  }</span></div> : null }
+              { timerStarted ? <div><button className="big-btn yellow-btn next-clue on-hover-underline" onClick={clueGuessedCorrectly}>Got it. <br/> Next Clue Please!</button></div> : null }  
+            </div>
         </>
     )
 }
