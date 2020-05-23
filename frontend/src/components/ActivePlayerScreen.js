@@ -87,7 +87,7 @@ const ActivePlayerScreen = (props) => {
             { timerStarted ? null : <button className="start-clock" onClick={startTurn}>Start the Clock</button> }
             { timerStarted ? <div className="time-left"> {timeLeft} </div> : null}
             { timerStarted ? <div>Current Clues: <br/><span className="current-clue">{ cluesInHat.length > 0 ? cluesInHat[0].content : <Redirect to='/the-hat-is-empty'/>  }</span></div> : null }
-            { timerStarted ? <button onClick={clueGuessedCorrectly}>We got it! Next Clue Please!</button> : null }  
+            { timerStarted ? <button className="big-btn yellow-btn" onClick={clueGuessedCorrectly}>Got it. <br/> Next Clue Please!</button> : null }  
         </>
     )
 }

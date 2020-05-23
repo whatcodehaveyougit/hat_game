@@ -14,8 +14,9 @@ export default function HomePage(props) {
             <section class="main-content">
                
                 <Games games={props.games} getPlayers={props.getPlayers} asyncSetSelectedGame={props.asyncSetSelectedGame} />
-            </section>
+            
             <div><img className="team" src={ hat } /></div>
+            </section>
         </>
     )
 }

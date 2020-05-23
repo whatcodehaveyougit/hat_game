@@ -1,0 +1,103 @@
+
+/* Create Game  */
+
+.create-game {
+    padding: 20px;
+    font-size: 18px;
+  }
+  
+  /* Create Teams */
+  
+  .game-title {
+    text-decoration: underline;
+    padding: 10px;
+    background: orange;
+    border-radius: 14px;
+  }
+  
+  .players-in-team {
+    padding:0;
+    list-style-type: none;
+  }
+  
+  img.hat {
+    transform: rotate(180deg);
+  }
+  
+  .teams-added-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  
+  .team-added-to-game {
+    margin: 20px;
+  }
+  
+  img.team {
+    width: 48%;
+  }
+  
+  button.add-team {
+    background-color: #503333;
+    color: white;
+  }
+  
+  /* Ready to play */
+  
+.add-clues-btn {
+    padding: 15px 91px;
+    font-size: 27px;
+    margin: 18px 0;
+}
+
+
+/* Add Clues Home */
+
+.player-name-to-add-clues {
+    padding: 20px;
+    border: 1px solid black;
+    margin: 2% 4%;
+    border-radius: 12px;
+  }
+  
+  .player-name-to-add-clues a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .player-name {
+    font-size: 17px;
+  }
+  
+  .player-name-to-add-clues:hover {
+    background-color: var(--yellow-btn);
+  }
+
+  .player-name-to-add-clues:hover .player-name {
+    font-size: 25px;
+    transition: font 0.3s ease;
+  }
+  
+
+/* Add Clues Player  */
+
+button.finshed-adding-clues  {
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 4px 45px;
+    margin: 10px 0 18px;
+    color: black;
+  }
+  
+  .scores-wrapper {
+    margin: 20px 0 20px;
+  }
+
+  .team-on-table {
+    font-size: 16px;
+  }
+
+.scores-wrapper h3 {
+    margin: 5px 0 10px;
+    font-size: 19px;
+}

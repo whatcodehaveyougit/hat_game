@@ -1,6 +1,7 @@
 import React,  { useState }from 'react'
 import { Redirect } from 'react-router-dom'
 import '../../App.css'
+import '../../style/game-setup.css'
 
 const CreateGame = (props) => {
    const [title, setTitle] = useState('');
@@ -19,7 +20,7 @@ const CreateGame = (props) => {
 
     return(
         <form onSubmit={handleSubmit}>
-            <div className="flex-container-center">
+            <div className="flex-container-center create-game">
                 <label>Name of HatGame</label>
                 <input type="text" required value={title} onChange={(e) => setTitle(e.target.value)} />
                 <input type="submit" />

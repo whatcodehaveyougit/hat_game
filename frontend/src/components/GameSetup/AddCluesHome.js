@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
+import '../../style/game-setup.css'
 
 
 export default function AddCluesHome(props){
@@ -26,16 +27,16 @@ export default function AddCluesHome(props){
 
             { playersToAddClues.length > 0 ?  
             <div>
-            <h1>Select a name and start adding clues!</h1>
+            <h1>Select your name and start adding clues!</h1>
                 { playersToAddClues.map((player) => (
-                    <div className="player-name-to-add-clues" key={player.name}>
-                        <Link to="/add-clues/player" onClick={() => props.setPlayerAddingClues(player)}>
-                            <div className="player">
-                                {player.name}
-                                <br/>Start Adding Clues!
-                            </div>
-                        </Link>            
-                    </div>
+                        <div className="player-name-to-add-clues" key={player.name}>
+                                <Link to="/add-clues/player" onClick={() => props.setPlayerAddingClues(player)}>
+                                    <div className="player-name">                    
+                                        {player.name}
+                                    </div>
+                                </Link>         
+                        </div>
+                    
                     )
                 )}
             </div> :

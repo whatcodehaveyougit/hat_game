@@ -1,8 +1,81 @@
-/* Global Styles */
+/* ================== Global Styles ==================== */
 
 .App {
     text-align: center;
   }
+
+/* Global Buttons  */
+
+  button:hover, input[type="submit"]:hover {
+  cursor: pointer;
+}
+
+
+button {
+  border: 1px solid black;
+  font-family: monospace;
+  border-radius: 13px;
+  font-size: 14px;
+  padding: 4px 17px;
+  margin-bottom:10px;
+  font-family: monospace;
+}
+
+:root {
+  --yellow-btn: #ccff00;
+}
+
+
+.yellow-btn {
+  background-color: var(--yellow-btn);
+}
+
+.green-btn {
+  background-color: #00ff66;
+}
+
+.big-btn {
+  font-size: 19px;
+  text-decoration: none;
+}
+
+input {
+  height: 23px;
+  border: 1px solid black;
+  margin: 0 5px;
+  font-size: 15px;
+  border-radius: 5px;
+  color: black;
+}
+
+input[type=number] {
+width: 25px;
+padding: 0 9px;
+}
+
+input[type="text"] {
+  margin: 5px;
+  padding: 0 18px;
+}
+
+input[type="submit"] {
+  padding: 1px 25px;
+  font-family: monospace;
+  height: 100%;
+}
+
+
+input[type="text"] {
+  font-family: monospace;
+}
+
+.counter-span {
+  background-color: orange;
+  padding: 5px;
+  font-size: 15px;
+}
+
+/* Main content - Page Layout */
 
 body {
   background-color: #1f099a;
@@ -12,12 +85,12 @@ body {
 .main-content {
   background-color: white;
   display: inline-block;
-  padding: 40px 100px;
+  width: 80%;
   border-radius: 10px;
 }
   
 .box {
-  background-color: white;
+    background-color: white;
     background-color: white;
     padding: 10px 15px;
     font-size: 18px;
@@ -27,33 +100,8 @@ body {
 }
 
 
-
 .box:hover {
   cursor: pointer;
-}
-
- input {
-    height: 23px;
-    border: 1px solid black;
-    margin: 0 5px;
-    font-size: 15px;
-    border-radius: 5px;
-    color: black;
-}
-
-input[type=number] {
-  width: 25px;
-  padding: 0 9px;
-}
-
-  input[type="text"] {
-    margin: 5px;
-    padding: 0 18px;
-  }
-  
-input[type="submit"] {
-  padding: 0 18px;
-  background-color: #c1a7a7;
 }
 
 .flex-container-center {
@@ -62,17 +110,6 @@ input[type="submit"] {
   align-items: center;
 }
 
-.game-title {
-  text-decoration: underline;
-}
-
-button {
-  border: 1px solid black;
-  border-radius: 4px;
-  font-size: 14px;
-  padding: 4px 17px;
-  margin-bottom:10px;
-}
 
 .grid-container {
   display: grid;
@@ -82,56 +119,23 @@ button {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-/* Nav bar */
-
-a#page-title {
-  text-decoration: none;
-}
-
-.create-game-button {
-  border: 1px solid black;
-  text-decoration: none;
-  padding: 6px 10px;
-  border-radius: 9px;
-  color: black;
-}
-
-/* Create Teams */
 
 .game-title {
   text-decoration: underline;
-  padding: 10px;
-  background: orange;
-  border-radius: 14px;
 }
 
-.players-in-team {
-  padding:0;
-  list-style-type: none;
+h1 {
+  font-size: 30px;
 }
 
-img.hat {
-  transform: rotate(180deg);
-}
+/*=========================  Specific Components ======================== */
 
-.teams-added-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
+/* Ready to Play */
 
-.team-added-to-game {
-  margin: 20px;
+.lets-go-img {
+    height: 129px;
+    padding: 0 0 30px;
 }
-
-img.team {
-  width: 48%;
-}
-
-button.add-team {
-  background-color: #503333;
-  color: white;
-}
-
 
 /* Game Screen */
 
@@ -139,6 +143,26 @@ button.add-team {
   text-decoration: none;
   color: black;
 }
+
+.scores-wrapper {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 10px 20px;
+  border-radius: 10px;
+  /* font-size: 13px; */
+}
+
+img.hat-on-game-screen {
+  height: 130px;
+}
+
+img.hat-on-game-screen:hover
+{
+    cursor: pointer;
+    transform: rotate(360deg);
+    transition: all 0.3s ease-in-out 0s;
+}
+
 
 /* Clue */
 
@@ -155,20 +179,7 @@ button.add-team {
   list-style-type: none;
 }
 
-/* Mapping of Players to then add Clues */
 
-.player-name-to-add-clues {
-  padding: 20px;
-  border: 1px solid black;
-  margin: 2% 4%;
-  border-radius: 12px;
-}
-
-.player-name-to-add-clues:hover {
-  background-color:#6418bf;
-  color: white;
-  font-weight: 700;
-}
 
 
 /* Active Player Screen */

@@ -168,7 +168,7 @@ export default function Dashboard() {
           },
           body: JSON.stringify({
             content: newClue,
-            game: `games/${selectedGame._links.self.href}`,
+            game: `${API}/games/${selectedGame._links.self.href}`,
             guessed: false
           })
         })
@@ -177,7 +177,7 @@ export default function Dashboard() {
     // Setup for round 
 
     function getTeamsCurrentScore(){
-      fetch(`/teams/${selectedGame.teams[selectedGame.activeTeam].id}`)
+      fetch(`${API}/teams/${selectedGame.teams[selectedGame.activeTeam].id}`)
       .then(res => res.json())
       .then(team => setCurrentScore(team.score))
       .then(res => console.log(res))
@@ -201,7 +201,7 @@ export default function Dashboard() {
       // End of Turn 
 
       async function endOfTurn(){
-        await fetch(`/teams/${selectedGame.teams[selectedGame.activeTeam].id}`, {
+        await fetch(`${API}/teams/${selectedGame.teams[selectedGame.activeTeam].id}`, {
           method: 'PATCH',
           headers: {
             'Accept': 'application/json',
@@ -266,6 +266,7 @@ export default function Dashboard() {
         return (
           <>
           <Navbar />
+            <div class="main-content">
             <Router>
                     
                     <Route exact path="/" render={() => <HomePage games={games} fetchGames={fetchGames} asyncSetSelectedGame={asyncSetSelectedGame} getPlayers={getPlayers}   /> } />
@@ -287,6 +288,7 @@ export default function Dashboard() {
                     <Route exact path="/the-hat-is-empty" render={() => <RoundOver endOfRound={endOfRound} endOfTurn={endOfTurn} /> } />
                     <Route exact path="/game-over" render={() => <GameOver orderedTeams={orderedTeams}  /> } />
             </Router>
+            </div>
             </>
         )
 }

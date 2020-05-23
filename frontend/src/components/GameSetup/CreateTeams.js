@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import '../../App.css'
+import '../../style/game-setup.css'
 import team from '../../assets/team.png'
 
 export default function CreateTeams(props){
