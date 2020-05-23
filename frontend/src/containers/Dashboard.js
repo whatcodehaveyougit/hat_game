@@ -265,8 +265,9 @@ export default function Dashboard() {
 
         return (
           <>
-          <Navbar />
-            <div class="main-content">
+          <div class="entire-page">
+            <Navbar />
+            <div class="body-content">
             <Router>
                     
                     <Route exact path="/" render={() => <HomePage games={games} fetchGames={fetchGames} asyncSetSelectedGame={asyncSetSelectedGame} getPlayers={getPlayers}   /> } />
@@ -288,6 +289,7 @@ export default function Dashboard() {
                     <Route exact path="/the-hat-is-empty" render={() => <RoundOver endOfRound={endOfRound} endOfTurn={endOfTurn} /> } />
                     <Route exact path="/game-over" render={() => <GameOver orderedTeams={orderedTeams}  /> } />
             </Router>
+            </div>
             </div>
             </>
         )

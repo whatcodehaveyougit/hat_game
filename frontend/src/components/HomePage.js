@@ -11,11 +11,9 @@ export default function HomePage(props) {
 
     return (
         <>
-            <section class="main-content">
-               
-                <Games games={props.games} getPlayers={props.getPlayers} asyncSetSelectedGame={props.asyncSetSelectedGame} />
-            
-            <div><img className="team" src={ hat } /></div>
+            <section class="main-content">              
+                <Games games={props.games} getPlayers={props.getPlayers} asyncSetSelectedGame={props.asyncSetSelectedGame} />   
+                <div className="wrapper"><img className="team animation" src={ hat } /></div>
             </section>
         </>
     )

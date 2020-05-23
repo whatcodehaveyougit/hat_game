@@ -46,11 +46,11 @@ export default function ReadyToPlay(props) {
                 <Link to="/the-hat-game" onClick={props.updateSelectedGame}><img className="lets-go-img" src={letsGo} /></Link>
             </div> :
             <div>
-                <h1>Everyone Please Add Their Clues to the Hat</h1>
+                <h1>Add Your Clues to the Hat</h1>
                 <h3>
                     { numberOfPlayersToAddClues ? numberOfPlayersToAddClues + " more players need to add their clues to the hat." : null}
                 </h3>
-                <Link to='/add-clues-home'><button className=" add-clues-btn yellow-btn">Click Here to Add Your Clues</button></Link>
+                <Link to='/add-clues-home'><button className=" add-clues-btn yellow-btn">Start Adding Clues</button></Link>
             </div>     
         }
             
