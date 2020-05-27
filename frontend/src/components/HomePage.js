@@ -17,9 +17,17 @@ export default function HomePage(props) {
                 {/* <div className="wrapper"><img className="team animation" src={ hat } /></div> */}
 
                 <div>
-                    <h1>Rules</h1>
-                    <p>The Hat Game is quite legendary, lots of people play it but everyone calls it by a different name.</p>
-                    <p>For more information on how to use this virtual version of the hat game, <Link to="/rules"><span className="highlight-orange on-hover-underline">please click here.</span></Link></p>
+                    <h1>Rules & Using this App</h1>
+                    <p>Firstly if you don't know the rules of the hat game,
+                        <a target="_blank" className="on-hover-underline" href="https://en.wikipedia.org/wiki/Celebrity_(game)"> find out here.</a>
+                    </p>
+                    <p>Know the rules of the hat game?</p>
+                    <p>Wondering how to play it virtually?</p>
+                    <p>
+                        <Link to="/rules">
+                            <button className="green-btn on-hover-underline">Click Here!</button>
+                        </Link>
+                    </p>
 
                     <h1>Getting Started</h1>
                     <p>Firstly, get everyone on a zoom call!</p>

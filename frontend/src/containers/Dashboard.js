@@ -14,6 +14,7 @@ import TurnOverScreen from '../components/TurnOverScreen.js'
 import RoundOver from '../components/RoundOver.js'
 import GameOver from '../components/GameOver.js'
 import AddCluesHome from '../components/GameSetup/AddCluesHome.js'
+import DeleteGame from '../components/GameSetup/DeleteGame'
 
 var API 
 if (process.env.NODE_ENV === "production"){
@@ -39,6 +40,7 @@ export default function Dashboard() {
     const [emptyHatRedirect, setEmptyHatRedirect] = useState(false)
 
     useEffect(() => {
+      console.log('Fetching games');
      fetchGames()
     }, [])
 
@@ -122,14 +124,13 @@ export default function Dashboard() {
     }
 
     function onGameDelete(gameId){
-      console.log('On game delete');
       fetch(`${API}/games/${gameId}`, {
           method: 'DELETE',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
-        })
+       })
   }
 
     function onTeamPost(newTeamName){
@@ -291,6 +292,7 @@ export default function Dashboard() {
                     <Route exact path="/add-clues" render={() => <AddClues createdGame={createdGame} playersInCreatedGame={playersInCreatedGame} /> } /> 
                     <Route exact path="/add-clues/player" render={() => <AddCluesPlayer onCluePost={onCluePost} finishedAddingClues={finishedAddingClues} /> } />
                     <Route exact path="/add-clues-home" render={() => <AddCluesHome selectedGamePlayers={selectedGamePlayers} setPlayerAddingClues={setPlayerAddingClues} /> } />
+                    <Route exact path="/delete-game" render={() => <DeleteGame selectedGame={selectedGame} onGameDelete={onGameDelete} games={games} fetchGames={fetchGames} asyncSetSelectedGame={asyncSetSelectedGame} getPlayers={getPlayers} /> } />
 
                     { selectedGame ? <Route exact path="/ready-to-play" render={() => <ReadyToPlay selectedGame={selectedGame} selectedGamePlayers={selectedGamePlayers} updateSelectedGame={updateSelectedGame} /> } /> : null }
                     { orderedTeams ? <Route exact path="/the-hat-game" render={() => <GameScreen selectedGame={selectedGame} updateSelectedGame={updateSelectedGame} gameOver={gameOver} orderedTeams={orderedTeams} /> } /> : null } 

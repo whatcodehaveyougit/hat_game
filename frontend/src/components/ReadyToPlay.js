@@ -8,19 +8,16 @@ export default function ReadyToPlay(props) {
     const [numberOfPlayersToAddClues, setNumberOfPlayersToAddClues] = useState()
 
     useEffect(() => {
-        gameChecks()
+        checkIfAllPlayersAddedClues() 
     }, [props.selectedGamePlayers])
 
-    function gameChecks(){
-        checkIfPlayersAndCluesAddedToGame()
-        checkIfAllPlayersAddedClues() 
-    }
 
-    function checkIfPlayersAndCluesAddedToGame(){
-        console.log('test');
+    if(props.selectedGame.teams < 2 || props.selectedGame.players < 3) {
+        console.log('Function ran - again !!!');
+         return <Redirect to='/delete-game'/>
     }
     
-     function checkIfAllPlayersAddedClues(){
+    function checkIfAllPlayersAddedClues(){
         let counter = 0;
         props.selectedGamePlayers.forEach(player => {
             if(player.addedClues){

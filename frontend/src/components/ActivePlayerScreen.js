@@ -6,7 +6,7 @@ const ActivePlayerScreen = (props) => {
     
     // Timer
     const [timerStarted, setTimerStarted] = useState(false)
-    const [timeLeft, setTimeLeft] = useState(60);
+    const [timeLeft, setTimeLeft] = useState(3);
     // Clues
     const [cluesArray, setCluesArray] = useState(props.selectedGame.clues)
     const [cluesInHat, setCluesInHat] = useState([])

@@ -17,7 +17,7 @@ a {
 button {
   border: 1px solid black;
   font-family: monospace;
-  border-radius: 13px;
+  border-radius: 3vw;
   font-size: 14px;
   padding: 4px 17px;
   margin-bottom:10px;
@@ -36,6 +36,14 @@ button {
 .green-btn {
   background-color: #00ff66;
 }
+
+.red-btn {
+  background-color: red;
+  color: white;
+  padding: 14px;
+  font-size: 15px;
+}
+
 
 .big-btn {
   font-size: 19px;

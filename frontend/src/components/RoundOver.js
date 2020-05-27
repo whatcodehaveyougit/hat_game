@@ -16,6 +16,8 @@ export default function EmptyHat(props){
     return (
         <>
         <h3>The Hat is empty!</h3>
+        <p>NB : Your team does not get the remaining amount of time on the clock in the virtual hat game, sorry!</p>
+        {/* <p>After clicking the button below please press "Update Game Info"</p> */}
         <Link to="/the-hat-game"><button onClick={endOfRound}>Move to the Next Round!</button></Link> 
         </>
     )

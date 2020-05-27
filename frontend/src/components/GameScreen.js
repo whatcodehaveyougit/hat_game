@@ -7,6 +7,7 @@ import '../App.css'
 export default function GameScreen(props) {
 
 useEffect(() => {
+    console.log('use effect ran');
     props.updateSelectedGame()
 }, [])
 
@@ -23,7 +24,7 @@ if(props.selectedGame){
             <div className="custom-grid">
                 <div></div>
                 <h1>Round { props.selectedGame.round }</h1>
-                <h1><span className="highlight">{ props.orderedTeams[props.selectedGame.activeTeam].name }</span> to go</h1>
+                { props ? <h1><span className="highlight"> { props.orderedTeams[props.selectedGame.activeTeam].name } </span> to go</h1> : null }
             </div>
             
             

@@ -19,13 +19,13 @@ if(redirect) {
       <>
       <h2>Games In Progress</h2>
       <div>  
-        { props.games.map((game, index) => (
+        { props.games.length > 0 ? props.games.map((game, index) => (
           <div key={index}>
             <div onClick={() => handleRedirect(game)} className="box">
               {game.title} 
             </div>
           </div>
-        ))}
+        )) : <p>No games in progress ;(</p>}
       </div>
     </>
   )
