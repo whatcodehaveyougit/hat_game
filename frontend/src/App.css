@@ -148,13 +148,27 @@ h2 {
   margin: 10px 0;
 }
 
-/*=========================  Specific Components ======================== */
-
-
 .wrapper {
   display: inline-block;
   transition: opacity .25s ease-in-out;
 }
+
+/*=========================  Specific Components ======================== */
+
+/* Home  */
+
+.create-game-btn {
+  width: 43%;
+  height: 43px;
+  font-size: 18px;
+}
+
+/* Rules */
+
+.video {
+  margin-bottom: 20px;
+}
+
 /* Ready to Play */
 
 .lets-go-img {
@@ -245,6 +259,12 @@ img.hat-on-game-screen {
   border-radius: 9px;
 }
 
+.highlight-orange {
+  background-color: #FF8300;
+  padding: 5px;
+  border-radius: 9px;
+}
+
 
 /* Clue */
 
@@ -309,4 +329,28 @@ img.hat-on-game-screen {
 .turn-over-btn {
   width: 54%;
   height: 43px;
+}
+
+/* Game Over */
+
+.winners {
+  background-color: yellow;
+  padding: 10px;
+}
+
+.game-over {
+  margin-top: 20px;
+}
+
+.final-score-wrapper {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 10px 40px;
+  margin: 0 0 20px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.final-score-wrapper h3 {
+  margin: 3px;
 }

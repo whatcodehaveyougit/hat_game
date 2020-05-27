@@ -20,6 +20,8 @@ const ActivePlayerScreen = (props) => {
   }, [turnCount]);
 // This turn count should not be necessary - it is to stop it going on an infinite loop
 
+
+
     function filterOutGuessedClues(arrayOfClues){      
       return new Promise(resolve => {
         let array = []; 
@@ -60,7 +62,6 @@ const ActivePlayerScreen = (props) => {
           setCluesInHat(deck)
     } 
 
-    // Is timir continuing to tick after page redirected
     useEffect(() => {
         if (!timerStarted) return
         const intervalId = setInterval(() => {
@@ -79,7 +80,6 @@ const ActivePlayerScreen = (props) => {
           }
         }, [timerStarted])
 
-       
 
     return (
         <>

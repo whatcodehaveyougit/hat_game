@@ -9,11 +9,11 @@ export default function AddClues(props){
         <>
             <h2>Now, as game master you need to:</h2>
 
-            <h3>Tell every to refresh their page and start adding clues!</h3>
+            <h3>Tell everyone to refresh their page and start adding answers!</h3>
 
             <h3>Then... feel free to</h3>
 
-            <Link to="/"><button>Start Adding Clues</button></Link>
+            <Link to="/"><button>Start Adding Answers</button></Link>
         </>
     )
 }

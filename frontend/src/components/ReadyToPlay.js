@@ -8,16 +8,23 @@ export default function ReadyToPlay(props) {
     const [numberOfPlayersToAddClues, setNumberOfPlayersToAddClues] = useState()
 
     useEffect(() => {
-        checkIfAllPlayersAddedClues() 
+        gameChecks()
     }, [props.selectedGamePlayers])
 
-    // Don't need this - will just over complicate - when they are ready just let them through
-    function checkIfAllPlayersAddedClues(){
+    function gameChecks(){
+        checkIfPlayersAndCluesAddedToGame()
+        checkIfAllPlayersAddedClues() 
+    }
+
+    function checkIfPlayersAndCluesAddedToGame(){
+        console.log('test');
+    }
+    
+     function checkIfAllPlayersAddedClues(){
         let counter = 0;
         props.selectedGamePlayers.forEach(player => {
             if(player.addedClues){
                 counter++
-                console.log("player has added clues");
             }
             const remainingPlayersCount = props.selectedGamePlayers.length - counter
             setNumberOfPlayersToAddClues(remainingPlayersCount)

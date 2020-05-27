@@ -8,6 +8,7 @@ import CreateGame from '../components/GameSetup/CreateGame.js'
 import GameScreen from '../components/GameScreen.js'
 import CreateTeams from '../components/GameSetup/CreateTeams.js'
 import HomePage from '../components/HomePage.js'
+import Rules from '../components/GameSetup/Rules.js'
 import ActivePlayerScreen from '../components/ActivePlayerScreen.js'
 import TurnOverScreen from '../components/TurnOverScreen.js'
 import RoundOver from '../components/RoundOver.js'
@@ -119,6 +120,17 @@ export default function Dashboard() {
           .then(res => res.json())
           .then(game => setCreatedGame(game));
     }
+
+    function onGameDelete(gameId){
+      console.log('On game delete');
+      fetch(`${API}/games/${gameId}`, {
+          method: 'DELETE',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+        })
+  }
 
     function onTeamPost(newTeamName){
       fetch(`${API}/teams/`,{
@@ -265,13 +277,14 @@ export default function Dashboard() {
 
         return (
           <>
-          <div class="entire-page">
+          <div className="entire-page">
             <Navbar />
-            <div class="body-content">
+            <div className="body-content">
             <Router>
                     
                     <Route exact path="/" render={() => <HomePage games={games} fetchGames={fetchGames} asyncSetSelectedGame={asyncSetSelectedGame} getPlayers={getPlayers}   /> } />
-        
+                    <Route exact path="/rules" render={() => <Rules/> } />
+
                     <Route exact path="/create-game" render={() => <CreateGame onGamePost={onGamePost} /> } />
                      {/* I have put in this ternary as before it was trying to load the component before the state had been set to pass down  */}
                     { createdGame ? <Route exact path="/create-teams" render={() => <CreateTeams createdGame={createdGame} onPlayerPost={onPlayerPost} onTeamPost={onTeamPost} /> } /> : null }
@@ -287,7 +300,7 @@ export default function Dashboard() {
 
                     <Route exact path="/the-hat-game/turn-over" render={() => <TurnOverScreen endOfTurn={endOfTurn} emptyHatRedirect={emptyHatRedirect} /> } />
                     <Route exact path="/the-hat-is-empty" render={() => <RoundOver endOfRound={endOfRound} endOfTurn={endOfTurn} /> } />
-                    <Route exact path="/game-over" render={() => <GameOver orderedTeams={orderedTeams}  /> } />
+                    <Route exact path="/game-over" render={() => <GameOver orderedTeams={orderedTeams} selectedGame={selectedGame} onGameDelete={onGameDelete} /> } />
             </Router>
             </div>
             </div>

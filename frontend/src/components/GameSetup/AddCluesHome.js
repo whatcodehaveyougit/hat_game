@@ -40,7 +40,7 @@ export default function AddCluesHome(props){
                     )
                 )}
             </div> :
-            <h1>Everyone has added Clues to the Hat!</h1>
+            <h1>Everyone has added Answers to the Hat!</h1>
         }
         </>
     )

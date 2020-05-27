@@ -20,9 +20,11 @@ if(redirect) {
       <h2>Games In Progress</h2>
       <div>  
         { props.games.map((game, index) => (
-          <>
-            <div key={index} onClick={() => handleRedirect(game)} className="box">{game.title}</div><br/>
-          </>
+          <div key={index}>
+            <div onClick={() => handleRedirect(game)} className="box">
+              {game.title} 
+            </div>
+          </div>
         ))}
       </div>
     </>

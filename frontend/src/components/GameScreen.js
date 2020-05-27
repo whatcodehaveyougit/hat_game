@@ -1,10 +1,22 @@
-import React, {useState} from 'react'
-import {Link } from 'react-router-dom'
+import React, { useEffect} from 'react'
+import {Link, Redirect } from 'react-router-dom'
 import hat from '../assets/hat.png'
 import '../App.css'
 
 
 export default function GameScreen(props) {
+
+useEffect(() => {
+    props.updateSelectedGame()
+}, [])
+
+
+if(props.selectedGame){
+    if (props.selectedGame.round > 3){
+        return <Redirect to='/game-over'/>
+    }
+  } 
+ 
 
     return (
         <>

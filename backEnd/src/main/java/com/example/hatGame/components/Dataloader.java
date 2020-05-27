@@ -34,7 +34,7 @@ public class Dataloader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args){
 
-        Game contest1 = new Game("The FA Cup of Hat Games");
+        Game contest1 = new Game("The FA Cup of Hat Games 2");
         contestRepo.save(contest1);
 
         Clue clue1 = new Clue("Bob Odenkirk", false, contest1);
