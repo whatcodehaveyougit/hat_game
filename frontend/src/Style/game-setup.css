@@ -90,7 +90,7 @@ button.finshed-adding-clues  {
   }
 
 @media (max-width: 500px) {
-  form.submit-clues-form {
+  form.submit-clues-form, .display-block-on-mobile {
     display: block;
   }
 }

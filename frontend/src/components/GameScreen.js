@@ -1,15 +1,16 @@
-import React, { useEffect} from 'react'
+import React, { useState, useEffect} from 'react'
 import {Link, Redirect } from 'react-router-dom'
 import hat from '../assets/hat.png'
 import '../App.css'
 
 
 export default function GameScreen(props) {
+const [hatGrabbed, setHatGrabbed] = useState(false)
 
 useEffect(() => {
     console.log('use effect ran');
     props.updateSelectedGame()
-}, [])
+}, [props.selectedGame])
 
 
 if(props.selectedGame){
@@ -17,7 +18,15 @@ if(props.selectedGame){
         return <Redirect to='/game-over'/>
     }
   } 
- 
+
+ async function grabTheHat() {
+      await props.updateSelectedGame()
+      setHatGrabbed(true)
+  } 
+
+  if(hatGrabbed){
+    return <Redirect to='/the-hat-game/player-with-hat'/>
+  }
 
     return (
         <>
@@ -45,7 +54,7 @@ if(props.selectedGame){
              </div>
             <h2>Choose a player from your team and...</h2> 
             <h3>Grab the hat amigo!</h3>
-            <Link to="/the-hat-game/player-with-hat"><img className="animation hat-on-game-screen" src={hat} /></Link>
+            <img onClick={grabTheHat}className="animation hat-on-game-screen" src={hat} />
 
         </>
     )
