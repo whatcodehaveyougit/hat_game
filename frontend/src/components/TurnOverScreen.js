@@ -8,7 +8,7 @@ export default function TurnOverScreen(props){
             <> 
             <h1>Time is Out!!</h1>
             <Link to="/the-hat-game" onClick={props.endOfTurn}>
-                <button className="big-btn yellow-btn turn-over-btn">Return to Game Screen</button> 
+                <button className="big-btn yellow-btn turn-over-btn">Add Points to Hat & <br /> Return to Game Screen</button> 
             </Link> 
             </>
         </>

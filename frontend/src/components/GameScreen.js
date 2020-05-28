@@ -33,12 +33,12 @@ if(props.selectedGame){
                 <div className="scores-wrapper">
                     <h3>Scores</h3>
                     { props ? props.orderedTeams.map((team, index) => (
-                            <div className="team-on-table" key={index}> {team.name} : {team.score} </div>
+                            <div className="team-on-table no-break" key={index}> {team.name} : {team.score} </div>
                     )) : null }
                 </div>
 
                 <div className="game-screen-btn-wrapper">
-                    <button className="big-btn on-hover-underline yellow-btn" onClick={props.updateSelectedGame}>Update Game Info</button>
+                    <button className="big-btn game-scren-fetch on-hover-underline yellow-btn" onClick={props.updateSelectedGame}>Update Game Info</button>
                 </div>
 
                 

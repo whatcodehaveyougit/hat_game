@@ -159,7 +159,7 @@ h2 {
    font-size: 17px;
 }
 
-@media (min-width: 400px) {
+@media (min-width: 787px) {
   h1 {
     font-size: 30px;
   }
@@ -180,6 +180,23 @@ h2 {
 /*=========================  Specific Components ======================== */
 
 /* Home  */
+
+/* .games-in-progress-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+} */
+
+@media (min-width: 787px) {
+  .games-in-progress-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .games-in-progress-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
 
 .create-game-btn {
   width: 43%;
@@ -219,18 +236,37 @@ h2 {
 
 .custom-grid {
   display: grid;
-    grid-template-columns: 20% 30% 30% 20%;
+  grid-template-columns: 0% 50% 50% 0%;
 }
 
-.custom-grid > div {
-  margin: 20px;
+@media (min-width: 787px) {
+  .custom-grid {
+    display: grid;
+    grid-template-columns: 20% 30% 30% 20%;
+  }
+  .custom-grid > div {
+    margin: 20px;
+  }
 }
 
 .scores-wrapper {
   display: inline-block;
   border: 1px solid black;
   padding: 10px 20px;
-  border-radius: 10px;
+  border-radius: 3vw;
+}
+
+.game-scren-fetch {
+  margin: 0px;
+}
+
+.team-on-table {
+  font-size: 16px;
+}
+
+.scores-wrapper h3 {
+  margin: 5px 0 10px;
+  font-size: 19px;
 }
 
 .game-screen-btn-wrapper > button {
@@ -351,8 +387,7 @@ img.hat-on-game-screen {
 /* Turn over */
 
 .turn-over-btn {
-  width: 54%;
-  height: 43px;
+  padding: 1.5% 8%;
 }
 
 /* Game Over */

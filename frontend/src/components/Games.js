@@ -18,7 +18,7 @@ if(redirect) {
   return (
       <>
       <h2>Games In Progress</h2>
-      <div>  
+      <section className="games-in-progress-wrapper">  
         { props.games.length > 0 ? props.games.map((game, index) => (
           <div key={index}>
             <div onClick={() => handleRedirect(game)} className="box green-btn">
@@ -26,7 +26,7 @@ if(redirect) {
             </div>
           </div>
         )) : <p>No games in progress ;(</p>}
-      </div>
+      </section>
     </>
   )
 };
