@@ -21,7 +21,7 @@ if(redirect) {
       <div>  
         { props.games.length > 0 ? props.games.map((game, index) => (
           <div key={index}>
-            <div onClick={() => handleRedirect(game)} className="box">
+            <div onClick={() => handleRedirect(game)} className="box green-btn">
               {game.title} 
             </div>
           </div>

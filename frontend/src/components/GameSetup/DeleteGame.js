@@ -15,9 +15,9 @@ export default function DeleteGame(props){
     return (
         <>
             <section>
-                <h1>Please Note that Games must have</h1>
-                <h1>More than 1 Team</h1>
-                <h1>At least 4 players</h1>
+                <h1>Please Note that Games must have:</h1>
+                <h2>• More than 1 Team</h2>
+                <h2>• At least 4 players</h2>
                 <button className="red-btn" onClick={handleClick}>Click Here to Delete Game and Create a New One</button>
             </section>
         </>

@@ -54,7 +54,7 @@ export default function ReadyToPlay(props) {
                 <h3>
                     { numberOfPlayersToAddClues ? numberOfPlayersToAddClues + " more players need to add their clues to the hat." : null}
                 </h3>
-                <Link to='/add-clues-home'><button className=" add-clues-btn yellow-btn">Start Adding Clues</button></Link>
+                <Link to='/add-clues-home'><button className=" add-clues-btn yellow-btn on-hover-underline">Start Adding Clues</button></Link>
             </div>     
         }
             

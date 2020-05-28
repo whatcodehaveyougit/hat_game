@@ -2,7 +2,7 @@
 /* Create Game  */
 
 .create-game {
-    padding: 20px;
+    padding: 0 0 20px;
     font-size: 18px;
   }
   
@@ -45,9 +45,9 @@
   /* Ready to play */
   
 .add-clues-btn {
-    padding: 15px 91px;
+    padding: 2% 24%;
     font-size: 27px;
-    margin: 18px 0;
+    margin: 0px 20px 18px;
 }
 
 
@@ -85,7 +85,7 @@ button.finshed-adding-clues  {
     border: 1px solid black;
     border-radius: 4px;
     padding: 4px 45px;
-    margin: 10px 0 18px;
+    margin: 10px 10px 18px;
     color: black;
   }
   
@@ -100,4 +100,10 @@ button.finshed-adding-clues  {
 .scores-wrapper h3 {
     margin: 5px 0 10px;
     font-size: 19px;
+}
+
+@media (max-width: 500px) {
+  form.submit-clues-form {
+    display: block;
+  }
 }

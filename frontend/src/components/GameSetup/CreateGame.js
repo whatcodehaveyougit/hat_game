@@ -20,6 +20,9 @@ const CreateGame = (props) => {
 
     return(
         <form onSubmit={handleSubmit}>
+                <h3>Greetings Game Master</h3>
+                <p>Please dream up a name for this particular hat game</p>
+                <p>Feel free to ask the other players for their suggestions.</p>
             <div className="flex-container-center create-game">
                 <label>Name of HatGame</label>
                 <input type="text" required value={title} onChange={(e) => setTitle(e.target.value)} />

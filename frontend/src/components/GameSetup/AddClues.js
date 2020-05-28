@@ -7,13 +7,15 @@ export default function AddClues(props){
 
     return(
         <>
-            <h2>Now, as game master you need to:</h2>
+            <h2><span className="no-break">Congrats Game Master,</span><span className="no-break"> you did well.</span></h2>
 
-            <h3>Tell everyone to refresh their page and start adding answers!</h3>
+            <p>Please ask everyone to:</p> 
 
-            <h3>Then... feel free to</h3>
+                <p>•Refresh their home page.</p>
+                <p>•Select the game you created.</p>
+                <p>•Start adding answers to the virutal hat!</p>
 
-            <Link to="/"><button>Start Adding Answers</button></Link>
+            <Link to="/"><button>Return Home</button></Link>
         </>
     )
 }

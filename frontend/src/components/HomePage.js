@@ -25,14 +25,15 @@ export default function HomePage(props) {
                     <p>Wondering how to play it virtually?</p>
                     <p>
                         <Link to="/rules">
-                            <button className="green-btn on-hover-underline">Click Here!</button>
+                            <button className="on-hover-underline">Learn how here!</button>
                         </Link>
                     </p>
 
                     <h1>Getting Started</h1>
                     <p>Firstly, get everyone on a zoom call!</p>
                     
-                    <p>Nominate 1 person to setup up the game, this begins by clicking the button below.</p>
+                    <p>Nominate 1 person to be the <span className="underline">Game Master</span></p>
+                    <p>Game Master: Your destiny is to setup the hat game, please click the button below.</p>
                     
                     <div>
                         <Link to="/create-game"><button className="yellow-btn create-game-btn on-hover-underline">Create New Game</button></Link> 

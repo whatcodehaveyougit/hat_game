@@ -39,8 +39,9 @@ export default function CreateTeams(props){
     
     return(
         <>
-            <h3>Now lets create teams for <span className="game-title">{ props.createdGame.title }</span> </h3>
-            <h3>Once you have decided on the teams + team names enter them in here.</h3>
+            <h3>Now Game Master: Teams / Team Names must be created.</h3>
+            <p>Please decide a way to randomly assign players into teams.</p>
+            <p>Once decided, please enter the these teams below.</p>
 
             { submittedTeamName ? null : <form onSubmit={handleTeamNameSubmit}>
                 <div>

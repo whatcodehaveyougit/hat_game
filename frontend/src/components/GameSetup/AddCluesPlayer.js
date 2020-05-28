@@ -21,9 +21,9 @@ function clueAdded(){
     return (
         <>
             <h3>Now, Lets Start Adding Clues Amigo</h3>
-                <form className="flex-container-center" onSubmit={handleClueSubmit}>
+                <form className="flex-container-center submit-clues-form" onSubmit={handleClueSubmit}>
                     <input type="text" required value={clueContent} onChange={(e) => setClueContent(e.target.value)} />
-                    <input type="submit" className="green-btn big-btn" onClick={clueAdded}/>
+                    <input type="submit" className="green-btn big-btn on-hover-underline" onClick={clueAdded}/>
                 </form>
                 <div>
                      <h4><span className="clues-added-count">{cluesAddedCounter }</span> clues written so far</h4>
@@ -31,7 +31,7 @@ function clueAdded(){
                 </div>
                
             <Link to="/">
-                <button className="finshed-adding-clues yellow-btn big-btn" onClick={props.finishedAddingClues}>Submit All Clues to Virtual Hat</button>
+                <button className="finshed-adding-clues yellow-btn big-btn on-hover-underline" onClick={props.finishedAddingClues}>Submit All Clues to Virtual Hat</button>
             </Link>
         </>
     )

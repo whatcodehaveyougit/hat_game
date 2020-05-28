@@ -2,9 +2,15 @@
     background-color: white;
     display: inline-block;
     border-radius: 10px;
-    font-size: 35px;
+    font-size: 25px;
     color: black;
     white-space: nowrap;
+}
+
+@media (min-width: 500px) {
+    #page-title h1 {
+        font-size: 35px;
+    }
 }
 
 a#page-title {
